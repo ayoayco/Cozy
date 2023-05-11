@@ -2,8 +2,8 @@
 import Form, { FormGroup } from "@astro-reactive/form";
 import { Validators } from "@astro-reactive/validator";
 import { extract } from "@extractus/article-extractor";
-import Article from "../components/article.astro";
 import { getParams, isURL } from "../utils";
+import Post from "../components/post.astro";
 
 const params = getParams(Astro.url);
 const url: string = params?.url;
@@ -31,4 +31,4 @@ const form = new FormGroup([
 />
 <a href="https://github.com/ayoayco/cozy-reader" target="_blank">Source code</a>
 
-<Article article={article} />
+<Post article={article} />
