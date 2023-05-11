@@ -1,0 +1,32 @@
+---
+import Form, { FormGroup } from "@astro-reactive/form";
+import { Validators } from "@astro-reactive/validator";
+import { extract } from "@extractus/article-extractor";
+import getParams from "../utils/get-params";
+
+const params = getParams(Astro.url);
+const url = params?.url;
+const article = extract(url);
+
+const form = new FormGroup([
+  {
+    type: "text",
+    name: "url",
+    value: url || "",
+    placeholder: "Put the URL here",
+    validators: [Validators.required, Validators.minLength(11)],
+  },
+]);
+---
+
+<Form
+  formGroups={form}
+  showValidationHints
+  submitControl={{
+    type: "submit",
+    name: "submit",
+    value: "Get cozy!",
+  }}
+/>
+
+{article ? <p>{JSON.stringify(article)}</p> : "<hr />"}

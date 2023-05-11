@@ -1,5 +1,13 @@
 {
+  "scripts": {
+    "start": "astro dev"
+  },
   "devDependencies": {
     "astro": "^2.4.4"
+  },
+  "dependencies": {
+    "@astro-reactive/form": "^0.8.1",
+    "@astro-reactive/validator": "^0.3.4",
+    "@extractus/article-extractor": "^7.2.15"
   }
 }
