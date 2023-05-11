@@ -1,12 +1,13 @@
 ---
 import Form, { FormGroup } from "@astro-reactive/form";
 import { Validators } from "@astro-reactive/validator";
-import { extract } from "@extractus/article-extractor";
 import getParams from "../utils/get-params";
+import { extract } from "@extractus/article-extractor";
+import Article from "../components/article.astro";
 
 const params = getParams(Astro.url);
 const url = params?.url;
-const article = extract(url);
+const article = await extract(url);
 
 const form = new FormGroup([
   {
@@ -29,4 +30,4 @@ const form = new FormGroup([
   }}
 />
 
-{article ? <p>{JSON.stringify(article)}</p> : "<hr />"}
+<Article article={article} />

@@ -1,0 +1,14 @@
+---
+import { ArticleData } from "@extractus/article-extractor";
+
+const article = Astro.props.article;
+
+export interface Props {
+  article: ArticleData;
+}
+---
+
+<h2>{article.title}</h2>
+<p>by <em>{article.author}</em></p>
+
+<span set:html={article.content} />
