@@ -8,7 +8,10 @@ export interface Props {
 }
 ---
 
-<h2>{article.title}</h2>
-<p>by <em>{article.author}</em></p>
-
-<span set:html={article.content} />
+{
+article ? (
+    <h2>{article.title}</h2>
+    <p>by <em>{article.author}</em></p>
+    <span set:html={article.content} />
+    ) : ''
+}

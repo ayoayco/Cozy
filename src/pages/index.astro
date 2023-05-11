@@ -1,13 +1,13 @@
 ---
 import Form, { FormGroup } from "@astro-reactive/form";
 import { Validators } from "@astro-reactive/validator";
-import getParams from "../utils/get-params";
 import { extract } from "@extractus/article-extractor";
 import Article from "../components/article.astro";
+import { getParams, isURL } from "../utils";
 
 const params = getParams(Astro.url);
-const url = params?.url;
-const article = await extract(url);
+const url: string = params?.url;
+const article = isURL(url) && (await extract(url));
 
 const form = new FormGroup([
   {

@@ -1,6 +1,4 @@
-export default function getParams(
-  url: URL
-): { [key: string]: string } | undefined {
+export function getParams(url: URL): { [key: string]: string } | undefined {
   if (url.search === "") return;
 
   return Object.fromEntries(
