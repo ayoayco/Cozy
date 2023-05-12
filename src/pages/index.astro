@@ -6,14 +6,13 @@ import { getParams, isURL } from "../utils";
 import Post from "../components/post.astro";
 
 const params = getParams(Astro.url);
-const url: string = params?.url;
+const url: string = params?.url || "";
 const article = isURL(url) && (await extract(url));
 
 const form = new FormGroup([
   {
-    type: "text",
     name: "url",
-    value: url || "",
+    value: url,
     placeholder: "Put the URL here",
     validators: [Validators.required, Validators.minLength(11)],
   },
