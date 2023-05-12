@@ -4,6 +4,10 @@ Store all your favorite online articles for safe-keeping. That's it. That's the 
 
 👉 [**cozy-reader.netlify.app/**](https://cozy-reader.netlify.app/)
 
+| Cozy | Actual |
+|--------|--------|
+| ![cozy](https://github.com/ayoayco/cozy-reader/assets/4262489/802f25ae-d970-4df4-8b87-f65cbc7fe24c) | ![actual](https://github.com/ayoayco/cozy-reader/assets/4262489/dc7ab81f-8353-4d7b-9388-f08a3772b9d4) |
+
 ## Usage - Copy, Paste
 
 It's simple. When you open an article and want to turn it into a more cozy reading experience, just copy the url and paste it to the cozy app's address bar.
