@@ -1,23 +1,55 @@
 ---
 import { ArticleData } from "@extractus/article-extractor";
+import CSS from "./post.module.scss";
 
 const article = Astro.props.article;
 
 export interface Props {
   article: ArticleData;
 }
+const datePublished =
+  article.published && new Date(article.published).toDateString();
 ---
 
 {
-  article ? (
-    <article>
-      <h1>{article.title}</h1>
-      <p>
-        by <em>{article.author}</em>
-      </p>
+  article && (
+    <div class="post">
+      {article.title && <h1 class="title">{article.title}</h1>}
+      {(article.author || datePublished) && (
+        <ul class="publish-info">
+          {article.author && <li>️{article.author} </li>}
+          {datePublished && <li>️{datePublished}</li>}
+        </ul>
+      )}
       <content set:html={article.content} />
-    </article>
-  ) : (
-    ""
+    </div>
   )
 }
+
+<style is:inline>
+  div.post {
+    max-width: 550px;
+    margin: 1em auto;
+    padding: 1em;
+  }
+  @counter-style publish-icons {
+    system: cyclic;
+    symbols: "️✍️" "🗓️";
+    suffix: " ";
+  }
+  ul.publish-info {
+    margin: 1em -1em;
+    list-style: publish-icons;
+  }
+  h1.title {
+    font-size: xx-large;
+  }
+  p,
+  img {
+    margin: 1em 0;
+  }
+
+  pre {
+    white-space: pre-wrap;
+  }
+</style>

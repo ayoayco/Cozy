@@ -1,0 +1,56 @@
+---
+import Form, { FormGroup } from "@astro-reactive/form";
+import { Validators } from "@astro-reactive/validator";
+
+export interface Props {
+  url: string;
+}
+
+const { url } = Astro.props;
+const form = new FormGroup([
+  {
+    name: "url",
+    value: url,
+    placeholder: "Put the URL here",
+    validators: [Validators.required, Validators.minLength(11)],
+  },
+]);
+---
+
+<div class="address-bar">
+  <Form
+    formGroups={form}
+    showValidationHints
+    submitControl={{
+      type: "submit",
+      name: "submit",
+      value: "Get cozy!",
+    }}
+  />
+</div>
+
+<style is:inline>
+  .address-bar {
+    background-color: orange;
+    text-align: center;
+    padding: 0.5em;
+    width: 100%;
+  }
+  input {
+    width: 100%;
+    text-align: center;
+    border: 0px;
+    border-radius: 5px;
+    padding: 0.5rem;
+  }
+  input[type="text"] {
+    border: 2px solid brown;
+  }
+  input[type="submit"] {
+    width: 150px;
+    margin-top: 0.5em;
+    background-color: brown;
+    color: white;
+    font-weight: bolder;
+  }
+</style>
