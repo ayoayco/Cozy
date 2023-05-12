@@ -1,14 +1,12 @@
 ---
 import { ArticleData } from "@extractus/article-extractor";
-import CSS from "./post.module.scss";
-
-const article = Astro.props.article;
-
 export interface Props {
   article: ArticleData;
 }
+
+const article = Astro.props.article;
 const datePublished =
-  article.published && new Date(article.published).toDateString();
+  article?.published && new Date(article.published).toDateString();
 ---
 
 {
