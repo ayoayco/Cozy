@@ -9,7 +9,15 @@ import Layout from "../layouts/layout.astro";
 
 const params = getParams(Astro.url);
 const url: string = params?.url || "";
-const article = isURL(url) && (await extract(url));
+let article;
+try {
+  article = isURL(url) && (await extract(url));
+} catch {
+  article = {
+    title: "Something is not right",
+    content: "The articl extractor did not get any result",
+  };
+}
 ---
 
 <Layout title={article?.title}>
