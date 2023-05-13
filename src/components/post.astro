@@ -7,7 +7,6 @@ export interface Props {
 const article = Astro.props.article;
 const datePublished =
   article?.published && new Date(article.published).toDateString();
-article.author = "Ayo Ayco";
 ---
 
 {
