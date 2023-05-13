@@ -34,6 +34,6 @@ This is possible on all major browsers, including Safari on iOS (where I persona
 
 **3. One-click Extension then...**
 
-It doesn't exist yet... I'll probably get to creating a browser extension at some point. Either that, or I'll write a CONTRIBUTING.md and PRs will be welcome. 
+It doesn't exist yet... I'll probably get to creating a browser extension at some point. Either that, or I'll write a CONTRIBUTING.md. PRs welcome forever. 
 
-
+🧸
