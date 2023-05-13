@@ -6,14 +6,14 @@ import Post from "../components/post.astro";
 import Layout from "../layouts/layout.astro";
 
 const params = getParams(Astro.url);
-const url: string = params?.url || "";
+const url = params?.url;
 let article;
 try {
   article = isURL(url) && (await extract(url));
 } catch {
   article = {
     title: "Something is not right",
-    content: "The article extractor did not get any result",
+    content: "<p>The article extractor did not get any result</p>",
   };
 }
 ---
