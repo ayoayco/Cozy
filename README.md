@@ -18,17 +18,19 @@ It's simple. When you open an article and want to turn it into a more cozy readi
 
 **2. One-click Bookmark**
 
-You can create a new bookmark titled 'Get cozy!' and put the following as value for the URL:
+A bookmarklet could run a script to open the current page for you on Cozy. You can create this new bookmark titled 'Get cozy!' and put the following as value for the URL:
 
 ```
 javascript:(function(){ window.open('https://cozy-reader.netlify.app/?url=%27 + window.location.href, %27_self%27); })();
 ```
 
+This is possible on all major browsers, including Safari on iOS (where I personally use this often). Some screenshots:
+
 | Firefox | Chrome |
 | --- | --- |
 | ![Screenshot from 2023-05-12 23-33-10](https://github.com/ayoayco/cozy-reader/assets/4262489/5f0be296-3a3e-4606-b442-7f4b51163e3c) | ![Screenshot from 2023-05-12 23-32-08](https://github.com/ayoayco/cozy-reader/assets/4262489/144b74f8-3949-46b9-849c-351e4af0ac12) |
 
-*You don't want a bookmark?*
+*Oh, you don't want a bookmark?*
 
 **3. One-click Extension then...**
 
