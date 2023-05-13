@@ -12,6 +12,7 @@ const datePublished =
 {
   article && (
     <div class="post">
+      {article.source && <span class="source">{article.source}</span>}
       {article.title && <h1 class="title">{article.title}</h1>}
       {(article.author || datePublished) && (
         <ul class="publish-info">
@@ -41,6 +42,10 @@ const datePublished =
   }
   h1.title {
     font-size: xx-large;
+  }
+  span.source {
+    color: #555;
+    font-size: normal;
   }
   p,
   img,
