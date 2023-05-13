@@ -28,7 +28,7 @@ This is possible on all major browsers, including Safari on iOS (where I persona
 
 | Firefox | Chrome |
 | --- | --- |
-| ![Screenshot from 2023-05-12 23-33-10](https://github.com/ayoayco/cozy-reader/assets/4262489/5f0be296-3a3e-4606-b442-7f4b51163e3c) | ![Screenshot from 2023-05-12 23-32-08](https://github.com/ayoayco/cozy-reader/assets/4262489/144b74f8-3949-46b9-849c-351e4af0ac12) |
+| ![Screenshot from 2023-05-13 08-31-41](https://github.com/ayoayco/cozy-reader/assets/4262489/9b296d4f-2722-483a-bbc2-431c6b2ae996) | ![Screenshot from 2023-05-12 23-32-08](https://github.com/ayoayco/cozy-reader/assets/4262489/144b74f8-3949-46b9-849c-351e4af0ac12) |
 
 *Oh, you don't want a bookmark?*
 
