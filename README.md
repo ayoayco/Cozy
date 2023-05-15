@@ -1,5 +1,7 @@
-# Cozy Reader
-Remove distractions and store all your favorite articles for safe-keeping. That's it. That's the app.
+<h1 style="text-align: center">Cozy Reading Assistant 🧸</h1
+<p style="text-align: center">
+✅ Remove distractions. 💾 Save your favorites. 💡 Get useful insights.
+</p>
 
 
 ## Usage / Options
