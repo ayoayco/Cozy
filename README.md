@@ -1,6 +1,10 @@
-<h1 align="center">Cozy Reading Assistant 🧸</h1
+<h1 align="center">Cozy Reader 🧸</h1>
 <p align="center">
-✅ Remove distractions. 💾 Save your favorites. 💡 Get useful insights.
+<a href="https://github.com/ayoayco/cozy-reader">
+  <img alt="Last Commit" src="https://img.shields.io/github/last-commit/ayoayco/cozy-reader?logo=github" />
+</a><br />
+Remove distractions. Save your favorites. Get useful insights.<br />
+Cozy is your modern-day reading assistant.
 </p>
 
 ## Roadmap
