@@ -1,8 +1,16 @@
-<h1 style="text-align: center">Cozy Reading Assistant 🧸</h1
-<p style="text-align: center">
+<h1 align="center">Cozy Reading Assistant 🧸</h1
+<p align="center">
 ✅ Remove distractions. 💾 Save your favorites. 💡 Get useful insights.
 </p>
 
+## Roadmap
+| Feature | Status |
+| --- | --- |
+| Remove distractions| Done |
+| Save to a Reading Library | In-Progress |
+| PWA: Offline access to library | |
+| AI insights | |
+| Browser Extensions | |
 
 ## Usage / Options
 
@@ -29,3 +37,4 @@ This is possible on all major browsers, including Safari on iOS (where I persona
 It doesn't exist yet... I'll probably get to creating a browser extension at some point. But for now, PRs welcome! :)
 
 🧸
+
