@@ -1,19 +1,22 @@
 ---
 import { extract } from "@extractus/article-extractor";
-import { getParams, isURL } from "../utils";
+import { getParams } from "../utils";
 import AddressBar from "../components/address-bar.astro";
 import Post from "../components/post.astro";
 import Layout from "../layouts/layout.astro";
 
+// temporary default content while we don't have any good thing to put yet :)
+const defaultUrl = "https://github.com/ayoayco/cozy-reader";
 const params = getParams(Astro.url);
-const url = params?.url;
+const url = params?.url || defaultUrl;
 let article;
+
 try {
-  article = isURL(url) && (await extract(url));
+  article = await extract(url);
 } catch {
   article = {
     title: "Something is not right",
-    content: "<p>The article extractor did not get any result</p>",
+    content: "<p>The article extractor did not get any result.</p>",
   };
 }
 ---

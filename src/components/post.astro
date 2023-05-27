@@ -4,7 +4,7 @@ export interface Props {
   article: ArticleData;
 }
 
-const article = Astro.props.article;
+const { article } = Astro.props;
 const datePublished =
   article?.published && new Date(article.published).toDateString();
 ---
