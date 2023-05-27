@@ -40,9 +40,11 @@ img,
 picture,
 video,
 canvas,
-svg {
+svg,
+iframe {
   display: block;
   max-width: 100%;
+  margin: 0 auto;
 }
 /*
     7. Remove built-in form typography styles
