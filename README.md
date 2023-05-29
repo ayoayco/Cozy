@@ -40,5 +40,9 @@ This is possible on all major browsers, including Safari on iOS (where I persona
 
 It doesn't exist yet... I'll probably get to creating a browser extension at some point. But for now, PRs welcome! :)
 
+## Contributing
+
+Speaking of PRs being welcome, see our [CONTRIBUTING guide](/CONTRIBUTING.md).
+
 🧸
 
