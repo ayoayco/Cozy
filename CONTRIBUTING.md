@@ -33,3 +33,7 @@ npm start
 ## Good first issues
 
 Go to our [issues page](https://github.com/ayoayco/cozy-reader/issues) to watch out for issues we label as "good first issue" or "help wanted"
+
+## Code of Conduct
+
+Our [CODE OF CONDUCT](/CODE_OF_CONDUCT.md) follows the [Contributor Covenant](https://www.contributor-covenant.org)
