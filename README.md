@@ -20,14 +20,14 @@ Cozy is your modern-day reading assistant.
 
 **1. Copy, Paste**
 
-It's simple. When you open an article and want to turn it into a more cozy reading experience, just copy the url and paste it to the [Cozy](https://cozy.netlify.app/) address bar.  
+It's simple. When you open an article and want to turn it into a more cozy reading experience, just copy the url and paste it to the [Cozy](https://cozy-reader.netlify.app/) address bar.  
 
 **2. One-click Bookmark**
 
 A bookmarklet could run a script to open the current page for you on Cozy. You can create this new bookmark titled 'Get cozy!' and put the following as value for the URL:
 
 ```
-javascript:(function(){ window.open('https://cozy.netlify.app/?url=%27 + window.location.href, %27_self%27); })();
+javascript:(function(){ window.open('https://cozy-reader.netlify.app/?url=%27 + window.location.href, %27_self%27); })();
 ```
 
 This is possible on all major browsers, including Safari on iOS (where I personally use this often). Some screenshots:
