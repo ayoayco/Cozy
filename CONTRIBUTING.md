@@ -14,13 +14,13 @@ This project is built with the following tech
 1. Clone
 
 ```
-git clone https://github.com/ayoayco/cozy-reader.git
+git clone https://github.com/ayoayco/cozy.git
 ```
 
 2. install dependencies
 
 ```
-cd cozy-reader
+cd cozy
 npm install
 ```
 
@@ -32,7 +32,7 @@ npm start
 
 ## Good first issues
 
-Go to our [issues page](https://github.com/ayoayco/cozy-reader/issues) to watch out for issues we label as "good first issue" or "help wanted"
+Go to our [issues page](https://github.com/ayoayco/cozy/issues) to watch out for issues we label as "good first issue" or "help wanted"
 
 ## Code of Conduct
 
