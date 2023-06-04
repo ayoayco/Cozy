@@ -1,26 +1,29 @@
 ---
 export interface Props {
-  postDivSelector: string
+  postDivSelector: string,
+  skipSave?: boolean
 }
 
-const {postDivSelector} = Astro.props;
+const {postDivSelector, skipSave = false} = Astro.props;
 ---
 <div id="library">
   <ul id="post-list"></ul>
 </div>
 
 <input value={postDivSelector} name="postDivSelector" id="postDivSelector" hidden />
+<input type="checkbox" id="skipSave" name="skipSave" checked={skipSave} hidden />
 
 <script>
   const cache = await caches.open('cozy-reader');
   const url = new URL(window.location.href);
   const response = await cache.match(url)
-  if (!response) {
+  const postDivSelector = document.getElementById('postDivSelector') as HTMLInputElement;
+  const skipSave = document.getElementById('skipSave') as HTMLInputElement;
+  const postDiv = document.querySelector(postDivSelector?.value);
+
+  if (!response && !skipSave.checked) {
     await cache.add(url);
   }
-
-  const postDivSelector = document.getElementById('postDivSelector') as HTMLInputElement;
-  const postDiv = document.querySelector(postDivSelector?.value);
 
   const cachedResponses = await cache.keys();
   const list = document.querySelector('#post-list');

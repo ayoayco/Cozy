@@ -8,6 +8,7 @@ import Library from "../components/Library.astro";
 const params = Astro.url.searchParams;
 const url = params.get('url') || '';
 let article;
+let skipSave;
 
 try {
   article = await extract(url);
@@ -18,17 +19,26 @@ try {
   };
 }
 
+if (!article) {
+  article = {
+    title: "Something is not right",
+    content: "<p>The article extractor did not get any result.</p>",
+  }
+  skipSave = true;
+}
+
 if (url === '') {
   article = {
     title: "Welcome to Cozy 🧸",
     author: "Ayo Ayco",
     content: "<p>Enter a URL in the address bar above to get started.</p>",
   };
+  skipSave = true;
 }
 
 ---
 <Layout title={url !== "" ?  article?.title : "Your modern-day reading assistant"}>
     <AddressBar slot="address-bar" url={url} />
     <Post slot="post" article={article} />
-    <Library slot="library" postDivSelector="#post" />
+    <Library skipSave={skipSave} slot="library" postDivSelector="#post" />
 </Layout>
