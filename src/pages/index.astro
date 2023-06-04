@@ -3,6 +3,7 @@ import { extract } from "@extractus/article-extractor";
 import AddressBar from "../components/AddressBar.astro";
 import Post from "../components/Post.astro";
 import Layout from "../layouts/Layout.astro";
+import Library from "../components/Library.astro";
 
 const params = Astro.url.searchParams;
 const url = params.get('url') || '';
@@ -16,8 +17,10 @@ try {
     content: "<p>The article extractor did not get any result.</p>",
   };
 }
+
 ---
 <Layout title={url !== "" ?  article?.title : "Your modern-day reading assistant"}>
   <AddressBar url={url} />
+  <Library />
   {url && <Post article={article} />}
 </Layout>

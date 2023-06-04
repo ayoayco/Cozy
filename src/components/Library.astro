@@ -1,0 +1,30 @@
+<div id="library"></div>
+
+<script>
+  const cache = await caches.open('cozy-reader');
+  const url = new URL(window.location.href);
+  console.log('client script loaded', url);
+  const response = await cache.match(url)
+  if (response) {
+    console.log('cache hit', response);
+  } else {
+    console.log('cache miss');
+    await cache.add(url);
+  }
+
+  const cachedResponses = await cache.keys();
+  console.log(cachedResponses);
+
+  const library = document.getElementById('library');
+  const list = document.createElement('ul');
+  cachedResponses.forEach(response => {
+    const {url} = response;
+    const link = document.createElement('a');
+    link.innerText = url;
+    link.href = url;
+    const item = document.createElement('li');
+    item.appendChild(link);
+    list?.appendChild(item);
+  })
+  library?.appendChild(list);
+</script>
