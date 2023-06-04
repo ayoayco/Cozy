@@ -16,9 +16,32 @@ const { title } = Astro.props;
     <title>{appTitle} {title && `| ${title}`}</title>
   </head>
   <body>
-    <slot />
+    <slot name="address-bar" />
+    <div id="main-content">
+      <div id="post-wrapper">
+        <slot name="post" />
+      </div>
+      <div id="library-wrapper">
+        <slot name="library" />
+      </div>
+    </div>
   </body>
 </html>
+
+<style>
+  #main-content {
+    display: flex;
+    padding: 1em;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  #post-wrapper, #library-wrapper {
+    flex: 1
+  }
+  #post-wrapper {
+    flex-grow: 2;
+  }
+</style>
 
 <style is:global>
   :root {

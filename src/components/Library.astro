@@ -1,0 +1,65 @@
+---
+export interface Props {
+  postDivSelector: string
+}
+
+const {postDivSelector} = Astro.props;
+---
+<div id="library">
+  <ul id="post-list"></ul>
+</div>
+
+<input value={postDivSelector} name="postDivSelector" id="postDivSelector" hidden />
+
+<script>
+  const cache = await caches.open('cozy-reader');
+  const url = new URL(window.location.href);
+  const response = await cache.match(url)
+  if (!response) {
+    await cache.add(url);
+  }
+
+  const postDivSelector = document.getElementById('postDivSelector') as HTMLInputElement;
+  const postDiv = document.querySelector(postDivSelector?.value);
+
+  const cachedResponses = await cache.keys();
+  const list = document.querySelector('#post-list');
+
+  cachedResponses
+  .filter(request => {
+    const urlObj = new URL(request.url);
+    return urlObj.search !== '';
+  })
+  .forEach(async (request) => {
+    const {url} = request;
+    const link = document.createElement('a');
+
+
+    let responseText;
+
+    const fullResponse = await cache.match(url)
+    fullResponse?.text().then(data => {
+      responseText = data;
+      const html = document.createElement('html');
+      html.innerHTML = responseText;
+      const title = html.querySelector('title');
+      link.innerText = (title?.innerText || url).replace('Cozy 🧸 | ', '');
+    });
+
+    link.href = url;
+    link.onclick = async (e) => {
+      e.preventDefault();
+    
+        const html = document.createElement('html');
+        html.innerHTML = responseText;
+        const newPost = html.querySelector('body')?.querySelector('#post');
+        if (postDiv && newPost?.innerHTML) {
+          postDiv.innerHTML = (newPost.innerHTML)
+        }
+    }
+    const item = document.createElement('li');
+    item.appendChild(link);
+    list?.appendChild(item);
+  });
+
+</script>

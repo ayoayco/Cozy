@@ -11,7 +11,7 @@ const datePublished =
 
 {
   article && (
-    <div class="post">
+    <div id="post">
       {article.source && <span class="source">{article.source}</span>}
       {article.title && <h1 class="title">{article.title}</h1>}
       {(article.author || datePublished) && (
@@ -26,11 +26,6 @@ const datePublished =
 }
 
 <style is:inline>
-  div.post {
-    max-width: 600px;
-    margin: 1em auto;
-    padding: 1em;
-  }
   @counter-style publish-icons {
     system: cyclic;
     symbols: "️✍️" "🗓️";

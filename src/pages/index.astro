@@ -3,6 +3,7 @@ import { extract } from "@extractus/article-extractor";
 import AddressBar from "../components/AddressBar.astro";
 import Post from "../components/Post.astro";
 import Layout from "../layouts/Layout.astro";
+import Library from "../components/Library.astro";
 
 const params = Astro.url.searchParams;
 const url = params.get('url') || '';
@@ -16,8 +17,18 @@ try {
     content: "<p>The article extractor did not get any result.</p>",
   };
 }
+
+if (url === '') {
+  article = {
+    title: "Welcome to Cozy 🧸",
+    author: "Ayo Ayco",
+    content: "<p>Enter a URL in the address bar above to get started.</p>",
+  };
+}
+
 ---
 <Layout title={url !== "" ?  article?.title : "Your modern-day reading assistant"}>
-  <AddressBar url={url} />
-  {url && <Post article={article} />}
+    <AddressBar slot="address-bar" url={url} />
+    <Post slot="post" article={article} />
+    <Library slot="library" postDivSelector="#post" />
 </Layout>
