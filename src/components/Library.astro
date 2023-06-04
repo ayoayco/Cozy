@@ -5,7 +5,9 @@ export interface Props {
 
 const {postDivSelector} = Astro.props;
 ---
-<div id="library"></div>
+<div id="library">
+  <ul id="post-list"></ul>
+</div>
 
 <input value={postDivSelector} name="postDivSelector" id="postDivSelector" hidden />
 
@@ -21,31 +23,43 @@ const {postDivSelector} = Astro.props;
   const postDiv = document.querySelector(postDivSelector?.value);
 
   const cachedResponses = await cache.keys();
-  const library = document.getElementById('library');
-  const list = document.createElement('ul');
-  cachedResponses.forEach(response => {
-    const {url} = response;
+  const list = document.querySelector('#post-list');
+
+  cachedResponses
+  .filter(request => {
+    const urlObj = new URL(request.url);
+    return urlObj.search !== '';
+  })
+  .forEach(async (request) => {
+    const {url} = request;
     const link = document.createElement('a');
-    link.innerText = url;
+
+
+    let responseText;
+
+    const fullResponse = await cache.match(url)
+    fullResponse?.text().then(data => {
+      responseText = data;
+      const html = document.createElement('html');
+      html.innerHTML = responseText;
+      const title = html.querySelector('title');
+      link.innerText = (title?.innerText || url).replace('Cozy 🧸 | ', '');
+    });
+
     link.href = url;
     link.onclick = async (e) => {
       e.preventDefault();
-      const fullResponse = await cache.match(url)
-      fullResponse?.text().then(data => {
+    
         const html = document.createElement('html');
-        html.innerHTML = data;
-        const body = html.querySelector('body');
-        const newPost = body?.querySelector('#post');
-        console.log(body?.querySelector('#post'));
+        html.innerHTML = responseText;
+        const newPost = html.querySelector('body')?.querySelector('#post');
         if (postDiv && newPost?.innerHTML) {
           postDiv.innerHTML = (newPost.innerHTML)
         }
-      });
-
     }
     const item = document.createElement('li');
     item.appendChild(link);
     list?.appendChild(item);
-  })
-  library?.appendChild(list);
+  });
+
 </script>
