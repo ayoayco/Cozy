@@ -3,7 +3,7 @@
 <a href="https://github.com/ayoayco/cozy">
   <img alt="Last Commit" src="https://img.shields.io/github/last-commit/ayoayco/cozy?logo=github" />
 </a>
-<a href=""><img alt"NPM Version" src="https://img.shields.io/npm/v/@ayco/cozy?label=alpha" /></a><br />
+<a href="https://github.com/ayoayco/cozy-reader/releases/latest"><img alt="Alpha Version" src="https://img.shields.io/github/package-json/v/ayoayco/cozy?label=alpha" /></a><br />
 Remove distractions. Save your favorites. Get useful insights.<br />
 Cozy is your modern-day reading assistant.
 </p>
