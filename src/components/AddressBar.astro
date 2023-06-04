@@ -35,12 +35,14 @@ const form = new FormGroup([
   <a target="_blank" href="https://github.com/ayoayco/cozy"
     >⭐️ GitHub</a
   >
+  •
+  <a class="nav-badge" href="https://www.npmjs.com/package/@ayco/cozy"><img alt"NPM Version" src="https://img.shields.io/npm/v/@ayco/cozy?label=alpha&logo=npm" /></a>
   </nav>
 </div>
 
 <style is:inline>
   .address-bar {
-    background-color: orange;
+    background-color:antiquewhite;
     text-align: center;
     padding: 0.5em;
     width: 100%;
@@ -65,7 +67,16 @@ const form = new FormGroup([
   nav {
     margin: 0.5em 0;
   }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
   nav a {
     color: brown;
+    text-decoration: none;
+  }
+  nav img {
+    display: inline;
+    vertical-align: middle;
   }
 </style>
