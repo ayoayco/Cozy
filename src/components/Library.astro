@@ -62,13 +62,7 @@ const {postDivSelector, skipSave = false} = Astro.props;
         html.innerHTML = responseText;
         const newPost = html.querySelector('body')?.querySelector('#post');
         if (postDiv && newPost?.innerHTML) {
-          const homeLink = document.createElement('a');
-          homeLink.href = '/';
-          homeLink.innerText = 'Home';
-          postDiv.innerHTML = (newPost.innerHTML)
-          const homeLinkWrapper = document.createElement('div');
-          homeLinkWrapper.append(homeLink)
-          postDiv.insertBefore(homeLinkWrapper, postDiv.firstChild);
+          postDiv.innerHTML = newPost.innerHTML
         }
     }
     const item = document.createElement('li');

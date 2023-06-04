@@ -2,10 +2,9 @@
 import { ArticleData } from "@extractus/article-extractor";
 export interface Props {
   article: ArticleData;
-  isHome?: boolean;
 }
 
-const { article, isHome = false } = Astro.props;
+const { article } = Astro.props;
 const datePublished =
   article?.published && new Date(article.published).toDateString();
 ---
