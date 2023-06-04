@@ -1,4 +1,5 @@
 {
+  "version": "0.0.1",
   "scripts": {
     "start": "astro dev",
     "build": "astro build"
@@ -11,6 +12,5 @@
     "@astro-reactive/validator": "^0.3.4",
     "@astrojs/netlify": "^2.2.2",
     "@extractus/article-extractor": "^7.2.15"
-  },
-  "version": "0.0.1"
+  }
 }
