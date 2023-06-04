@@ -1,6 +1,6 @@
 # Contributing to Cozy
 
-Thank you for your interest to help bring the coziest web experience to people like you and me.
+Thank you for your interest in building the coziest web experience for people like you and me.
 
 ## Tech Stack
 
