@@ -3,7 +3,7 @@
     "start": "astro dev"
   },
   "devDependencies": {
-    "astro": "^2.4.4"
+    "astro": "^2.5.7"
   },
   "dependencies": {
     "@astro-reactive/form": "^0.8.1",
