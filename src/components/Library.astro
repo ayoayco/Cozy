@@ -39,6 +39,7 @@ const {postDivSelector, skipSave = false} = Astro.props;
     const urlObj = new URL(request.url);
     return urlObj.search !== '';
   })
+  .reverse()
   .forEach(async (request) => {
     const {url} = request;
     const link = document.createElement('a');
