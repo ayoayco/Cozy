@@ -27,9 +27,15 @@ const form = new FormGroup([
       value: "Get cozy!",
     }}
   />
-  <a class="repo-link" href="https://github.com/ayoayco/cozy"
-    >Star on GitHub</a
+  <nav>
+  <a href="/"
+    >📚 Library</a
   >
+  •
+  <a target="_blank" href="https://github.com/ayoayco/cozy"
+    >⭐️ GitHub</a
+  >
+  </nav>
 </div>
 
 <style is:inline>
@@ -56,8 +62,10 @@ const form = new FormGroup([
     color: white;
     font-weight: bolder;
   }
-  a.repo-link {
-    font-size: small;
+  nav {
+    margin: 0.5em 0;
+  }
+  nav a {
     color: brown;
   }
 </style>

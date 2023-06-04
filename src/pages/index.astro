@@ -7,7 +7,7 @@ import Library from "../components/Library.astro";
 
 const params = Astro.url.searchParams;
 const url = params.get('url') || '';
-let article: ArticleData;
+let article: ArticleData | null;
 let skipSave;
 
 const error = {
@@ -16,7 +16,11 @@ const error = {
 }
 
 try {
-  article = await extract(url) || error;
+  article = await extract(url);
+  if (!article ) {
+    article = error;
+    skipSave = true;
+  }
 } catch {
   article = error;
   skipSave = true;
@@ -34,5 +38,5 @@ if (url === '') {
 <Layout title={url !== "" ?  article?.title : "Your modern-day reading assistant"}>
     <AddressBar url={url} />
     <Post slot="post" article={article} />
-    <Library skipSave={!article || skipSave} slot="library" postDivSelector="#post" />
+    <Library skipSave={skipSave} slot="library" postDivSelector="#post" />
 </Layout>
