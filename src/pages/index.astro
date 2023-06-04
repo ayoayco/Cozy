@@ -1,8 +1,8 @@
 ---
 import { extract } from "@extractus/article-extractor";
-import AddressBar from "../components/address-bar.astro";
-import Post from "../components/post.astro";
-import Layout from "../layouts/layout.astro";
+import AddressBar from "../components/AddressBar.astro";
+import Post from "../components/Post.astro";
+import Layout from "../layouts/Layout.astro";
 
 const params = Astro.url.searchParams;
 const url = params.get('url') || '';
