@@ -2,13 +2,13 @@
 import { ArticleData } from "@extractus/article-extractor";
 export interface Props {
   article: ArticleData;
+  isHome?: boolean;
 }
 
-const { article } = Astro.props;
+const { article, isHome = false } = Astro.props;
 const datePublished =
   article?.published && new Date(article.published).toDateString();
 ---
-
 {
   article && (
     <div id="post">
@@ -50,7 +50,7 @@ const datePublished =
   p,
   table,
   ul {
-    margin: 1em 0;
+    margin: 0 0 1em;
     font-size: 20px;
   }
 

@@ -7,6 +7,7 @@ export interface Props {
 const {postDivSelector, skipSave = false} = Astro.props;
 ---
 <div id="library">
+  <h2></h2>
   <ul id="post-list"></ul>
 </div>
 
@@ -28,6 +29,11 @@ const {postDivSelector, skipSave = false} = Astro.props;
   const cachedResponses = await cache.keys();
   const list = document.querySelector('#post-list');
 
+  if (cachedResponses.length) {
+    const heading = document.querySelector('#library h2') as HTMLHeadingElement;
+    heading.innerText = 'Previously viewed:';
+  }
+
   cachedResponses
   .filter(request => {
     const urlObj = new URL(request.url);
@@ -36,7 +42,6 @@ const {postDivSelector, skipSave = false} = Astro.props;
   .forEach(async (request) => {
     const {url} = request;
     const link = document.createElement('a');
-
 
     let responseText;
 
@@ -52,12 +57,18 @@ const {postDivSelector, skipSave = false} = Astro.props;
     link.href = url;
     link.onclick = async (e) => {
       e.preventDefault();
-    
+      scroll(0,0);
         const html = document.createElement('html');
         html.innerHTML = responseText;
         const newPost = html.querySelector('body')?.querySelector('#post');
         if (postDiv && newPost?.innerHTML) {
+          const homeLink = document.createElement('a');
+          homeLink.href = '/';
+          homeLink.innerText = 'Home';
           postDiv.innerHTML = (newPost.innerHTML)
+          const homeLinkWrapper = document.createElement('div');
+          homeLinkWrapper.append(homeLink)
+          postDiv.insertBefore(homeLinkWrapper, postDiv.firstChild);
         }
     }
     const item = document.createElement('li');
