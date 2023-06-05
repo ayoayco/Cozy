@@ -17,6 +17,7 @@ Cozy is your modern-day reading assistant.
 | PWA: full Offline access | |
 | AI insights | |
 | Browser Extensions | |
+| Native Apps | |
 
 ## Usage / Options
 
