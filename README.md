@@ -13,7 +13,7 @@ Cozy is your modern-day reading assistant.
 | --- | --- |
 | Remove distractions| ✅ DONE |
 | Save to a Reading Library | ✅ DONE |
-| PWA: Offline access to library | 🛠️ In-progress |
+| PWA: full Offline access | 🛠️ In-progress |
 | AI insights | |
 | Browser Extensions | |
 
