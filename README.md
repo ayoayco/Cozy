@@ -12,8 +12,9 @@ Cozy is your modern-day reading assistant.
 | Feature | Status |
 | --- | --- |
 | Remove distractions| ✅ DONE |
-| Save to a Reading Library | ✅ DONE |
-| PWA: full Offline access | 🛠️ In-progress |
+| Save viewed history | ✅ DONE |
+| Set items as Favorites | 🛠️ In-progress |
+| PWA: full Offline access | |
 | AI insights | |
 | Browser Extensions | |
 
