@@ -40,43 +40,45 @@ const form = new FormGroup([
   </nav>
 </div>
 
-<style is:inline>
+<style lang="scss">
   .address-bar {
     background-color:antiquewhite;
     text-align: center;
     padding: 0.5em;
     width: 100%;
   }
-  input {
+
+  nav {
+    margin: 0.5em 0;
+
+    a:hover {
+      text-decoration: underline;
+    }
+    a {
+      color: brown;
+      text-decoration: none;
+    }
+    img {
+      display: inline;
+      vertical-align: middle;
+    }
+  }
+
+  :global(input) {
     width: 100%;
     text-align: center;
     border: 0px;
     border-radius: 5px;
     padding: 0.5rem;
   }
-  input[type="text"] {
+  :global(input[type="text"]) {
     border: 2px solid brown;
   }
-  input[type="submit"] {
+  :global(input[type="submit"]) {
     width: 150px;
     margin-top: 0.5em;
     background-color: brown;
     color: white;
     font-weight: bolder;
-  }
-  nav {
-    margin: 0.5em 0;
-  }
-
-  nav a:hover {
-    text-decoration: underline;
-  }
-  nav a {
-    color: brown;
-    text-decoration: none;
-  }
-  nav img {
-    display: inline;
-    vertical-align: middle;
   }
 </style>
