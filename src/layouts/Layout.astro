@@ -45,9 +45,9 @@ const { title } = Astro.props;
     font-family: var(--system-ui);
   }
   
-  // fix for older cached items
+  /* fix for older cached items */
   p, table, ul {
-    margin: 1em 0;
+    margin: 1em 0 !import;
     font-size: 20px;
   }
 </style>
