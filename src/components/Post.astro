@@ -72,3 +72,15 @@ const datePublished =
     }
   }
 </style>
+
+<style is:global lang="scss">
+  /**
+    forced fix for older cached items before v0.1.5
+   */
+  content {
+    p, table, ul {
+      margin: 1em 0 !important;
+      font-size: 20px;
+    }
+  }
+</style>
