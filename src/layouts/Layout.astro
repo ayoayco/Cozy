@@ -31,8 +31,26 @@ const { title } = Astro.props;
 <style>
   #main-content {
     padding: 1em;
-    max-width: 600px;
+    max-width: 1000px;
     margin: 0 auto;
+    display: flex;
+  }
+
+  #library-wrapper {
+    flex: 1
+  }
+
+  #post-wrapper {
+    flex: 2
+  }
+
+  @media only screen and (min-width: 0px) and (max-width: 700px) {
+  #main-content {
+    max-width: 600px;
+    display: block;
+  }
+
+
   }
 </style>
 
@@ -44,4 +62,5 @@ const { title } = Astro.props;
   html * {
     font-family: var(--system-ui);
   }
+
 </style>
