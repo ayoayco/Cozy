@@ -97,6 +97,8 @@ const {postDivSelector, skipSave = false} = Astro.props;
         }
           </div>
         <div class="post-card__content">
+          ${
+          (source || published) ? `
           <div class="post-card__meta">
             ${
               source ? `
@@ -110,8 +112,8 @@ const {postDivSelector, skipSave = false} = Astro.props;
               `
               : ''
             }
-
           </div>
+          `: ''}
           <h3 class="post-card__title">${title}</h3>
           ${
             description ? `
@@ -138,8 +140,7 @@ const {postDivSelector, skipSave = false} = Astro.props;
       float: left;
       width: calc(100% + 40px);
       margin-left: -40px;
-      padding: 1rem;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid antiquewhite;
 
       :global(a) {
         text-decoration: none;
@@ -150,23 +151,31 @@ const {postDivSelector, skipSave = false} = Astro.props;
         }
 
         :global(.post-card) {
+          padding: 1rem;
+
           :global(.post-card__image) {
             float: left;
             margin-right: 0.5rem;
-            margin: 0.5rem 1rem 0 0;
+            margin: 0.5rem 1rem 0.5rem 0;
 
             :global(img, svg) {
               width: 60px;
               height: 60px;
               object-fit: cover;
               border-radius: 50%;
-              border: 3px solid #eee;
+              border: 3px solid antiquewhite;
             }
             :global(svg) {
-              color: #888;
+              color: antiquewhite;
               padding: 0.5rem;
             }
           }
+        }
+        :global(.post-card__content) {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-height: calc(60px + 1rem);
         }
         :global(.post-card__title, .post-card__description) {
           display: -webkit-box;
