@@ -21,11 +21,6 @@ const form = new FormGroup([
   <Form
     formGroups={form}
     showValidationHints
-    submitControl={{
-      type: "submit",
-      name: "submit",
-      value: "Get cozy!",
-    }}
   />
   <nav>
   <a href="/"
@@ -73,12 +68,5 @@ const form = new FormGroup([
   }
   :global(input[type="text"]) {
     border: 2px solid brown;
-  }
-  :global(input[type="submit"]) {
-    width: 150px;
-    margin-top: 0.5em;
-    background-color: brown;
-    color: white;
-    font-weight: bolder;
   }
 </style>

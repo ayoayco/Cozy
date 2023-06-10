@@ -1,10 +1,11 @@
 ---
+import { ArticleData } from "@extractus/article-extractor";
 import "./reset.css";
 export interface Props {
-  title?: string;
+  meta: ArticleData
 }
 const appTitle = "Cozy 🧸";
-const { title } = Astro.props;
+const { meta } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -13,7 +14,14 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{appTitle} {title && `| ${title}`}</title>
+    <title>{appTitle} {meta.title && `| ${meta.title}`}</title>
+
+    <meta property="cozy:title" content={meta.title} />
+    <meta property="cozy:url" content={meta.url} />
+    <meta property="cozy:description" content={meta.description} />
+    <meta property="cozy:image" content={meta.image} />
+    <meta property="cozy:source" content={meta.source} />
+
   </head>
   <body>
     <slot />
@@ -30,28 +38,12 @@ const { title } = Astro.props;
 
 <style>
   #main-content {
-    padding: 1em;
-    max-width: 1000px;
+    max-width: 600px;
     margin: 0 auto;
-    display: flex;
   }
 
-  #library-wrapper {
-    flex: 1
-  }
-
-  #post-wrapper {
-    max-width: 600px;
-    flex: 2
-  }
-
-  @media only screen and (min-width: 0px) and (max-width: 700px) {
-  #main-content {
-    max-width: 600px;
-    display: block;
-  }
-
-
+  #main-content * {
+    margin: 1em 0 0;
   }
 </style>
 
