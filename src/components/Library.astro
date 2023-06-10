@@ -84,24 +84,34 @@ const {postDivSelector, skipSave = false} = Astro.props;
     const image = html.querySelector('meta[property="cozy:image"]')?.getAttribute('content');
     const url = html.querySelector('meta[property="cozy:url"]')?.getAttribute('content');
     const source = html.querySelector('meta[property="cozy:source"]')?.getAttribute('content');
+    const published = html.querySelector('meta[property="cozy:published"]')?.getAttribute('content');
 
     const postCard = `
       <div class="post-card">
+          <div class="post-card__image">
         ${
           image ? `
-          <div class="post-card__image">
             <img src="${image}" alt="${title} | ${description}" />
-          </div>
           `
-          : ''
+          : '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/><path fill="currentColor" d="M14 17H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>'
         }
+          </div>
         <div class="post-card__content">
-          ${
-            source ? `
-              <p class="post-card__site-name">${source}</p>
-            `
-            : ''
-          }
+          <div class="post-card__meta">
+            ${
+              source ? `
+                <p class="post-card__source">${source}</p>
+              `
+              : ''
+            }
+            ${
+              published ? `
+                <p class="post-card__published">${new Date(published).toLocaleDateString()}</p>
+              `
+              : ''
+            }
+
+          </div>
           <h3 class="post-card__title">${title}</h3>
           ${
             description ? `
@@ -118,22 +128,18 @@ const {postDivSelector, skipSave = false} = Astro.props;
 <style lang="scss">
   #library {
     :global(h2) {
-      margin-bottom: 1rem;
       text-align: center;
     }
   }
   #post-list {
     :global(li) {
-      margin-bottom: 1rem;
       list-style: none;
-      border: 1px solid #ccc;
-      box-shadow: 0 5px 2px #eee;
-      border-radius: 5px;
-      padding: 1rem;
-      width: calc(100% + 40px);
       display: block;
       float: left;
+      width: calc(100% + 40px);
       margin-left: -40px;
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
 
       :global(a) {
         text-decoration: none;
@@ -146,14 +152,40 @@ const {postDivSelector, skipSave = false} = Astro.props;
         :global(.post-card) {
           :global(.post-card__image) {
             float: left;
-            margin-right: 1rem;
-            :global(img) {
-              width: 150px;
-              height: 150px;
+            margin-right: 0.5rem;
+            margin: 0.5rem 1rem 0 0;
+
+            :global(img, svg) {
+              width: 60px;
+              height: 60px;
               object-fit: cover;
-              border-radius: 5px;
-              border: 1px solid #eee;
+              border-radius: 50%;
+              border: 3px solid #eee;
             }
+            :global(svg) {
+              color: #888;
+              padding: 0.5rem;
+            }
+          }
+        }
+        :global(.post-card__title, .post-card__description) {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;  
+          overflow: hidden;
+        }
+        :global(.post-card__meta) {
+          display: flex;
+          justify-content: space-between;
+          font-size: smaller;
+          color: #555;
+
+          * {
+            flex: 1;
+          }
+
+          :global(.post-card__source) {
+            font-weight: bold;
           }
         }
       }

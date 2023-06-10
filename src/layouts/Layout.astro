@@ -21,6 +21,8 @@ const { meta } = Astro.props;
     <meta property="cozy:description" content={meta.description} />
     <meta property="cozy:image" content={meta.image} />
     <meta property="cozy:source" content={meta.source} />
+    <meta property="cozy:author" content={meta.author} />
+    <meta property="cozy:published" content={meta.published} />
 
   </head>
   <body>
@@ -56,5 +58,4 @@ const { meta } = Astro.props;
   html * {
     font-family: var(--system-ui);
   }
-
 </style>
