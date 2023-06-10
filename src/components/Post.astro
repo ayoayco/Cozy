@@ -24,14 +24,14 @@ const datePublished =
   )
 }
 
-<style lang="scss">
+<style is:global lang="scss">
+
   @counter-style publish-icons {
     system: cyclic;
     symbols: "️✍️" "🗓️";
     suffix: " ";
   }
 
-  #post {
     h1.title {
       font-size: xx-large;
     }
@@ -51,36 +51,25 @@ const datePublished =
       }
     }
 
-    content {
-        :global(p, table, ul) {
-          margin: 1em 0;
-          font-size: 20px;
-        }
 
-        :global(table) {
-          border-collapse: collapse;
-          
-          :global(td, th) {
-            border: 1px solid #ccc;
-            padding: 0.5em;
-          }
-        }
 
-        :global(pre) {
-          white-space: pre-wrap;
-        }
-    }
-  }
-</style>
-
-<style is:global lang="scss">
-  /**
-    forced fix for older cached items before v0.1.5
-   */
   content {
-    p, table, ul {
+    p, table, ul, img {
       margin: 1em 0 !important;
       font-size: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+      
+      td, th {
+        border: 1px solid #ccc;
+        padding: 0.5em;
+      }
+    }
+
+    pre {
+      white-space: pre-wrap;
     }
   }
 </style>

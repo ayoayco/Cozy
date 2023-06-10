@@ -22,53 +22,141 @@ const {postDivSelector, skipSave = false} = Astro.props;
   const skipSave = document.getElementById('skipSave') as HTMLInputElement;
   const postDiv = document.querySelector(postDivSelector?.value);
 
-  if (!response && !skipSave.checked) {
+  if (!response && !skipSave?.checked) {
+    console.log('skip?', skipSave?.checked)
     await cache.add(url);
   }
 
   const cachedResponses = await cache.keys();
   const list = document.querySelector('#post-list');
 
-  if (cachedResponses.length) {
-    const heading = document.querySelector('#library h2') as HTMLHeadingElement;
-    heading.innerText = 'Previously viewed:';
-  }
+  if(cachedResponses?.length) {
+    const headingEl = document.querySelector('#library h2');
+    if(headingEl)
+      headingEl.innerHTML = 'Previously Viewed';
 
-  cachedResponses
-  .filter(request => {
-    const urlObj = new URL(request.url);
-    return urlObj.search !== '';
-  })
-  .reverse()
-  .forEach(async (request) => {
-    const {url} = request;
-    const link = document.createElement('a');
+    cachedResponses
+    .filter(request => {
+      const urlObj = new URL(request.url);
+      return urlObj.search !== '';
+    })
+    .reverse()
+    .forEach(async (request) => {
+      const {url} = request;
+      const link = document.createElement('a');
 
-    let responseText;
+      let responseText;
 
-    const fullResponse = await cache.match(url)
-    fullResponse?.text().then(data => {
-      responseText = data;
-      const html = document.createElement('html');
-      html.innerHTML = responseText;
-      const title = html.querySelector('title');
-      link.innerText = (title?.innerText || url).replace('Cozy 🧸 | ', '');
-    });
-
-    link.href = url;
-    link.onclick = async (e) => {
-      e.preventDefault();
-      scroll(0,0);
+      const fullResponse = await cache.match(url)
+      fullResponse?.text().then(data => {
+        responseText = data;
         const html = document.createElement('html');
         html.innerHTML = responseText;
-        const newPost = html.querySelector('body')?.querySelector('#post');
-        if (postDiv && newPost?.innerHTML) {
-          postDiv.innerHTML = newPost.innerHTML
-        }
-    }
-    const item = document.createElement('li');
-    item.appendChild(link);
-    list?.appendChild(item);
-  });
+        const title = html.querySelector('title');
+        const postCard = getPostCard(html);
+        link.innerHTML = postCard;
+      });
 
+      link.href = url;
+      link.onclick = async (e) => {
+        e.preventDefault();
+        scroll(0,0);
+          const html = document.createElement('html');
+          html.innerHTML = responseText;
+          const newPost = html.querySelector('body')?.querySelector('#post');
+          if (postDiv && newPost?.innerHTML) {
+            postDiv.innerHTML = newPost.innerHTML
+          }
+      }
+      const item = document.createElement('li');
+      item.appendChild(link);
+      list?.appendChild(item);
+    });
+  }
+
+
+  function getPostCard(html: HTMLHtmlElement) {
+    const title
+      = html.querySelector('meta[property="cozy:title"]')?.getAttribute('content')
+      ||html.querySelector('title')?.innerHTML?.replace('Cozy 🧸 | ', '');
+
+    const description = html.querySelector('meta[property="cozy:description"]')?.getAttribute('content');
+    const image = html.querySelector('meta[property="cozy:image"]')?.getAttribute('content');
+    const url = html.querySelector('meta[property="cozy:url"]')?.getAttribute('content');
+    const source = html.querySelector('meta[property="cozy:source"]')?.getAttribute('content');
+
+    const postCard = `
+      <div class="post-card">
+        ${
+          image ? `
+          <div class="post-card__image">
+            <img src="${image}" alt="${title} | ${description}" />
+          </div>
+          `
+          : ''
+        }
+        <div class="post-card__content">
+          ${
+            source ? `
+              <p class="post-card__site-name">${source}</p>
+            `
+            : ''
+          }
+          <h3 class="post-card__title">${title}</h3>
+          ${
+            description ? `
+            <p class="post-card__description">${description}</p>`
+            : ''
+          }
+        </div>
+      </div>
+    `;
+    return postCard;
+  }
 </script>
+
+<style lang="scss">
+  #library {
+    :global(h2) {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+  }
+  #post-list {
+    :global(li) {
+      margin-bottom: 1rem;
+      list-style: none;
+      border: 1px solid #ccc;
+      box-shadow: 0 5px 2px #eee;
+      border-radius: 5px;
+      padding: 1em;
+      width: calc(100% + 40px);
+      display: block;
+      float: left;
+      margin-left: -40px;
+
+      :global(a) {
+        text-decoration: none;
+        color: #000;
+
+        :global(h3) {
+          text-decoration: underline;
+        }
+
+        :global(.post-card) {
+          :global(.post-card__image) {
+            float: left;
+            margin-right: 1em;
+            :global(img) {
+              width: 150px;
+              height: 150px;
+              object-fit: cover;
+              border-radius: 5px;
+              border: 1px solid #eee;
+            }
+          }
+        }
+      }
+    }
+  }
+</style>

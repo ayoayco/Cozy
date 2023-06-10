@@ -30,13 +30,19 @@ if (url === '') {
   article = {
     title: "Welcome to Cozy 🧸",
     content: "<p>Enter a URL above to get started.</p>",
+    url: '/'
   };
   skipSave = true;
 }
 
 ---
-<Layout title={url !== "" ?  article?.title : "Your modern-day reading assistant"}>
+<Layout meta={article}>
     <AddressBar url={url} />
-    <Post slot="post" article={article} />
-    <Library skipSave={skipSave} slot="library" postDivSelector="#post" />
+    <div slot="post" id="outlet"></div>
+    {
+      url
+      ? <Post slot="post" article={article} />
+      : 
+        <Library skipSave={skipSave} slot="library" postDivSelector="#outlet" />
+    }
 </Layout>
