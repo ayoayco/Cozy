@@ -40,21 +40,18 @@ const { meta } = Astro.props;
 
 <style>
   #main-content {
-    max-width: 600px;
+    max-width: var(--cozy-width);
     margin: 0 auto;
-  }
-
-  #main-content * {
-    margin: 1rem 0 0;
-    padding: 0 0.5rem;
+    padding: 0 1em 1em;
   }
 </style>
-
 <style is:global lang="scss">
   :root {
+    --cozy-width: 600px;
     --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
       "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }
+
   html * {
     font-family: var(--system-ui);
   }

@@ -7,6 +7,7 @@ export interface Props {
 const {postDivSelector, skipSave = false} = Astro.props;
 ---
 <div id="library">
+  <span id="heading"></span>
   <ul id="post-list"></ul>
 </div>
 
@@ -32,6 +33,9 @@ const {postDivSelector, skipSave = false} = Astro.props;
   const list = document.querySelector('#post-list');
 
   if(cachedRequests?.length) {
+    const heading = document.querySelector('#library span#heading') as HTMLHeadingElement;
+    heading.innerHTML = 'History';
+
     cachedRequests
     // temporary delete all cached errors
     .filter(request => {
@@ -79,18 +83,18 @@ const {postDivSelector, skipSave = false} = Astro.props;
 
 <style lang="scss">
   #library {
-    :global(h2) {
-      text-align: center;
+    :global(span#heading) {
+      color: #555;
+      font-size: small;
+      text-transform: uppercase;
     }
   }
   #post-list {
+
     :global(li) {
       list-style: none;
-      display: block;
-      float: left;
       width: calc(100% + 40px);
       margin-left: -40px;
-      border-bottom: 1px solid #eee;
 
       :global(a) {
         text-decoration: none;
@@ -101,12 +105,10 @@ const {postDivSelector, skipSave = false} = Astro.props;
         }
 
         :global(.post-card) {
-          padding: 1rem 0;
-
+          padding-top: 1rem;
           :global(.post-card__image) {
             float: left;
-            margin-right: 0.5rem;
-            margin: 0.25rem 1rem 0.25rem 0;
+            margin: 0.25rem 0.5rem 0.25rem 0;
 
             :global(img, svg) {
               width: 70px;
