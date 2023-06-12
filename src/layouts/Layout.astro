@@ -26,28 +26,30 @@ const { meta } = Astro.props;
 
   </head>
   <body>
-    <slot />
-    <div id="main-content">
-      <div id="post-wrapper">
-        <slot name="post" />
-      </div>
-      <div id="library-wrapper">
-        <slot name="library" />
+    <div id="app-wrapper">
+      <slot />
+      <div id="main-content">
+        <div id="post-wrapper">
+          <slot name="post" />
+        </div>
+        <div id="library-wrapper">
+          <slot name="library" />
+        </div>
       </div>
     </div>
   </body>
 </html>
 
 <style>
-  #main-content {
-    max-width: var(--cozy-width);
+  #app-wrapper {
+    width: 100%;
+    max-width: 650px;
     margin: 0 auto;
-    padding: 0 1em 1em;
+    padding: 0.5rem;
   }
 </style>
 <style is:global lang="scss">
   :root {
-    --cozy-width: 600px;
     --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
       "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   }

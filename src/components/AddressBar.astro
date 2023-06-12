@@ -38,13 +38,12 @@ const form = new FormGroup([
 <style lang="scss">
   .address-bar {
     text-align: center;
-    padding: 0.5em;
     width: 100%;
   }
 
   nav {
-    margin: 0.5em 0;
-
+    padding: 0.5rem;
+    font-size: small;
     a:hover {
       text-decoration: underline;
     }
@@ -54,13 +53,12 @@ const form = new FormGroup([
     }
     img {
       display: inline;
-      vertical-align: middle;
+      vertical-align: bottom;
     }
   }
 
   :global(input) {
     width: 100%;
-    max-width: var(--cozy-width);
     text-align: center;
     border: 0px;
     border-radius: 5px;
