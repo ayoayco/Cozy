@@ -1,6 +1,6 @@
 {
   "name": "@ayco/cozy",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "scripts": {
     "start": "astro dev",
     "build": "astro build"
