@@ -7,7 +7,6 @@ export interface Props {
 const {postDivSelector, skipSave = false} = Astro.props;
 ---
 <div id="library">
-  <h2></h2>
   <ul id="post-list"></ul>
 </div>
 
@@ -15,6 +14,7 @@ const {postDivSelector, skipSave = false} = Astro.props;
 <input type="checkbox" id="skipSave" name="skipSave" checked={skipSave} hidden />
 
 <script>
+  import { getPostCard } from '../utils/library-utils'
   const cache = await caches.open('cozy-reader');
   const url = new URL(window.location.href);
   const response = await cache.match(url)
@@ -22,20 +22,18 @@ const {postDivSelector, skipSave = false} = Astro.props;
   const skipSave = document.getElementById('skipSave') as HTMLInputElement;
   const postDiv = document.querySelector(postDivSelector?.value);
 
-  if (!response && !skipSave?.checked) {
-    console.log('skip?', skipSave?.checked)
-    await cache.add(url);
+  if (!response) {
+    if (!skipSave?.checked) {
+      await cache.add(url);
+    }
   }
 
-  const cachedResponses = await cache.keys();
+  const cachedRequests = await cache.keys();
   const list = document.querySelector('#post-list');
 
-  if(cachedResponses?.length) {
-    const headingEl = document.querySelector('#library h2');
-    if(headingEl)
-      headingEl.innerHTML = 'Previously Viewed';
-
-    cachedResponses
+  if(cachedRequests?.length) {
+    cachedRequests
+    // temporary delete all cached errors
     .filter(request => {
       const urlObj = new URL(request.url);
       return urlObj.search !== '';
@@ -52,78 +50,30 @@ const {postDivSelector, skipSave = false} = Astro.props;
         responseText = data;
         const html = document.createElement('html');
         html.innerHTML = responseText;
-        const title = html.querySelector('title');
+        const title = html.querySelector('meta[property="cozy:title"]')?.getAttribute('content');
+        if (title === 'Something is not right') {
+          cache.delete(url);
+          return; // temporary fix for deleting cached errors
+        }
         const postCard = getPostCard(html);
         link.innerHTML = postCard;
-      });
 
-      link.href = url;
-      link.onclick = async (e) => {
-        e.preventDefault();
-        scroll(0,0);
-          const html = document.createElement('html');
-          html.innerHTML = responseText;
-          const newPost = html.querySelector('body')?.querySelector('#post');
-          if (postDiv && newPost?.innerHTML) {
-            postDiv.innerHTML = newPost.innerHTML
-          }
-      }
-      const item = document.createElement('li');
-      item.appendChild(link);
-      list?.appendChild(item);
-    });
-  }
-
-
-  function getPostCard(html: HTMLHtmlElement) {
-    const title
-      = html.querySelector('meta[property="cozy:title"]')?.getAttribute('content')
-      ||html.querySelector('title')?.innerHTML?.replace('Cozy 🧸 | ', '');
-
-    const description = html.querySelector('meta[property="cozy:description"]')?.getAttribute('content');
-    const image = html.querySelector('meta[property="cozy:image"]')?.getAttribute('content');
-    const url = html.querySelector('meta[property="cozy:url"]')?.getAttribute('content');
-    const source = html.querySelector('meta[property="cozy:source"]')?.getAttribute('content');
-    const published = html.querySelector('meta[property="cozy:published"]')?.getAttribute('content');
-
-    const postCard = `
-      <div class="post-card">
-          <div class="post-card__image">
-        ${
-          image ? `
-            <img src="${image}" alt="${title} | ${description}" />
-          `
-          : '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/><path fill="currentColor" d="M14 17H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>'
+        link.href = url;
+        link.onclick = async (e) => {
+          e.preventDefault();
+          scroll(0,0);
+            const html = document.createElement('html');
+            html.innerHTML = responseText;
+            const newPost = html.querySelector('body')?.querySelector('#post');
+            if (postDiv && newPost?.innerHTML) {
+              postDiv.innerHTML = newPost.innerHTML
+            }
         }
-          </div>
-        <div class="post-card__content">
-          ${
-          (source || published) ? `
-          <div class="post-card__meta">
-            ${
-              source ? `
-                <p class="post-card__source">${source}</p>
-              `
-              : ''
-            }
-            ${
-              published ? `
-                <p class="post-card__published">${new Date(published).toLocaleDateString()}</p>
-              `
-              : ''
-            }
-          </div>
-          `: ''}
-          <h3 class="post-card__title">${title}</h3>
-          ${
-            description ? `
-            <p class="post-card__description">${description}</p>`
-            : ''
-          }
-        </div>
-      </div>
-    `;
-    return postCard;
+        const item = document.createElement('li');
+        item.appendChild(link);
+        list?.appendChild(item);
+      });
+    });
   }
 </script>
 
