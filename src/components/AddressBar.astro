@@ -11,7 +11,7 @@ const form = new FormGroup([
   {
     name: "url",
     value: url,
-    placeholder: "Put the URL here",
+    placeholder: "Type a URL here",
     validators: [Validators.required, Validators.minLength(11)],
   },
 ]);
@@ -37,7 +37,6 @@ const form = new FormGroup([
 
 <style lang="scss">
   .address-bar {
-    background-color:antiquewhite;
     text-align: center;
     padding: 0.5em;
     width: 100%;
@@ -60,13 +59,12 @@ const form = new FormGroup([
   }
 
   :global(input) {
-    width: 100%;
+    width: var(--cozy-width);
     text-align: center;
     border: 0px;
     border-radius: 5px;
     padding: 0.5rem;
-  }
-  :global(input[type="text"]) {
-    border: 2px solid brown;
+    background-color: #f5f5f5;
+    box-shadow: 0 0 1px 1px #ccc;
   }
 </style>
