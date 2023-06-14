@@ -4,8 +4,8 @@ import "./reset.css";
 export interface Props {
   meta: ArticleData
 }
-const appTitle = "Cozy 🧸";
 const { meta } = Astro.props;
+const appTitle = `Cozy 🧸${meta.title && `| ${meta.title}`}`;
 ---
 
 <!DOCTYPE html>
@@ -14,7 +14,20 @@ const { meta } = Astro.props;
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{appTitle} {meta.title && `| ${meta.title}`}</title>
+    <title>{appTitle}</title>
+
+    {
+      meta.url !== '/' ? (
+        <meta name="robots" content="noindex">
+        <meta name="googlebot" content="noindex">
+      ) : (
+        <meta property="og:title" content={appTitle} />
+        <meta property="og:url" content={Astro.url.href} />
+        <meta property="og:description" content="Remove distractions.Save your favorites. Get useful insights. Cozy is your modern-day reading assistant." />
+        <meta name="description" content="Remove distractions.Save your favorites. Get useful insights. Cozy is your modern-day reading assistant." />
+        <meta itemprop="description" content="Remove distractions.Save your favorites. Get useful insights. Cozy is your modern-day reading assistant." />
+      )
+    }
 
     <meta property="cozy:title" content={meta.title} />
     <meta property="cozy:url" content={meta.url} />
