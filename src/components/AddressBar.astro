@@ -4,6 +4,7 @@ export interface Props {
 }
 
 const { url } = Astro.props;
+const placeholder = 'Type the URL of an article here';
 ---
 
 <div class="address-bar">
@@ -11,7 +12,7 @@ const { url } = Astro.props;
     <button aria-label="Home" title="Home" class="left-button" type="button" id="app-home" name="app-home" onclick="window.location.href = '/';" hidden>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17.51 3.87L15.73 2.1L5.84 12l9.9 9.9l1.77-1.77L9.38 12l8.13-8.13z"/></svg>
     </button>
-    <input type="text" id="app-url" name="url" value={url} placeholder="Type a URL here" />
+    <input type="text" id="app-url" name="url" value={url} placeholder={placeholder} />
     <button aria-label="Submit" title="Submit" class="right-button primary-button" type="submit" id="submit">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M6.23 20.23L8 22l10-10L8 2L6.23 3.77L14.46 12z"/></svg>
     </button>

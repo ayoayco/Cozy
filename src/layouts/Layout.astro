@@ -1,6 +1,7 @@
 ---
 import { ArticleData } from "@extractus/article-extractor";
 import "./reset.css";
+import Footer from "../components/Footer.astro";
 export interface Props {
   meta: ArticleData
 }
@@ -50,6 +51,7 @@ const appTitle = `Cozy 🧸${meta.title && `| ${meta.title}`}`;
         </div>
       </div>
     </div>
+    <Footer />
   </body>
 </html>
 
@@ -62,7 +64,7 @@ const appTitle = `Cozy 🧸${meta.title && `| ${meta.title}`}`;
   }
   #main-content {
     * {
-      margin: 1rem 0;
+      margin: 1rem 0 0;
     }
   
     #post-wrapper {
