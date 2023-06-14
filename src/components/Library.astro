@@ -15,13 +15,12 @@ const {postDivSelector, skipSave = false} = Astro.props;
 <input type="checkbox" id="skipSave" name="skipSave" checked={skipSave} hidden />
 
 <script>
-  import { getPostCard } from '../utils/library'
+  import { getPostCard, renderPost } from '../utils/library'
   const cache = await caches.open('cozy-reader');
   const url = new URL(window.location.href);
   const response = await cache.match(url)
   const postDivSelector = document.getElementById('postDivSelector') as HTMLInputElement;
   const skipSave = document.getElementById('skipSave') as HTMLInputElement;
-  const postDiv = document.querySelector(postDivSelector?.value);
 
   if (!response) {
     if (!skipSave?.checked) {
@@ -66,14 +65,7 @@ const {postDivSelector, skipSave = false} = Astro.props;
         link.onclick = async (e) => {
           e.preventDefault();
           scroll(0,0);
-            const html = document.createElement('html');
-            html.innerHTML = responseText;
-            const newPost = html.querySelector('body')?.querySelector('#post');
-            if (postDiv && newPost?.innerHTML) {
-              postDiv.innerHTML = newPost.innerHTML
-              const homeBtn = document.getElementById('app-home') as HTMLButtonElement;
-              homeBtn.removeAttribute('disabled');
-            }
+          renderPost(responseText, url, postDivSelector?.value)
         }
         const item = document.createElement('li');
         item.appendChild(link);
@@ -82,6 +74,20 @@ const {postDivSelector, skipSave = false} = Astro.props;
 
       });
     });
+
+    window.onpopstate = async (data) => {
+      let url = data.state?.url;
+
+      if (!url) {
+        url = window.location.href;
+      }
+
+        const fullResponse = await cache.match(url)
+        fullResponse?.text().then(data => {
+          const responseText = data;
+          renderPost(responseText, url, postDivSelector?.value, true);
+        });
+    }
   }
 </script>
 
