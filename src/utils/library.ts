@@ -77,6 +77,8 @@ export function renderPost(responseText, url, postDivSelector: string, preventPu
               const cozyUrl = html.querySelector('meta[property="cozy:url"]')?.getAttribute('content');
               if(cozyUrl !== '/') {
                 appUrl.value = cozyUrl || '';
+              } else {
+                appUrl.value = '';
               }
               if(!preventPushState) {
                 window.history.pushState({url}, '', url);
