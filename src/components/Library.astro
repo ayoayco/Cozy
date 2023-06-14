@@ -75,19 +75,19 @@ const {postDivSelector, skipSave = false} = Astro.props;
       });
     });
 
-    window.onpopstate = async (data) => {
+    window.addEventListener('popstate', async (data) => {
       let url = data.state?.url;
 
       if (!url) {
         url = window.location.href;
       }
 
-        const fullResponse = await cache.match(url)
-        fullResponse?.text().then(data => {
-          const responseText = data;
-          renderPost(responseText, url, postDivSelector?.value, true);
-        });
-    }
+      const fullResponse = await cache.match(url)
+      fullResponse?.text().then(data => {
+        const responseText = data;
+        renderPost(responseText, url, postDivSelector?.value, true);
+      });
+    });
   }
 </script>
 
