@@ -19,7 +19,7 @@ try {
   article = await extract(url);
   if (!article ) {
     article = error;
-    // skipSave = true;
+    skipSave = true;
   }
 } catch {
   article = error;
@@ -32,17 +32,11 @@ if (url === '') {
     content: "<p>Enter a URL above to get started.</p>",
     url: '/'
   };
-  skipSave = true;
 }
 
 ---
 <Layout meta={article}>
     <AddressBar url={url} />
-    {
-      url
-      ? <Post slot="post" article={article} />
-      : 
-      <div slot="post" id="outlet"></div>
-    }
-    <Library skipSave={skipSave} slot="library" postDivSelector="#outlet" />
+    <Post slot="post" article={article} />
+    <Library skipSave={skipSave} slot="library" postDivSelector="#post"/>
 </Layout>

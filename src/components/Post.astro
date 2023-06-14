@@ -8,21 +8,22 @@ const { article } = Astro.props;
 const datePublished =
   article?.published && new Date(article.published).toDateString();
 ---
-{
-  article && (
-    <div id="post">
-      {article.source && <span class="source">{article.source}</span>}
-      {article.title && <h1 class="title">{article.title}</h1>}
-      {(article.author || datePublished) && (
-        <ul class="publish-info">
-          {article.author && <li>️{article.author} </li>}
-          {datePublished && <li>️{datePublished}</li>}
-        </ul>
-      )}
-      <content set:html={article.content} />
-    </div>
-  )
-}
+<div id="post">
+  {
+    article && article.url !== '/'  &&
+      <>
+        {article.source && <span class="source">{article.source}</span>}
+        {article.title && <h1 class="title">{article.title}</h1>}
+        {(article.author || datePublished) && (
+          <ul class="publish-info">
+            {article.author && <li>️{article.author} </li>}
+            {datePublished && <li>️{datePublished}</li>}
+          </ul>
+        )}
+        <content set:html={article.content} />
+      </>
+  }
+</div>
 
 <style is:global lang="scss">
 

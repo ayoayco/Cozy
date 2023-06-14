@@ -40,12 +40,21 @@ const { meta } = Astro.props;
   </body>
 </html>
 
-<style>
+<style lang="scss">
   #app-wrapper {
     width: 100%;
     max-width: 650px;
     margin: 0 auto;
     padding: 0.5rem;
+  }
+  #main-content {
+    * {
+      margin: 1rem 0;
+    }
+  
+    #post-wrapper {
+      padding: 0 1rem;
+    }
   }
 </style>
 <style is:global lang="scss">

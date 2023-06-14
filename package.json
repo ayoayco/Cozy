@@ -9,8 +9,6 @@
     "astro": "^2.5.7"
   },
   "dependencies": {
-    "@astro-reactive/form": "^0.8.1",
-    "@astro-reactive/validator": "^0.3.4",
     "@astrojs/netlify": "^2.2.2",
     "@extractus/article-extractor": "^7.2.15",
     "sass": "^1.62.1"

@@ -15,7 +15,7 @@ const {postDivSelector, skipSave = false} = Astro.props;
 <input type="checkbox" id="skipSave" name="skipSave" checked={skipSave} hidden />
 
 <script>
-  import { getPostCard } from '../utils/library-utils'
+  import { getPostCard } from '../utils/library'
   const cache = await caches.open('cozy-reader');
   const url = new URL(window.location.href);
   const response = await cache.match(url)
@@ -71,11 +71,15 @@ const {postDivSelector, skipSave = false} = Astro.props;
             const newPost = html.querySelector('body')?.querySelector('#post');
             if (postDiv && newPost?.innerHTML) {
               postDiv.innerHTML = newPost.innerHTML
+              const homeBtn = document.getElementById('app-home') as HTMLButtonElement;
+              homeBtn.setAttribute('style', 'display: block');
             }
         }
         const item = document.createElement('li');
         item.appendChild(link);
         list?.appendChild(item);
+
+
       });
     });
   }
@@ -105,7 +109,8 @@ const {postDivSelector, skipSave = false} = Astro.props;
         }
 
         :global(.post-card) {
-          padding-bottom: 0.5rem;
+          padding-bottom: 1rem;
+
           :global(.post-card__image) {
             float: left;
             margin: 0.25rem 0.5rem 0.25rem 0;
