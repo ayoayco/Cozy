@@ -64,28 +64,36 @@ const {postDivSelector, skipSave = false} = Astro.props;
         link.href = url;
         link.onclick = async (e) => {
           e.preventDefault();
+          localStorage.setItem('scrollPosition', window.scrollY.toString());
           scroll(0,0);
           renderPost(responseText, url, postDivSelector?.value)
         }
         const item = document.createElement('li');
         item.appendChild(link);
         list?.appendChild(item);
-
-
       });
     });
 
     window.addEventListener('popstate', async (data) => {
       let url = data.state?.url;
+      let isHome = false;
 
       if (!url) {
         url = window.location.href;
+        isHome = true;
+      } else {
+        // replace scrollPosition
+        localStorage.setItem('scrollPosition', window.scrollY.toString());
       }
 
       const fullResponse = await cache.match(url)
       fullResponse?.text().then(data => {
         const responseText = data;
         renderPost(responseText, url, postDivSelector?.value, true);
+        if (isHome) {
+          const scrollPosition = localStorage.getItem('scrollPosition');
+          scrollTo(0, scrollPosition ? parseInt(scrollPosition) : 0);
+        }
       });
     });
   }
