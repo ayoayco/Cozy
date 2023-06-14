@@ -72,7 +72,7 @@ const {postDivSelector, skipSave = false} = Astro.props;
             if (postDiv && newPost?.innerHTML) {
               postDiv.innerHTML = newPost.innerHTML
               const homeBtn = document.getElementById('app-home') as HTMLButtonElement;
-              homeBtn.setAttribute('style', 'display: block');
+              homeBtn.removeAttribute('disabled');
             }
         }
         const item = document.createElement('li');

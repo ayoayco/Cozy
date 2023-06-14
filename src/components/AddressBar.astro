@@ -12,7 +12,7 @@ const { url } = Astro.props;
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17.51 3.87L15.73 2.1L5.84 12l9.9 9.9l1.77-1.77L9.38 12l8.13-8.13z"/></svg>
     </button>
     <input type="text" id="app-url" name="url" value={url} placeholder="Type a URL here" />
-    <button aria-label="Submit" title="Submit" class="right-button" type="submit" id="submit">
+    <button aria-label="Submit" title="Submit" class="right-button primary-button" type="submit" id="submit">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M6.23 20.23L8 22l10-10L8 2L6.23 3.77L14.46 12z"/></svg>
     </button>
     <button aria-label="GitHub" title="GitHub" class="right-button" type="button" id="gh-link" onclick="window.location.href = 'https://github.com/ayoayco/cozy'">
@@ -24,8 +24,20 @@ const { url } = Astro.props;
 <script>
   const homeBtn = document.getElementById('app-home') as HTMLButtonElement;
   const urlInput = document.getElementById('app-url') as HTMLInputElement;
-  if (urlInput.value === '')
-    homeBtn.setAttribute('style', 'display: none');
+  const submitBtn = document.getElementById('submit') as HTMLButtonElement;
+  if (urlInput.value === '') {
+    homeBtn.setAttribute('disabled', 'true');
+    submitBtn.setAttribute('disabled', 'true');
+  }
+
+  urlInput.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    if (target.value === '') {
+      submitBtn.setAttribute('disabled', 'true');
+    } else {
+      submitBtn.removeAttribute('disabled');
+    }
+  });
 </script>
 
 <style lang="scss">
@@ -76,5 +88,15 @@ const { url } = Astro.props;
     :global(.right-button) {
       margin-left: 0.5rem;
     }
+
+    :global(.primary-button:not([disabled="true"])) {
+      color: blue !important;
+    }
+
+    :global(button[disabled="true"]) {
+      color: #eee !important;
+    }
+
+
   }
 </style>
