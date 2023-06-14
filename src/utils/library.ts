@@ -64,3 +64,24 @@ export function getPostCard(html: HTMLHtmlElement) {
     `;
   return postCard;
 }
+export function renderPost(responseText, url, postDivSelector: string, preventPushState = false) {
+            const postDiv = document.querySelector(postDivSelector);
+            const html = document.createElement('html');
+            html.innerHTML = responseText;
+            const newPost = html.querySelector('body')?.querySelector('#post');
+            if (postDiv && newPost?.innerHTML) {
+              postDiv.innerHTML = newPost.innerHTML
+              const homeBtn = document.getElementById('app-home') as HTMLButtonElement;
+              homeBtn.removeAttribute('disabled');
+              const appUrl = document.getElementById('app-url') as HTMLInputElement;
+              const cozyUrl = html.querySelector('meta[property="cozy:url"]')?.getAttribute('content');
+              if(cozyUrl !== '/') {
+                appUrl.value = cozyUrl || '';
+              }
+              if(!preventPushState) {
+                window.history.pushState({url}, '', url);
+              }
+              const submitBtn = document.getElementById('submit') as HTMLButtonElement;
+              submitBtn.removeAttribute('disabled');
+            }
+    }
