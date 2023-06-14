@@ -11,9 +11,6 @@ export function getPostCard(html: HTMLHtmlElement) {
   const image = html
     .querySelector('meta[property="cozy:image"]')
     ?.getAttribute("content");
-  const url = html
-    .querySelector('meta[property="cozy:url"]')
-    ?.getAttribute("content");
   const source = html
     .querySelector('meta[property="cozy:source"]')
     ?.getAttribute("content");
@@ -39,19 +36,17 @@ export function getPostCard(html: HTMLHtmlElement) {
           <div class="post-card__meta">
             ${
               source
-                ? `
+                && `
                 <p class="post-card__source">${source}</p>
               `
-                : ""
             }
             ${
               published
-                ? `
+                && `
                 <p class="post-card__published">${
                   new Date(published)?.toLocaleDateString() || ""
                 }</p>
               `
-                : ""
             }
           </div>
           `
