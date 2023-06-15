@@ -1,4 +1,6 @@
 ---
+import Icon from 'astro-iconify';
+
 export interface Props {
   url: string;
 }
@@ -9,15 +11,16 @@ const placeholder = 'Type the URL of an article here';
 
 <div class="address-bar">
   <form>
-    <button aria-label="Home" title="Home" class="left-button" type="button" id="app-home" name="app-home" onclick="history.go(-1); return false;" hidden>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M17.51 3.87L15.73 2.1L5.84 12l9.9 9.9l1.77-1.77L9.38 12l8.13-8.13z"/></svg>
+    <button aria-label="Home" class="left-buttons" type="button" id="app-home" name="app-home" onclick="history.go(-1); return false;" hidden>
+      <Icon name="ic:outline-arrow-back-ios" />
     </button>
-    <input type="text" id="app-url" name="url" value={url} placeholder={placeholder} />
-    <button aria-label="Submit" title="Submit" class="right-button primary-button" type="submit" id="submit">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M6.23 20.23L8 22l10-10L8 2L6.23 3.77L14.46 12z"/></svg>
+    <input type="url" id="app-url" name="url" value={url} placeholder={placeholder} />
+    <button aria-label="Submit" class="right-buttons" type="submit" id="submit">
+      <!-- <Icon name="ic:outline-arrow-forward-ios" /> -->
+      <Icon name="ri:ai-generate" />
     </button>
-    <button aria-label="GitHub" title="GitHub" class="right-button" type="button" id="gh-link" onclick="window.open('https://github.com/ayoayco/cozy', '_blank');" hidden>
-      <svg xmlns="http://www.w3.org/2000/svg" width="1227.83" height="1000" viewBox="0 0 1227.825 1000"><path fill="currentColor" d="M1078.94-.985c-33.192-.491-110.295 10.777-239.027 96.936c-70.161-17.535-144.812-26.188-219.591-26.188c-82.278 0-165.425 10.448-242.965 31.719C192.534-24.605 110.955 1.234 110.955 1.234c-53.258 133.183-20.347 231.788-10.344 256.277C38.014 325.069-.2 411.338-.2 517.07c0 79.822 9.085 151.416 31.281 213.653c1.231 4.803.832 3.732 2.906 7.844c4.89 12.884 10.327 25.39 16.438 37.468c2.094 4.346 4 7.563 4 7.563c62.395 116.307 185.396 191.438 404.244 215.028l330.995.375c233.392-23.144 345.386-98.499 396.994-215.591l3.281-7.625c4.89-11.828 9.153-24.135 20.813-65.562c11.659-41.427 16.875-113.172 16.875-193.185c0-114.755-43.1-206.577-113.092-276.434c12.231-39.48 28.57-127.158-16.313-239.402c0 0-6.293-1.995-19.281-2.188zM818.1 420.133c53.893-.117 100.057 9.136 134.717 45.499v.031c43.369 45.541 68.749 100.525 68.749 159.778c0 276.658-177.932 284.183-397.4 284.183c-219.506 0-397.4-38.336-397.4-284.183c0-58.861 25.009-113.516 67.843-158.872c71.451-75.59 192.365-35.562 329.558-35.562c70.423-.011 136.564-10.75 193.935-10.875zm-408.807 81.468c-45.666 0-82.687 61.741-82.687 137.936c0 76.206 37.019 137.967 82.687 137.967c45.666 0 82.687-61.761 82.687-137.967c0-76.184-37.019-137.881-82.687-137.936zm443.649 0c-45.666 0-82.687 61.741-82.687 137.936c0 76.206 37.019 137.967 82.687 137.967c45.666 0 82.687-61.761 82.687-137.967c0-76.184-37.019-137.881-82.687-137.936z"/></svg>
+    <button aria-label="GitHub" class="right-buttons" type="button" id="gh-link" onclick="window.open('https://github.com/ayoayco/cozy', '_blank');" hidden>
+      <Icon name="mdi:github" />
     </button>
   </form>
 </div>
@@ -64,7 +67,7 @@ const placeholder = 'Type the URL of an article here';
     box-shadow: 0 1px 3px 1px #eee;
     display: flex;
 
-    :global(input[type="text"]) {
+    :global(input[type="url"]) {
       flex: 3;
       background-color: white;
       border-radius: 5px;
@@ -80,7 +83,7 @@ const placeholder = 'Type the URL of an article here';
       background-color: transparent;
       padding: 0px;
       cursor: pointer;
-      color: #888;
+      color: black;
 
       :global(svg) {
           border: 0px;
@@ -90,20 +93,21 @@ const placeholder = 'Type the URL of an article here';
       }
     }
 
-    :global(.left-button) {
+    :global(.left-buttons) {
       margin-right: 0.5rem;
     }
-    :global(.right-button) {
+    :global(.right-buttons) {
       margin-left: 0.5rem;
     }
 
-    :global(button#gh-link:hover) ,
-    :global(.primary-button:not([disabled="true"])) {
+    :global(button:hover),
+    :global(button.primary-button) {
       color: blue !important;
     }
 
     :global(button[disabled="true"]) {
       color: #ccc !important;
+      cursor: default !important;
     }
   }
 </style>
