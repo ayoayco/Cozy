@@ -10,13 +10,16 @@
   <a href="https://cozy-reader.netlify.app" target="_blank">&nearr; Try the App! &nearr;</a><br />
 </p>
 
-## So, how is this app different?
-
+## How is this app different?
 Well here's what I’m building:
 1. An app that just works, no sign ups or setups.
 2. Progressively enhanced experience. Main feature works even without JS. Removing distractions happen on the server and dead clean HTML gets delivered
 3. All your data are cached and does not leave your device;  offline access is by default
 4. Cloud-sync will be opt-in, with your choice of provider
+5. Will also explore smart insights, such as:
+    1. text summarization
+    2. dominant emotion
+    3. other sources for lateral reading
 
 ## Roadmap
 | Feature | Status |
@@ -54,7 +57,6 @@ This is possible on all major browsers, including Safari on iOS (where I persona
 It doesn't exist yet... I'll probably get to creating a browser extension at some point. But for now, PRs welcome! :)
 
 ## Contributing
-
 Speaking of PRs being welcome, see our [CONTRIBUTING guide](/CONTRIBUTING.md).
 
 🧸
