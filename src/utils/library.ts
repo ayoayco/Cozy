@@ -77,6 +77,9 @@ export function renderPost(responseText, url, postDivSelector: string, preventPu
               const submitBtn = document.getElementById('submit') as HTMLButtonElement;
 
 
+              const title = html.querySelector('meta[property="cozy:title"]')?.getAttribute('content');
+              document.title = `Cozy 🧸 | ${title}` || 'Cozy 🧸';
+
               if(cozyUrl !== '/') {
                 appUrl.value = cozyUrl || '';
                 homeBtn.removeAttribute('disabled');
