@@ -6,7 +6,7 @@ export interface Props {
   meta: ArticleData
 }
 const { meta } = Astro.props;
-const appTitle = `Cozy 🧸${meta.title && `| ${meta.title}`}`;
+const appTitle = `Cozy 🧸${meta.title && ` | ${meta.title}`}`;
 ---
 
 <!DOCTYPE html>
