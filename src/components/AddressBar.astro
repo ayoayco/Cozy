@@ -14,7 +14,7 @@ const placeholder = 'Type the URL of an article here';
     <button aria-label="Home" class="left-buttons" type="button" id="app-home" name="app-home" onclick="history.go(-1); return false;" hidden>
       <Icon name="ic:outline-arrow-back-ios" />
     </button>
-    <input type="url" id="app-url" name="url" value={url} placeholder={placeholder} />
+    <input type="url" id="app-url" name="url" value={url} placeholder={placeholder} required />
     <button aria-label="Submit" class="right-buttons" type="submit" id="submit">
       <!-- <Icon name="ic:outline-arrow-forward-ios" /> -->
       <Icon name="ri:ai-generate" />
