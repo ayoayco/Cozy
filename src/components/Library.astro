@@ -31,7 +31,7 @@ const {postDivSelector, skipSave = false} = Astro.props;
   const cachedRequests = (await cache.keys())
     .filter(request => {
       const urlObj = new URL(request.url);
-      return urlObj.search !== '';
+      return urlObj.search !== '' && urlObj.searchParams.get('url') !== '';
     });
 
   if(cachedRequests?.length) {
@@ -64,7 +64,7 @@ const {postDivSelector, skipSave = false} = Astro.props;
         link.onclick = async (e) => {
           e.preventDefault();
           localStorage.setItem('scrollPosition', window.scrollY.toString());
-          scroll(0,0);
+          scrollTo(0,0);
           renderPost(responseText, url, postDivSelector?.value)
         }
         const item = document.createElement('li');
