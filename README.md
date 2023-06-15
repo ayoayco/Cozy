@@ -1,4 +1,4 @@
-<h1 align="center">Cozy 🧸</h1>
+<h1 align="center"><s>Cozy 🧸</s> Uh, we need a new name! See why <a href="https://social.ayco.io/@ayo/110547172702258070">here</a></h1>
 <p align="center">
   <a href="https://github.com/ayoayco/cozy">
     <img alt="Last Commit" src="https://img.shields.io/github/last-commit/ayoayco/cozy?logo=github" />
@@ -9,6 +9,14 @@
   <a href="https://cozy-reader.netlify.app" target="_blank"><img src="https://raw.githubusercontent.com/ayoayco/cozy/main/.github/assets/screenshot.png" /></a><br />
   <a href="https://cozy-reader.netlify.app" target="_blank">&nearr; Try the App! &nearr;</a><br />
 </p>
+
+## So, how is this app different?
+
+Well here's what I’m building:
+1. An app that just works, no sign ups or setups.
+2. Progressively enhanced experience. Main feature works even without JS. Removing distractions happen on the server and dead clean HTML gets delivered
+3. All your data are cached and does not leave your device;  offline access is by default
+4. Cloud-sync will be opt-in, with your choice of provider
 
 ## Roadmap
 | Feature | Status |
@@ -25,11 +33,11 @@
 
 **1. Copy, Paste**
 
-It's simple. When you open an article and want to turn it into a more cozy reading experience, just copy the url and paste it to the [Cozy](https://cozy-reader.netlify.app/) address bar.  
+It's simple. When you open an article and want to turn it into a more cozy reading experience, just copy the url and paste it to the [app's](https://cozy-reader.netlify.app/) address bar.  
 
 **2. One-click Bookmark**
 
-A bookmarklet could run a script to open the current page for you on Cozy. You can create this new bookmark titled 'Get cozy!' and put the following as value for the URL:
+A bookmarklet could run a script to open the current page for you on ~~Cozy~~. You can create this new bookmark titled 'Get cozy!' and put the following as value for the URL:
 
 ```
 javascript:(function(){ window.open('https://cozy-reader.netlify.app/?url=%27 + window.location.href, %27_self%27); })();
