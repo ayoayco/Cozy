@@ -73,7 +73,7 @@ export function renderPost(responseText, url, postDivSelector: string, preventPu
               postDiv.innerHTML = newPost.innerHTML
               const appUrl = document.getElementById('app-url') as HTMLInputElement;
               const cozyUrl = html.querySelector('meta[property="cozy:url"]')?.getAttribute('content');
-              const homeBtn = document.getElementById('app-home') as HTMLButtonElement;
+              const backBtn = document.getElementById('app-back') as HTMLButtonElement;
               const submitBtn = document.getElementById('submit') as HTMLButtonElement;
 
 
@@ -82,11 +82,11 @@ export function renderPost(responseText, url, postDivSelector: string, preventPu
 
               if(cozyUrl !== '/') {
                 appUrl.value = cozyUrl || '';
-                homeBtn.removeAttribute('disabled');
+                backBtn.removeAttribute('disabled');
                 submitBtn.removeAttribute('disabled');
               } else {
                 appUrl.value = '';
-                homeBtn.setAttribute('disabled', 'true');
+                backBtn.setAttribute('disabled', 'true');
                 submitBtn.setAttribute('disabled', 'true');
               }
 

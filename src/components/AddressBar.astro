@@ -6,17 +6,19 @@ export interface Props {
 }
 
 const { url } = Astro.props;
-const placeholder = 'Type the URL of an article here';
+const placeholder = 'Type the article URL here';
 ---
 
 <div class="address-bar">
   <form>
-    <button aria-label="Home" class="left-buttons" type="button" id="app-home" name="app-home" onclick="history.go(-1); return false;" hidden>
-      <Icon name="ic:outline-arrow-back-ios" />
+    <button aria-label="Home" class="left-buttons" type="button" id="app-home" name="app-home" onclick="window.location.href='/'; return false;" hidden>
+      <Icon name="ic:round-library-books" />
+    </button>
+    <button aria-label="Back" class="left-buttons" type="button" id="app-back" name="app-back" onclick="history.go(-1); return false;" hidden>
+      <Icon name="ic:round-arrow-back-ios" />
     </button>
     <input type="url" id="app-url" name="url" value={url} placeholder={placeholder} required />
     <button aria-label="Submit" class="right-buttons" type="submit" id="submit">
-      <!-- <Icon name="ic:outline-arrow-forward-ios" /> -->
       <Icon name="ri:ai-generate" />
     </button>
     <button aria-label="GitHub" class="right-buttons" type="button" id="gh-link" onclick="window.open('https://github.com/ayoayco/cozy', '_blank');" hidden>
@@ -27,16 +29,18 @@ const placeholder = 'Type the URL of an article here';
 
 <script>
   const ghLink = document.getElementById('gh-link') as HTMLButtonElement;
-  const homeBtn = document.getElementById('app-home') as HTMLButtonElement;
+  const backLink = document.getElementById('app-back') as HTMLButtonElement;
+  const homeLink = document.getElementById('app-home') as HTMLButtonElement;
   const urlInput = document.getElementById('app-url') as HTMLInputElement;
   const submitBtn = document.getElementById('submit') as HTMLButtonElement;
 
-  // if js is enabled, show the home button and github link
+  // if js is enabled, show the back button and github link
   ghLink.removeAttribute('hidden');
-  homeBtn.removeAttribute('hidden');
+  backLink.removeAttribute('hidden');
+  homeLink.removeAttribute('hidden');
 
   if (urlInput.value === '') {
-    homeBtn.setAttribute('disabled', 'true');
+    backLink.setAttribute('disabled', 'true');
     submitBtn.setAttribute('disabled', 'true');
   }
 
@@ -77,6 +81,7 @@ const placeholder = 'Type the URL of an article here';
     }
 
     :global(button#app-home),
+    :global(button#app-back),
     :global(button#submit),
     :global(button#gh-link) {
       border: 0px;
