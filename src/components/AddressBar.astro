@@ -11,15 +11,15 @@ const placeholder = 'Type the article URL here';
 
 <div class="address-bar">
   <form>
-    <button aria-label="Home" class="left-buttons" type="button" id="app-home" name="app-home" onclick="window.location.href='/'; return false;" hidden>
-      <Icon name="ic:round-library-books" />
-    </button>
     <button aria-label="Back" class="left-buttons" type="button" id="app-back" name="app-back" onclick="history.go(-1); return false;" hidden>
       <Icon name="ic:round-arrow-back-ios" />
     </button>
     <input type="url" id="app-url" name="url" value={url} placeholder={placeholder} required />
     <button aria-label="Submit" class="right-buttons" type="submit" id="submit">
       <Icon name="ri:ai-generate" />
+    </button>
+    <button aria-label="Home" class="right-buttons" type="button" id="app-home" name="app-home" onclick="window.location.href='/'; return false;" hidden>
+      <Icon name="ic:round-library-books" />
     </button>
     <button aria-label="GitHub" class="right-buttons" type="button" id="gh-link" onclick="window.open('https://github.com/ayoayco/cozy', '_blank');" hidden>
       <Icon name="mdi:github" />
@@ -42,6 +42,7 @@ const placeholder = 'Type the article URL here';
   if (urlInput.value === '') {
     backLink.setAttribute('disabled', 'true');
     submitBtn.setAttribute('disabled', 'true');
+    homeLink.setAttribute('disabled', 'true');
   }
 
   urlInput.addEventListener('input', (e) => {

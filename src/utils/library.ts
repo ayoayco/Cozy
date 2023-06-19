@@ -73,8 +73,9 @@ export function renderPost(responseText, url, postDivSelector: string, preventPu
               postDiv.innerHTML = newPost.innerHTML
               const appUrl = document.getElementById('app-url') as HTMLInputElement;
               const cozyUrl = html.querySelector('meta[property="cozy:url"]')?.getAttribute('content');
-              const backBtn = document.getElementById('app-back') as HTMLButtonElement;
-              const submitBtn = document.getElementById('submit') as HTMLButtonElement;
+              const homeBtn = document.querySelector<HTMLButtonElement>('#app-home');
+              const backBtn = document.querySelector<HTMLButtonElement>('#app-back');
+              const submitBtn = document.querySelector<HTMLButtonElement>('#app-submit');
 
 
               const title = html.querySelector('meta[property="cozy:title"]')?.getAttribute('content');
@@ -82,12 +83,14 @@ export function renderPost(responseText, url, postDivSelector: string, preventPu
 
               if(cozyUrl !== '/') {
                 appUrl.value = cozyUrl || '';
-                backBtn.removeAttribute('disabled');
-                submitBtn.removeAttribute('disabled');
+                backBtn?.removeAttribute('disabled');
+                submitBtn?.removeAttribute('disabled');
+                homeBtn?.removeAttribute('disabled');
               } else {
                 appUrl.value = '';
-                backBtn.setAttribute('disabled', 'true');
-                submitBtn.setAttribute('disabled', 'true');
+                backBtn?.setAttribute('disabled', 'true');
+                submitBtn?.setAttribute('disabled', 'true');
+                homeBtn?.setAttribute('disabled', 'true');
               }
 
               if(!preventPushState) {
