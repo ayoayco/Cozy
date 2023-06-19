@@ -80,6 +80,7 @@ const {postDivSelector, skipSave = false} = Astro.props;
       if (!url) {
         url = window.location.href;
         isHome = true;
+        console.log('>>> ishome', isHome);
       } else {
         // replace scrollPosition
         localStorage.setItem('scrollPosition', window.scrollY.toString());
