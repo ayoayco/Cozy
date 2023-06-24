@@ -1,10 +1,15 @@
 ---
 import { ArticleData } from "@extractus/article-extractor";
 export interface Props {
-  article: ArticleData;
+  article: ArticleData | null;
 }
 
-const { article } = Astro.props;
+const error: ArticleData = {
+  title: 'Something is not right',
+  content: '<p>The article extractor did not get any information.</p>',
+}
+let { article } = Astro.props;
+article ??= error;
 const datePublished =
   article?.published && new Date(article.published).toDateString();
 ---

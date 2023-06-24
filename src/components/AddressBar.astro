@@ -2,11 +2,11 @@
 import Icon from 'astro-iconify';
 
 export interface Props {
-  url: string;
+  url: string | null;
 }
 
-const { url } = Astro.props;
 const placeholder = 'Type the article URL here';
+const { url } = Astro.props;
 ---
 
 <div class="address-bar">
@@ -14,7 +14,7 @@ const placeholder = 'Type the article URL here';
     <button aria-label="Back" class="left-buttons" type="button" id="app-back" name="app-back" onclick="history.go(-1); return false;" hidden>
       <Icon name="ic:round-arrow-back-ios" />
     </button>
-    <input type="url" id="app-url" name="url" value={url} placeholder={placeholder} required />
+    <input type="url" id="app-url" name="url" value={url ?? ''} placeholder={placeholder} required />
     <button aria-label="Submit" class="right-buttons" type="submit" id="submit">
       <Icon name="ri:ai-generate" />
     </button>

@@ -1,31 +1,29 @@
 ---
 export interface Props {
-  postDivSelector: string,
+  routerOutlet: string,
   skipSave?: boolean
 }
 
-const {postDivSelector, skipSave = false} = Astro.props;
+const {routerOutlet, skipSave = false} = Astro.props;
 ---
 <div id="library">
   <span id="heading"></span>
   <ul id="post-list"></ul>
 </div>
 
-<input value={postDivSelector} name="postDivSelector" id="postDivSelector" hidden />
-<input type="checkbox" id="skipSave" name="skipSave" checked={skipSave} hidden />
+<input hidden value={routerOutlet} name="postDivSelector" id="postDivSelector" />
+<input hidden checked={skipSave} type="checkbox" name="skipSave" id="skipSave" />
 
 <script>
   import { getPostCard, renderPost } from '../utils/library'
   const cache = await caches.open('cozy-reader');
   const url = new URL(window.location.href);
   const response = await cache.match(url)
-  const postDivSelector = document.getElementById('postDivSelector') as HTMLInputElement;
-  const skipSave = document.getElementById('skipSave') as HTMLInputElement;
+  const postDivSelector = document.querySelector<HTMLInputElement>('#postDivSelector');
+  const skipSave = document.querySelector<HTMLInputElement>('#skipSave');
 
-  if (!response) {
-    if (!skipSave?.checked) {
+  if (!response && !skipSave?.checked) {
       await cache.add(url);
-    }
   }
 
   const cachedRequests = (await cache.keys())
@@ -34,7 +32,7 @@ const {postDivSelector, skipSave = false} = Astro.props;
       return urlObj.search !== '' && urlObj.searchParams.get('url') !== '';
     });
 
-  if(cachedRequests?.length) {
+  if(cachedRequests?.length && postDivSelector !== null) {
     const list = document.querySelector('#post-list');
     const heading = document.querySelector('#library span#heading') as HTMLHeadingElement;
     heading.innerHTML = 'History';
@@ -80,7 +78,6 @@ const {postDivSelector, skipSave = false} = Astro.props;
       if (!url) {
         url = window.location.href;
         isHome = true;
-        console.log('>>> ishome', isHome);
       } else {
         // replace scrollPosition
         localStorage.setItem('scrollPosition', window.scrollY.toString());
