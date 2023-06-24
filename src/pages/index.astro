@@ -6,40 +6,23 @@ import Layout from "../layouts/Layout.astro";
 import Library from "../components/Library.astro";
 import Footer from "../components/Footer.astro";
 
-const params = Astro.url.searchParams;
-const url = params.get('url') || '';
-let article: ArticleData | null;
-let skipSave;
+const url = Astro.url.searchParams.get('url');
+let article: ArticleData | null = {};
 
-const error = {
-    title: "Something is not right",
-    content: "<p>The article extractor did not get any result.</p>",
-}
-
-try {
-  article = await extract(url);
-  if (!article ) {
-    article = error;
-    skipSave = true;
+if (url)
+  try {
+    article = await extract(url);
+  } catch {
+    article = null;
   }
-} catch {
-  article = error;
-  skipSave = true;
-}
 
-if (url === '') {
-  article = {
-    title: "Welcome to Cozy 🧸",
-    content: "<p>Enter a URL above to get started.</p>",
-    url: '/'
-  };
-  skipSave = false;
-}
-
+const routerOutletID = "router-outlet";
 ---
-<Layout meta={article}>
+<Layout article={article}>
     <AddressBar url={url} />
-    <Post slot="post" article={article} />
-    <Library slot="library" skipSave={skipSave} postDivSelector="#post"/>
+    <div slot="post" id={routerOutletID}>
+      <Post article={article} />
+    </div>
+    <Library slot="library" skipSave={article === null} routerOutlet={routerOutletID}/>
     <Footer slot="footer" />
 </Layout>
