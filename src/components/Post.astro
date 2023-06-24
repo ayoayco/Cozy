@@ -52,8 +52,6 @@ const datePublished =
       }
     }
 
-
-
   content {
     p, table, ul, img {
       margin: 1em 0 !important;
@@ -71,6 +69,11 @@ const datePublished =
 
     pre {
       white-space: pre-wrap;
+    }
+    pre:has(code) {
+      padding: 1em;
+      background: #f6f8fa;
+      border-radius: 5px;
     }
   }
 </style>
