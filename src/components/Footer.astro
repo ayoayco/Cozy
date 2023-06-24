@@ -2,31 +2,30 @@
 import Icon from 'astro-iconify'
 ---
 
-<footer class="footer">
+<footer>
+  <section>
+    Remove distractions.<br />Save for later.
+  </section>
 
-  <p>Remove distractions. Save for later.</p>
-  <p>No sign-ups. No setups. It just works.</p>
-  <p>
+
+  <section class="attribution">
+    <a href="http://ayos.blog/building-a-cozy-web/">Hand-crafted</a> with <Icon name="line-md:heart" /> by <a href="https://ayo.ayco.io">Ayo Ayco</a>
+    <br />
     <a href="https://github.com/ayoayco/cozy">Star on GitHub to support!</a>
-  </p>
+  </section>
 
-  <p class="footer__attribution">
-    <a href="http://ayos.blog/building-a-cozy-web/">Hand-crafted</a> with <Icon name="line-md:heart" /> by <a href="https://ayo.ayco.io">Ayo Ayco</a
-    >
-  </p>
-
-  <p class="footer__disclaimer">All content rights and credits are reserved to their respective owners.</p>
- 
+  <section class="disclaimer">All rights reserved to content owners.</section>
 </footer>
+
 <style lang="scss">
-  .footer {
+  footer {
     width: 100%;
-    max-width: 350px;
     margin: 0 auto;
     text-align: center;
     color: #333;
     font-size: small;
-    padding-bottom: 1rem;
+    display: flex;
+    border-top: 1px solid #eee;
 
     svg {
       width: 1.25rem;
@@ -37,13 +36,20 @@ import Icon from 'astro-iconify'
       color: red;
     }
 
-    &__disclaimer, &__attribution {
-      padding: 1rem 0 0;
-    }
+    section {
+      flex: 1;
+      padding: 1rem 1rem 0;
 
-    &__title {
-      font-weight: bold;
-      font-size: 1.2rem;
+      &.attribution {
+        flex: 2;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    footer {
+      flex-direction: column;
+      max-width: 350px;
     }
   }
 </style>

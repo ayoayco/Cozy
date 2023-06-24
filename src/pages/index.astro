@@ -4,6 +4,7 @@ import AddressBar from "../components/AddressBar.astro";
 import Post from "../components/Post.astro";
 import Layout from "../layouts/Layout.astro";
 import Library from "../components/Library.astro";
+import Footer from "../components/Footer.astro";
 
 const params = Astro.url.searchParams;
 const url = params.get('url') || '';
@@ -39,5 +40,6 @@ if (url === '') {
 <Layout meta={article}>
     <AddressBar url={url} />
     <Post slot="post" article={article} />
-    <Library skipSave={skipSave} slot="library" postDivSelector="#post"/>
+    <Library slot="library" skipSave={skipSave} postDivSelector="#post"/>
+    <Footer slot="footer" />
 </Layout>
