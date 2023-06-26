@@ -65,13 +65,13 @@ export function renderPost(responseText, url, postDivSelector: string, preventPu
       backBtn?.removeAttribute('disabled');
       submitBtn?.removeAttribute('disabled');
       homeBtn?.removeAttribute('disabled');
-      document.title = `${getCozyTitle(html)} | Cozy 🧸`;
+      document.title = `${getCozyTitle(html)} | Cozy`;
     } else {
       appUrl.value = '';
       backBtn?.setAttribute('disabled', 'true');
       submitBtn?.setAttribute('disabled', 'true');
       homeBtn?.setAttribute('disabled', 'true');
-      document.title = `Cozy 🧸`;
+      document.title = `Cozy`;
     }
 
     if(!preventPushState) {
@@ -102,6 +102,9 @@ function getCozyTitle(html: HTMLHtmlElement): string | undefined {
   return html.querySelector('meta[property="cozy:title"]')?.getAttribute("content")
     /**
      * backwards compatibility for stuff before we implemented cozy:meta tags
+     * REMOVE ON V1 release
      */
-    ?? html.querySelector("title")?.innerHTML?.replace("Cozy 🧸 | ", "");
+    ?? html.querySelector("title")?.innerHTML
+        ?.replace("Cozy 🧸 | ", "")
+    
 }

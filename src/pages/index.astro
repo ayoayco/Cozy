@@ -5,6 +5,7 @@ import Post from "../components/Post.astro";
 import Layout from "../layouts/Layout.astro";
 import Library from "../components/Library.astro";
 import Footer from "../components/Footer.astro";
+import { Icon } from "astro-iconify";
 
 const url = Astro.url.searchParams.get('url');
 let article: ArticleData | null = {};

@@ -5,14 +5,9 @@ import Footer from "../components/Footer.astro";
 export interface Props {
   article: ArticleData | null
 }
-const app: ArticleData = {
-    title: "Cozy 🧸",
-    description: "Remove distractions. Save your favorites. Get useful insights. Cozy is your modern-day reading assistant.",
-    content: "<p>Enter a URL in the address bar to get started.</p>",
-    url: '/'
-  };
+
 const { article } = Astro.props;
-const appTitle = article?.title ? `${article.title} | Cozy 🧸` : app.title;
+const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
 ---
 
 <!DOCTYPE html>
