@@ -23,7 +23,7 @@ const {routerOutlet, skipSave = false} = Astro.props;
   const skipSave = document.querySelector<HTMLInputElement>('#skipSave');
 
   if (!response && !skipSave?.checked) {
-      await cache.add(url);
+    await cache.add(url);
   }
 
   const cachedRequests = (await cache.keys())
