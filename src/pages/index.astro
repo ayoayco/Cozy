@@ -6,8 +6,12 @@ import Layout from "../layouts/Layout.astro";
 import Library from "../components/Library.astro";
 import Footer from "../components/Footer.astro";
 
-const url = Astro.url.searchParams.get('url');
+let url = Astro.url.searchParams.get('url');
 let article: ArticleData | null = {url: '/'};
+
+while (url?.startsWith(Astro.url.origin)) {
+  url = new URL(url).searchParams.get('url');
+}
 
 if (url)
   try {
