@@ -1,4 +1,4 @@
-<h1 align="center"><s>Cozy 🧸</s> Uh, we need a new name! See why <a href="https://social.ayco.io/@ayo/110547172702258070">here</a></h1>
+<h1 align="center"><s>Cozy</s> Uh, we need a new name! See why <a href="https://social.ayco.io/@ayo/110547172702258070">here</a></h1>
 <p align="center">
   <a href="https://github.com/ayoayco/cozy">
     <img alt="Last Commit" src="https://img.shields.io/github/last-commit/ayoayco/cozy?logo=github" />
@@ -58,6 +58,3 @@ It doesn't exist yet... I'll probably get to creating a browser extension at som
 
 ## Contributing
 Speaking of PRs being welcome, see our [CONTRIBUTING guide](/CONTRIBUTING.md).
-
-🧸
-

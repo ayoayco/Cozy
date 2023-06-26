@@ -7,7 +7,7 @@ import Library from "../components/Library.astro";
 import Footer from "../components/Footer.astro";
 
 const url = Astro.url.searchParams.get('url');
-let article: ArticleData | null = {};
+let article: ArticleData | null = {url: '/'};
 
 if (url)
   try {
