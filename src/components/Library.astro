@@ -17,8 +17,13 @@ const {routerOutlet, skipSave = false} = Astro.props;
 <script>
   import { getPostCard, renderPost } from '../utils/library'
   const cache = await caches.open('cozy-reader');
-  const url = new URL(window.location.href);
-  const response = await cache.match(url)
+  let url= new URL(window.location.href);
+  // only cached unencoded url param
+  const urlParam = url.searchParams.get('url')
+  if (urlParam) {
+    url = new URL(`${url.origin}/?url=${urlParam}`);
+  }
+  const response = await cache.match(url);
   const postDivSelector = document.querySelector<HTMLInputElement>('#postDivSelector');
   const skipSave = document.querySelector<HTMLInputElement>('#skipSave');
 
@@ -29,7 +34,10 @@ const {routerOutlet, skipSave = false} = Astro.props;
   const cachedRequests = (await cache.keys())
     .filter(request => {
       const urlObj = new URL(request.url);
-      return urlObj.search !== '' && urlObj.searchParams.get('url') !== '';
+
+      return urlObj.search !== ''
+      && urlObj.searchParams.get('url') !== ''
+      && urlObj.searchParams.get('url') !== 'null';
     });
 
   if(cachedRequests?.length && postDivSelector !== null) {
