@@ -60,7 +60,6 @@ export function renderPost(responseText, url, postDivSelector: string, preventPu
     const homeBtn = document.querySelector<HTMLButtonElement>('#app-home');
     const backBtn = document.querySelector<HTMLButtonElement>('#app-back');
     const submitBtn = document.querySelector<HTMLButtonElement>('#app-submit');
-    console.log({cozyUrl, url, preventPushState});
     if(cozyUrl !== '/') {
       appUrl.value = cozyUrl || '';
       backBtn?.removeAttribute('disabled');
