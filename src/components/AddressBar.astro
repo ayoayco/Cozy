@@ -61,7 +61,7 @@ const { url } = Astro.props;
     width: 100%;
   }
 
-  :global(form) {
+  form {
     width: 100%;
     border: 0px;
     padding: 0.5rem;
@@ -72,7 +72,7 @@ const { url } = Astro.props;
     box-shadow: 0 1px 3px 1px #eee;
     display: flex;
 
-    :global(input[type="url"]) {
+    input[type="url"] {
       flex: 3;
       background-color: white;
       border-radius: 5px;
@@ -81,17 +81,14 @@ const { url } = Astro.props;
       color: #555;
     }
 
-    :global(button#app-home),
-    :global(button#app-back),
-    :global(button#submit),
-    :global(button#gh-link) {
+    button{
       border: 0px;
       background-color: transparent;
       padding: 0px;
       cursor: pointer;
       color: black;
 
-      :global(svg) {
+      svg {
           border: 0px;
           background-color: transparent;
           width: 1.5rem;
@@ -99,19 +96,18 @@ const { url } = Astro.props;
       }
     }
 
-    :global(.left-buttons) {
+    .left-buttons {
       margin-right: 0.5rem;
     }
-    :global(.right-buttons) {
+    .right-buttons {
       margin-left: 0.5rem;
     }
 
-    :global(button:hover),
-    :global(button.primary-button) {
+    button:hover {
       color: blue !important;
     }
 
-    :global(button[disabled="true"]) {
+    button[disabled="true"] {
       color: #ccc !important;
       cursor: default !important;
     }
