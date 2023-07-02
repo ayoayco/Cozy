@@ -13,6 +13,10 @@ article ??= error;
 const datePublished =
   article?.published && new Date(article.published).toDateString();
 ---
+
+<!-- 
+  Changing anything inside the #post div can cause a difference in the cached version of the post in users' devices. For this reason, we should avoid changing the HTML and instead do it with CSS when possible.
+ -->
 <div id="post">
   {
     article && article.url !== '/'  &&
@@ -38,24 +42,25 @@ const datePublished =
     suffix: " ";
   }
 
-    h1.title {
-      font-size: xx-large;
-    }
+  h1.title {
+    font-size: xx-large;
+  }
 
-    span.source {
-      font-weight: bolder;
-      color: #555;
-    }
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+  }
 
-    ul.publish-info {
-      margin: 0.3em -0.7em 1em;
-      list-style: publish-icons;
-
-      li {
-        color: #555;
-        font-size: small;
-      }
-    }
+  .source, .publish-info {
+    font-size: smaller;
+    color: #555;
+  }
+  .source {
+    font-weight: bold;
+  }
+  .publish-info {
+    margin: 0.3em -1em 1em;
+    list-style: publish-icons;
+  }
 
   content {
     p, table, ul, img {
