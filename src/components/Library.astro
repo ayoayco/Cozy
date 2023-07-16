@@ -4,15 +4,13 @@ export interface Props {
   routerOutlet: string,
   skipSave?: boolean
 }
-
-const {routerOutlet, skipSave = false} = Astro.props;
 ---
 <div id="library">
   <span id="heading"></span>
   <ul id="post-list"></ul>
 </div>
 
-<Serialize id="preferences" data={{routerOutlet, skipSave}} />
+<Serialize id="preferences" data={{...Astro.props}} />
 
 <script>
   import {deserialize} from '@ayco/astro-resume';
