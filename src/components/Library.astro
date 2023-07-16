@@ -16,6 +16,7 @@ const {routerOutlet, skipSave = false} = Astro.props;
 
 <script>
   import {resume} from '@ayco/astro-resume';
+  import {Props} from './Library.astro';
   import { getPostCard, renderPost } from '../utils/library'
   const cache = await caches.open('cozy-reader');
   let url= new URL(window.location.href);
@@ -25,7 +26,7 @@ const {routerOutlet, skipSave = false} = Astro.props;
     url = new URL(`${url.origin}/?url=${urlParam}`);
   }
   const response = await cache.match(url);
-  const {routerOutlet, skipSave} = resume('preferences') as any;
+  const {routerOutlet, skipSave} = resume<Props>('preferences');
   const includesAppURL = urlParam?.includes(window.location.origin)
 
   if (!response && !skipSave && !includesAppURL) {
