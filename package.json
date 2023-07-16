@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/netlify": "^2.2.2",
+    "@ayco/astro-resume": "^0.0.7",
     "@extractus/article-extractor": "^7.2.15",
     "astro-iconify": "^1.2.0",
     "sass": "^1.62.1"

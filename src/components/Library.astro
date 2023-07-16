@@ -1,4 +1,5 @@
 ---
+import Resumable from '@ayco/astro-resume';
 export interface Props {
   routerOutlet: string,
   skipSave?: boolean
@@ -11,10 +12,10 @@ const {routerOutlet, skipSave = false} = Astro.props;
   <ul id="post-list"></ul>
 </div>
 
-<input hidden value={routerOutlet} name="postDivSelector" id="postDivSelector" />
-<input hidden checked={skipSave} type="checkbox" name="skipSave" id="skipSave" />
+<Resumable id="preferences" data={{routerOutlet, skipSave}} />
 
 <script>
+  import {resume} from '@ayco/astro-resume';
   import { getPostCard, renderPost } from '../utils/library'
   const cache = await caches.open('cozy-reader');
   let url= new URL(window.location.href);
@@ -24,11 +25,10 @@ const {routerOutlet, skipSave = false} = Astro.props;
     url = new URL(`${url.origin}/?url=${urlParam}`);
   }
   const response = await cache.match(url);
-  const postDivSelector = document.querySelector<HTMLInputElement>('#postDivSelector');
-  const skipSave = document.querySelector<HTMLInputElement>('#skipSave');
+  const {routerOutlet, skipSave} = resume('preferences') as any;
   const includesAppURL = urlParam?.includes(window.location.origin)
 
-  if (!response && !skipSave?.checked && !includesAppURL) {
+  if (!response && !skipSave && !includesAppURL) {
     await cache.add(url);
   }
 
@@ -43,7 +43,7 @@ const {routerOutlet, skipSave = false} = Astro.props;
       && urlParam !== 'null';
     });
 
-  if(cachedRequests?.length && postDivSelector !== null) {
+  if(cachedRequests?.length && routerOutlet !== null) {
     const list = document.querySelector('#post-list');
     const heading = document.querySelector('#library span#heading') as HTMLHeadingElement;
     heading.innerHTML = 'History';
@@ -74,7 +74,7 @@ const {routerOutlet, skipSave = false} = Astro.props;
           e.preventDefault();
           localStorage.setItem('scrollPosition', window.scrollY.toString());
           scrollTo(0,0);
-          renderPost(responseText, url, postDivSelector?.value)
+          renderPost(responseText, url, routerOutlet)
         }
         const item = document.createElement('li');
         item.appendChild(link);
@@ -97,7 +97,7 @@ const {routerOutlet, skipSave = false} = Astro.props;
       const fullResponse = await cache.match(url)
       fullResponse?.text().then(data => {
         const responseText = data;
-        renderPost(responseText, url, postDivSelector?.value, true);
+        renderPost(responseText, url, routerOutlet, true);
         if (isHome) {
           const scrollPosition = localStorage.getItem('scrollPosition');
           scrollTo(0, scrollPosition ? parseInt(scrollPosition) : 0);
