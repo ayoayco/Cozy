@@ -1,5 +1,5 @@
 ---
-import Resumable from '@ayco/astro-resume';
+import Serialize from '@ayco/astro-resume';
 export interface Props {
   routerOutlet: string,
   skipSave?: boolean
@@ -12,10 +12,10 @@ const {routerOutlet, skipSave = false} = Astro.props;
   <ul id="post-list"></ul>
 </div>
 
-<Resumable id="preferences" data={{routerOutlet, skipSave}} />
+<Serialize id="preferences" data={{routerOutlet, skipSave}} />
 
 <script>
-  import {resume} from '@ayco/astro-resume';
+  import {deserialize} from '@ayco/astro-resume';
   import {Props} from './Library.astro';
   import { getPostCard, renderPost } from '../utils/library'
   const cache = await caches.open('cozy-reader');
@@ -26,7 +26,7 @@ const {routerOutlet, skipSave = false} = Astro.props;
     url = new URL(`${url.origin}/?url=${urlParam}`);
   }
   const response = await cache.match(url);
-  const {routerOutlet, skipSave} = resume<Props>('preferences');
+  const {routerOutlet, skipSave} = deserialize<Props>('preferences');
   const includesAppURL = urlParam?.includes(window.location.origin)
 
   if (!response && !skipSave && !includesAppURL) {
