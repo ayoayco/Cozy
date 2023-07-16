@@ -5,9 +5,10 @@ Thank you for your interest in building the coziest web experience for people li
 ## Tech Stack
 
 This project is built with the following tech
+1. TypeScript, HTML, SCSS - even just knowing basic JS and CSS will give you familiarity of the code
 1. [Astro](https://astro.build) - Astro is the chosen framework, please read throught the basics on their docs if you are unfamiliar
-1. [Vite](https://vitejs.dev) - Vite is the bundler Astro is using and it allows us to do server-side rendering
-1. [@extractus/article-extractor](https://www.npmjs.com/package/@extractus/article-extractor) - Article Extractor is the library we use to fetch and extract article content 
+ - we don't use any framework that ships to the browser, we only write Astro components for server-side rendering, and vanilla DOM manipulation via `script` tags.
+1. [@extractus/article-extractor](https://www.npmjs.com/package/@extractus/article-extractor) - Article Extractor is the library we use to fetch and extract article content
 
 ## Setting up the project
 
