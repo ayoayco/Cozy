@@ -6,7 +6,7 @@
     "build": "astro build"
   },
   "devDependencies": {
-    "astro": "^2.5.7"
+    "astro": "^2.9.1"
   },
   "dependencies": {
     "@astrojs/netlify": "^2.2.2",
