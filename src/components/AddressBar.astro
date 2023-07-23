@@ -11,14 +11,14 @@ const { url } = Astro.props;
 
 <div class="address-bar">
   <form>
-    <button aria-label="Back" class="left-buttons" type="button" id="app-back" name="app-back" onclick="history.go(-1); return false;" hidden>
+    <button aria-label="Back" class="btn left-buttons" type="button" id="app-back" name="app-back" onclick="history.go(-1); return false;" hidden>
       <Icon name="ic:round-arrow-back-ios" />
     </button>
     <input type="url" id="app-url" name="url" value={url ?? ''} placeholder={placeholder} required />
-    <button aria-label="Submit" class="right-buttons" type="submit" id="submit">
+    <button aria-label="Submit" class="btn right-buttons" type="submit" id="submit">
       <Icon name="ri:ai-generate" />
     </button>
-    <button aria-label="Home" class="right-buttons" type="button" id="app-home" name="app-home" onclick="window.location.href='/'; return false;" hidden>
+    <button aria-label="Home" class="btn right-buttons" type="button" id="app-home" name="app-home" onclick="window.location.href='/'; return false;" hidden>
       <Icon name="mdi:home" />
     </button>
     <div aria-label="Settings" class="btn right-buttons">
@@ -29,27 +29,27 @@ const { url } = Astro.props;
 </div>
 
 <script>
-  const backLink = document.getElementById('app-back') as HTMLButtonElement;
-  const homeLink = document.getElementById('app-home') as HTMLButtonElement;
-  const urlInput = document.getElementById('app-url') as HTMLInputElement;
-  const submitBtn = document.getElementById('submit') as HTMLButtonElement;
+  const backLink = document.querySelector<HTMLButtonElement>('#app-back');
+  const homeLink = document.querySelector<HTMLButtonElement>('#app-home');
+  const submitBtn = document.querySelector<HTMLButtonElement>('#submit');
+  const urlInput = document.querySelector<HTMLInputElement>('#app-url');
 
   // if js is enabled, show the back button and github link
-  backLink.removeAttribute('hidden');
-  homeLink.removeAttribute('hidden');
+  backLink?.removeAttribute('hidden');
+  homeLink?.removeAttribute('hidden');
 
-  if (urlInput.value === '') {
-    backLink.setAttribute('disabled', 'true');
-    submitBtn.setAttribute('disabled', 'true');
-    homeLink.setAttribute('disabled', 'true');
+  if (urlInput?.value === '') {
+    backLink?.setAttribute('disabled', 'true');
+    submitBtn?.setAttribute('disabled', 'true');
+    homeLink?.setAttribute('disabled', 'true');
   }
 
-  urlInput.addEventListener('input', (e) => {
+  urlInput?.addEventListener('input', (e) => {
     const target = e.target as HTMLInputElement;
     if (target.value === '') {
-      submitBtn.setAttribute('disabled', 'true');
+      submitBtn?.setAttribute('disabled', 'true');
     } else {
-      submitBtn.removeAttribute('disabled');
+      submitBtn?.removeAttribute('disabled');
     }
   });
 
@@ -81,17 +81,17 @@ const { url } = Astro.props;
       border-radius: 5px;
       border: 1px solid #eee;
       font-size: normal;
-      padding: 0 0.5rem;
+      padding: 0.5rem;
       color: #555;
     }
 
-    button, div.btn{
+    .btn{
       display: block;
       border: 0px;
       height: 100%;
       vertical-align:middle;
       background-color: transparent;
-      padding: 0px;
+      padding: 0.5rem 0;
       color: black;
 
       svg {
@@ -110,11 +110,11 @@ const { url } = Astro.props;
       margin-left: 0.5rem;
     }
 
-    button svg:hover, div.btn svg:hover {
+    .btn svg:hover {
       color: blue !important;
     }
 
-    button[disabled="true"] svg {
+    .btn[disabled="true"] svg {
       color: #ccc !important;
       cursor: default !important;
     }
