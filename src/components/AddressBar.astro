@@ -19,23 +19,22 @@ const { url } = Astro.props;
       <Icon name="ri:ai-generate" />
     </button>
     <button aria-label="Home" class="right-buttons" type="button" id="app-home" name="app-home" onclick="window.location.href='/'; return false;" hidden>
-      <Icon name="ic:round-library-books" />
+      <Icon name="mdi:home" />
     </button>
-    <button aria-label="GitHub" class="right-buttons" type="button" id="gh-link" onclick="window.open('https://github.com/ayoayco/cozy', '_blank');" hidden>
-      <Icon name="mdi:github" />
-    </button>
+    <div aria-label="Settings" class="btn right-buttons">
+      <input type="checkbox" id="settings-toggle" hidden>
+      <label for="settings-toggle"><Icon name="mdi:cog" /></label>
+    </div>
   </form>
 </div>
 
 <script>
-  const ghLink = document.getElementById('gh-link') as HTMLButtonElement;
   const backLink = document.getElementById('app-back') as HTMLButtonElement;
   const homeLink = document.getElementById('app-home') as HTMLButtonElement;
   const urlInput = document.getElementById('app-url') as HTMLInputElement;
   const submitBtn = document.getElementById('submit') as HTMLButtonElement;
 
   // if js is enabled, show the back button and github link
-  ghLink.removeAttribute('hidden');
   backLink.removeAttribute('hidden');
   homeLink.removeAttribute('hidden');
 
@@ -53,6 +52,10 @@ const { url } = Astro.props;
       submitBtn.removeAttribute('disabled');
     }
   });
+
+  const toggle = document.querySelector<HTMLInputElement>('#settings-toggle');
+  console.log(toggle);
+  toggle?.addEventListener('change', e => console.log(e.currentTarget?.['checked']));
 </script>
 
 <style lang="scss">
@@ -77,22 +80,26 @@ const { url } = Astro.props;
       background-color: white;
       border-radius: 5px;
       border: 1px solid #eee;
-      padding: 0.5rem;
+      font-size: normal;
+      padding: 0 0.5rem;
       color: #555;
     }
 
-    button{
+    button, div.btn{
+      display: block;
       border: 0px;
+      height: 100%;
+      vertical-align:middle;
       background-color: transparent;
       padding: 0px;
-      cursor: pointer;
       color: black;
 
       svg {
-          border: 0px;
-          background-color: transparent;
-          width: 1.5rem;
-          height: 1.5rem;
+        border: 0px;
+        background-color: transparent;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
       }
     }
 
@@ -103,11 +110,11 @@ const { url } = Astro.props;
       margin-left: 0.5rem;
     }
 
-    button:hover {
+    button svg:hover, div.btn svg:hover {
       color: blue !important;
     }
 
-    button[disabled="true"] {
+    button[disabled="true"] svg {
       color: #ccc !important;
       cursor: default !important;
     }
