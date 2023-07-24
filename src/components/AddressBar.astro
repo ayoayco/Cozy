@@ -1,5 +1,6 @@
 ---
 import Icon from 'astro-iconify';
+import SettingsPopover from './SettingsPopover.astro';
 
 export interface Props {
   url: string | null;
@@ -18,9 +19,9 @@ const { url } = Astro.props;
     <button aria-label="Submit" class="btn right-buttons" type="submit" id="submit">
       <Icon name="ri:ai-generate" />
     </button>
-    <button aria-label="Home" class="btn right-buttons" type="button" id="app-home" name="app-home" onclick="window.location.href='/'; return false;" hidden>
+    <a aria-label="Home" class="btn right-buttons" type="button" id="app-home" href="/" hidden>
       <Icon name="mdi:home" />
-    </button>
+    </a>
     <div aria-label="Settings" class="btn right-buttons">
       <input type="checkbox" id="settings-toggle" hidden>
       <label for="settings-toggle"><Icon name="mdi:cog" /></label>
@@ -28,20 +29,19 @@ const { url } = Astro.props;
   </form>
 </div>
 
+<SettingsPopover toggleId="settings-toggle" />
+
 <script>
   const backLink = document.querySelector<HTMLButtonElement>('#app-back');
-  const homeLink = document.querySelector<HTMLButtonElement>('#app-home');
   const submitBtn = document.querySelector<HTMLButtonElement>('#submit');
   const urlInput = document.querySelector<HTMLInputElement>('#app-url');
 
   // if js is enabled, show the back button and github link
   backLink?.removeAttribute('hidden');
-  homeLink?.removeAttribute('hidden');
 
   if (urlInput?.value === '') {
     backLink?.setAttribute('disabled', 'true');
     submitBtn?.setAttribute('disabled', 'true');
-    homeLink?.setAttribute('disabled', 'true');
   }
 
   urlInput?.addEventListener('input', (e) => {
