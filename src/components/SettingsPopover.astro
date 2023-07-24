@@ -1,0 +1,13 @@
+---
+export interface Props {
+  toggleId: string;
+}
+const { toggleId } = Astro.props;
+---
+
+<form hidden>
+  <div class="field">
+    <input type="checkbox" id="settings-1" name="settings-1" checked />
+    <label for="settings-1">Option 1</label>
+  </div>
+</form>
