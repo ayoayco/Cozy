@@ -12,7 +12,7 @@ const enabledSettings = Object.keys(featureFlags).filter(
 const { toggle } = Astro.props;
 ---
 
-<form id="settings-form">
+<form id="settings-form" hidden>
   <div id="toolbar">
     <h2>Settings</h2>
     <label for={toggle}>
