@@ -21,11 +21,11 @@ const { toggle } = Astro.props;
   </div>
   {
     enabledSettings.map(
-      (settings) =>
+      (settings, index) =>
         settings !== "" && (
           <div class="field">
-            <input type="checkbox" id="settings-2" name="settings-2" />
-            <label for="settings-2">{featureLabels[settings]}</label>
+            <input type="checkbox" id={`settings-${index}`} name="settings-2" />
+            <label for={`settings-${index}`}>{featureLabels[settings]}</label>
           </div>
         )
     )
