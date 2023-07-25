@@ -78,12 +78,6 @@ const { url } = Astro.props;
       submitBtn?.removeAttribute("disabled");
     }
   });
-
-  document
-    .getElementById("settings-toggle")
-    ?.addEventListener("change", (e) =>
-      console.log(e.currentTarget?.["checked"])
-    );
 </script>
 
 <style lang="scss">
