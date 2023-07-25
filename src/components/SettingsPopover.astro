@@ -8,10 +8,12 @@ const { toggle } = Astro.props;
 ---
 
 <form id="settings-form" hidden>
-  <h2>Settings</h2>
-  <label for={toggle}>
-    <Icon name="mdi:close" />
-  </label>
+  <div id="toolbar">
+    <h2>Settings</h2>
+    <label for={toggle}>
+      <Icon name="mdi:close" />
+    </label>
+  </div>
   <div class="field">
     <input type="checkbox" id="settings-1" name="settings-1" checked />
     <label for="settings-1">Option 1</label>
@@ -23,24 +25,30 @@ const { toggle } = Astro.props;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: white;
-    padding: 1em;
+    padding: 0.5em;
     width: 300px;
     position: absolute;
     top: 0.5em;
     right: 0.1em;
     box-shadow: 0 1px 3px 1px #eee;
 
-    h2 {
-      margin: 0.5em 0;
-    }
+    #toolbar {
+      display: flex;
+      margin-bottom: 0.5em;
 
-    svg {
-      width: 24px;
-      height: 24px;
-      position: absolute;
-      top: 0.5em;
-      right: 0.5em;
-      cursor: pointer;
+      h2,
+      svg {
+        flex: 1;
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+      }
+    }
+    .field {
+      margin-left: 0.5em;
     }
   }
 </style>
