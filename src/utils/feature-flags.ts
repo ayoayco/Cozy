@@ -10,5 +10,5 @@ export const featureLabels: Record<Features, string> = {
 
 export const featureFlags: Record<Features, boolean> = {
   [Features.SendToEmail]: false,
-  [Features.HideImages]: true,
+  [Features.HideImages]: false,
 };
