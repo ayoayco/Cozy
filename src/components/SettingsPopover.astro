@@ -1,13 +1,41 @@
 ---
+import Icon from "astro-iconify";
 export interface Props {
-  toggleId: string;
+  toggle: string;
 }
-const { toggleId } = Astro.props;
+
+const { toggle } = Astro.props;
 ---
 
-<form hidden>
+<form id="settings-form">
+  <label for={toggle}>
+    <Icon name="mdi:close" />
+  </label>
   <div class="field">
     <input type="checkbox" id="settings-1" name="settings-1" checked />
     <label for="settings-1">Option 1</label>
   </div>
 </form>
+
+<style lang="scss">
+  #settings-form {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    padding: 1em;
+    width: 300px;
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    box-shadow: 0 1px 3px 1px #eee;
+
+    svg {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 0.5em;
+      right: 0.5em;
+      cursor: pointer;
+    }
+  }
+</style>

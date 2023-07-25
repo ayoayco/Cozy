@@ -1,67 +1,95 @@
 ---
-import Icon from 'astro-iconify';
-import SettingsPopover from './SettingsPopover.astro';
+import Icon from "astro-iconify";
+import SettingsPopover from "./SettingsPopover.astro";
 
 export interface Props {
   url: string | null;
 }
 
-const placeholder = 'Type the article URL here';
+const placeholder = "Type the article URL here";
 const { url } = Astro.props;
 ---
 
 <div class="address-bar">
   <form>
-    <button aria-label="Back" class="btn left-buttons" type="button" id="app-back" name="app-back" onclick="history.go(-1); return false;" hidden>
+    <button
+      aria-label="Back"
+      class="btn left-buttons"
+      type="button"
+      id="app-back"
+      name="app-back"
+      onclick="history.go(-1); return false;"
+      hidden
+    >
       <Icon name="ic:round-arrow-back-ios" />
     </button>
-    <input type="url" id="app-url" name="url" value={url ?? ''} placeholder={placeholder} required />
-    <button aria-label="Submit" class="btn right-buttons" type="submit" id="submit">
+    <input
+      type="url"
+      id="app-url"
+      name="url"
+      value={url ?? ""}
+      placeholder={placeholder}
+      required
+    />
+    <button
+      aria-label="Submit"
+      class="btn right-buttons"
+      type="submit"
+      id="submit"
+    >
       <Icon name="ri:ai-generate" />
     </button>
-    <a aria-label="Home" class="btn right-buttons" type="button" id="app-home" href="/" hidden>
+    <a
+      aria-label="Home"
+      class="btn right-buttons"
+      type="button"
+      id="app-home"
+      href="/"
+      hidden
+    >
       <Icon name="mdi:home" />
     </a>
     <div aria-label="Settings" class="btn right-buttons">
-      <input type="checkbox" id="settings-toggle" hidden>
+      <input type="checkbox" id="settings-toggle" hidden />
       <label for="settings-toggle"><Icon name="mdi:cog" /></label>
     </div>
   </form>
+  <SettingsPopover toggle="settings-toggle" />
 </div>
 
-<SettingsPopover toggleId="settings-toggle" />
-
 <script>
-  const backLink = document.querySelector<HTMLButtonElement>('#app-back');
-  const submitBtn = document.querySelector<HTMLButtonElement>('#submit');
-  const urlInput = document.querySelector<HTMLInputElement>('#app-url');
+  const backLink = document.querySelector<HTMLButtonElement>("#app-back");
+  const submitBtn = document.querySelector<HTMLButtonElement>("#submit");
+  const urlInput = document.querySelector<HTMLInputElement>("#app-url");
 
   // if js is enabled, show the back button and github link
-  backLink?.removeAttribute('hidden');
+  backLink?.removeAttribute("hidden");
 
-  if (urlInput?.value === '') {
-    backLink?.setAttribute('disabled', 'true');
-    submitBtn?.setAttribute('disabled', 'true');
+  if (urlInput?.value === "") {
+    backLink?.setAttribute("disabled", "true");
+    submitBtn?.setAttribute("disabled", "true");
   }
 
-  urlInput?.addEventListener('input', (e) => {
+  urlInput?.addEventListener("input", (e) => {
     const target = e.target as HTMLInputElement;
-    if (target.value === '') {
-      submitBtn?.setAttribute('disabled', 'true');
+    if (target.value === "") {
+      submitBtn?.setAttribute("disabled", "true");
     } else {
-      submitBtn?.removeAttribute('disabled');
+      submitBtn?.removeAttribute("disabled");
     }
   });
 
-  const toggle = document.querySelector<HTMLInputElement>('#settings-toggle');
-  console.log(toggle);
-  toggle?.addEventListener('change', e => console.log(e.currentTarget?.['checked']));
+  document
+    .getElementById("settings-toggle")
+    ?.addEventListener("change", (e) =>
+      console.log(e.currentTarget?.["checked"])
+    );
 </script>
 
 <style lang="scss">
   .address-bar {
-    text-align: center;
     width: 100%;
+    position: relative;
   }
 
   form {
@@ -85,11 +113,11 @@ const { url } = Astro.props;
       color: #555;
     }
 
-    .btn{
+    .btn {
       display: block;
       border: 0px;
       height: 100%;
-      vertical-align:middle;
+      vertical-align: middle;
       background-color: transparent;
       padding: 0.5rem 0;
       color: black;
