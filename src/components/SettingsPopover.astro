@@ -1,23 +1,35 @@
 ---
 import Icon from "astro-iconify";
+import { featureFlags, featureLabels } from "../utils/feature-flags";
 export interface Props {
   toggle: string;
 }
 
+const enabledSettings = Object.keys(featureFlags).filter(
+  (key) => featureFlags[key]
+);
+
 const { toggle } = Astro.props;
 ---
 
-<form id="settings-form" hidden>
+<form id="settings-form">
   <div id="toolbar">
     <h2>Settings</h2>
     <label for={toggle}>
       <Icon name="mdi:close" />
     </label>
   </div>
-  <div class="field">
-    <input type="checkbox" id="settings-1" name="settings-1" checked />
-    <label for="settings-1">Option 1</label>
-  </div>
+  {
+    enabledSettings.map(
+      (settings) =>
+        settings !== "" && (
+          <div class="field">
+            <input type="checkbox" id="settings-2" name="settings-2" />
+            <label for="settings-2">{featureLabels[settings]}</label>
+          </div>
+        )
+    )
+  }
 </form>
 
 <style lang="scss">
