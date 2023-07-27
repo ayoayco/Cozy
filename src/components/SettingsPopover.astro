@@ -1,6 +1,6 @@
 ---
 import Icon from "astro-iconify";
-import { featureFlags, featureLabels } from "../utils/feature-flags";
+import { featureFlags } from "../utils/feature-flags";
 export interface Props {
   toggle: string;
 }
@@ -29,12 +29,12 @@ const { toggle } = Astro.props;
               id={`settings-${index}`}
               name={`settings-${index}`}
             />
-            <label for={`settings-${index}`}>{featureLabels[settings]}</label>
+            <label for={`settings-${index}`}>{settings}</label>
           </div>
         )
     )
   }
-  <small>This is where feature flags will be set once made available.</small>
+  <small>This is where feature flags will be set once made available. <a href="https://github.com/ayoayco/cozy/issues/new" target="_blank">Request features or report bugs here.</a></small>
 </form>
 
 <style lang="scss">
@@ -66,6 +66,7 @@ const { toggle } = Astro.props;
     }
     .field {
       margin-left: 0.5em;
+      margin-bottom: 0.5em;
     }
   }
 </style>
