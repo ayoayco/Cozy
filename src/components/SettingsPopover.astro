@@ -1,4 +1,5 @@
 ---
+import Serialize from "@ayco/astro-resume";
 import Icon from "astro-iconify";
 import { featureFlags } from "../utils/feature-flags";
 export interface Props {
@@ -37,6 +38,24 @@ const { toggle } = Astro.props;
   <small>This is where feature flags will be set once made available. <a href="https://github.com/ayoayco/cozy/issues/new" target="_blank">Request features or report bugs here.</a></small>
 </form>
 
+<Serialize id="settings-toggle" data={{toggle}} />
+
+<script>
+  /**
+   * temporary JS solution, should be replaced with CSS
+   */
+  import { deserialize } from "@ayco/astro-resume";
+  const {toggle} = deserialize("settings-toggle");
+  document
+    .getElementById(toggle)
+    ?.addEventListener("change", (e) => {
+      if (e.currentTarget?.["checked"])
+        document.getElementById("settings-form")?.removeAttribute("hidden");
+      else document.getElementById("settings-form")?.setAttribute("hidden", "");
+    });
+</script>
+
+
 <style lang="scss">
   #settings-form {
     border: 1px solid #ccc;
@@ -70,16 +89,3 @@ const { toggle } = Astro.props;
     }
   }
 </style>
-
-<script>
-  /**
-   * temporary JS solution, should be replaced with CSS
-   */
-  document
-    .getElementById("settings-toggle")
-    ?.addEventListener("change", (e) => {
-      if (e.currentTarget?.["checked"])
-        document.getElementById("settings-form")?.removeAttribute("hidden");
-      else document.getElementById("settings-form")?.setAttribute("hidden", "");
-    });
-</script>
