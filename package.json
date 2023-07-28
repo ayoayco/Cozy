@@ -1,6 +1,11 @@
 {
   "name": "@ayco/cozy",
   "version": "0.1.31",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ayoayco/cozy"
+  },
+  "homepage": "https://cozy-reader.netlify.app",
   "scripts": {
     "start": "astro dev",
     "build": "astro build"
