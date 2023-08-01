@@ -22,15 +22,15 @@ Well here's what I’m building:
     3. other sources for lateral reading
 
 ## Roadmap
-| Feature | Status |
-| --- | --- |
-| Remove distractions| ✅ DONE |
-| Save viewed history | ✅ DONE |
-| Set items as Favorites | 🛠️ In-progress |
-| PWA: full Offline access | |
-| AI insights | |
-| Browser Extensions | |
-| Native Apps | |
+| Feature | Status | Version |
+| --- | --- | --- |
+| Remove distractions| ✅ DONE | v0.0.x |
+| Save viewed history | ✅ DONE | v0.1.x |
+| Set items as Favorites | 🛠️ In-progress | v0.2.x |
+| PWA: full Offline access | | v1.0.x |
+| AI insights | | v1.1.x |
+| Browser Extensions | | |
+| Native Apps | | |
 
 ## Usage / Options
 
