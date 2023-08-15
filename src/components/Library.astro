@@ -1,7 +1,6 @@
 ---
 import Serialize from '@ayco/astro-resume';
 export interface Props {
-  routerOutlet: string,
   skipSave?: boolean
 }
 ---
@@ -14,7 +13,8 @@ export interface Props {
 
 <script>
   import {deserialize} from '@ayco/astro-resume';
-  import {Props} from './Library.astro';
+  import type { Props } from './Library.astro';
+  import type { AppConfig } from '../pages/index.astro';
   import { getPostCard, renderPost } from '../utils/library'
   const cache = await caches.open('cozy-reader');
   let url= new URL(window.location.href);
@@ -24,7 +24,8 @@ export interface Props {
     url = new URL(`${url.origin}/?url=${urlParam}`);
   }
   const response = await cache.match(url);
-  const {routerOutlet, skipSave} = deserialize<Props>('preferences');
+  const { skipSave } = deserialize<Props>('preferences');
+  const { routerOutlet } = deserialize<AppConfig>('app-config');
   const includesAppURL = urlParam?.includes(window.location.origin)
 
   if (!response && !skipSave && !includesAppURL) {
