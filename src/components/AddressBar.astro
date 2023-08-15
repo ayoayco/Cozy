@@ -56,10 +56,20 @@ const { url } = Astro.props;
 </div>
 
 <script>
+  import { deserialize } from "@ayco/astro-resume";
+  import type { AppConfig } from "../pages/index.astro";
+  import { renderPost } from "../utils/library";
   const backLink = document.querySelector<HTMLButtonElement>("#app-back");
   const submitBtn = document.querySelector<HTMLButtonElement>("#submit");
   const urlInput = document.querySelector<HTMLInputElement>("#app-url");
   const settings = document.querySelector<HTMLDivElement>("#app-settings");
+  const homeLink = document.querySelector<HTMLAnchorElement>("#app-home");
+  const { routerOutlet } = deserialize<AppConfig>('app-config');
+
+  homeLink?.addEventListener('click', (e) => {
+    e.preventDefault();
+    renderPost(null, '/', routerOutlet)
+  })
 
   // if js is enabled, show the back and settings button
   backLink?.setAttribute("style", "display: block");

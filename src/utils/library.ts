@@ -47,16 +47,24 @@ export function getPostCard(html: HTMLHtmlElement) {
   return postCard;
 }
 
-export function renderPost(responseText, url, postDivSelector: string, preventPushState = false) {
+export function renderPost(responseText: string | null, url, postDivSelector: string, preventPushState = false) {
   const postDiv = document.querySelector<HTMLDivElement>(`#${postDivSelector}`);
-  const html = document.createElement('html');
-  html.innerHTML = responseText;
-  const newPost = html.querySelector('body')?.querySelector('#post');
-  if (postDiv && newPost?.innerHTML) {
-    postDiv.innerHTML = newPost.innerHTML
+  let postText = '';
+  let cozyUrl = '/';
+  let cozyTitle = 'Cozy';
+  if (responseText) {
+    const html = document.createElement('html');
+    html.innerHTML = responseText;
+    const newPost = html.querySelector('body')?.querySelector('#post');
+    postText = newPost?.innerHTML || '';
+    cozyUrl = html.querySelector('meta[property="cozy:url"]')?.getAttribute('content') ?? '/';
+    cozyTitle = `${getCozyTitle(html)} | Cozy`;
+  }
+
+  if (postDiv) {
+    postDiv.innerHTML = postText;
 
     const appUrl = document.getElementById('app-url') as HTMLInputElement;
-    const cozyUrl = html.querySelector('meta[property="cozy:url"]')?.getAttribute('content');
     const homeBtn = document.querySelector<HTMLButtonElement>('#app-home');
     const backBtn = document.querySelector<HTMLButtonElement>('#app-back');
     const submitBtn = document.querySelector<HTMLButtonElement>('#app-submit');
@@ -65,7 +73,7 @@ export function renderPost(responseText, url, postDivSelector: string, preventPu
       backBtn?.removeAttribute('disabled');
       submitBtn?.removeAttribute('disabled');
       homeBtn?.removeAttribute('disabled');
-      document.title = `${getCozyTitle(html)} | Cozy`;
+      document.title = cozyTitle;
     } else {
       appUrl.value = '';
       backBtn?.setAttribute('disabled', 'true');
