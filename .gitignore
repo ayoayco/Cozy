@@ -6,4 +6,4 @@ dist/
 *swo
 *swp
 
-secret.mjs
+.env

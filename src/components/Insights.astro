@@ -7,8 +7,10 @@ export interface Props {
 }
 
 const { article } = Astro.props;
+const key = import.meta.env.SECRET_IOGPT_KEY;
 const prompts = {
   summary: `As a teacher, summarize the article ${article?.title && article?.title} ${article?.author ? `by ${article?.author}` : ''} on this web page: ${article?.url} in at most three sentences only.`,
+  key
 };
 export type Prompts = typeof prompts;
 ---
@@ -28,10 +30,10 @@ export type Prompts = typeof prompts;
   import { deserialize } from "@ayco/astro-resume";
   import { getInsights } from "../utils/insights";
   import type { Prompts } from "./Insights.astro";
-  const { summary } = deserialize<Prompts>("ai-prompt");
+  const { summary, key } = deserialize<Prompts>("ai-prompt");
 
   // summary
-  let insights = await getInsights(summary);
+  let insights = await getInsights(summary, key);
   try {
     console.log(insights?.choices?.map((choice) => choice.message));
     const list = document.querySelector("#summary-wrapper");

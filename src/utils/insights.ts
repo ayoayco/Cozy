@@ -1,11 +1,14 @@
 
-import {secret} from '../../secret.mjs'
 
 export function getInsights(
   content: string,
+  key: string,
 //   stream = false,
 //   max_tokens = 20
 ): Promise<any> {
+
+  if (!key) throw new Error("IOGPT_KEY is not set");
+
   return fetch(
     "https://iogpt-api-management-service.azure-api.net/openai/api/proxy/openai/chat/completions",
     {
@@ -13,7 +16,7 @@ export function getInsights(
       headers: {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache",
-        "iO-GPT-Subscription-Key": secret ?? process.env.IOGPT_KEY,
+        "iO-GPT-Subscription-Key":  key,
       },
       body: JSON.stringify({
         model: "gpt-35-turbo",
