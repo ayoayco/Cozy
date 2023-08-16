@@ -6,11 +6,7 @@ import Post from "../components/Post.astro";
 import Layout from "../layouts/Layout.astro";
 import Library from "../components/Library.astro";
 import Footer from "../components/Footer.astro";
-
-const appConfig = {
-  routerOutlet: 'router-outlet',
-};
-export type AppConfig = typeof appConfig;
+import Insights from "../components/Insights.astro";
 
 let url = Astro.url.searchParams.get('url');
 let article: ArticleData | null = {url: '/'};
@@ -26,6 +22,13 @@ if (url)
     article = null;
   }
 
+
+const appConfig = {
+  routerOutlet: 'router-outlet',
+  gptKey: import.meta.env.SECRET_IOGPT_KEY,
+  prompt: article ? `As a teacher for a five-year-old kid, summarize the article "${article?.title && article?.title}" ${article?.author ? `by ${article?.author}` : ''} on this web page: ${article?.url}. The summary should be in at most three sentences only. Send as an ordered list in HTML format without headings` : null
+};
+export type AppConfig = typeof appConfig;
 ---
 <Layout article={article}>
     <AddressBar url={url} />
@@ -34,6 +37,7 @@ if (url)
     </div>
     <Library slot="library" skipSave={article === null} />
     <Footer slot="footer" />
+    <Insights article={article} prompt={appConfig.prompt} slot="sidebar" />
 </Layout>
 
 <Serialize id="app-config" data={appConfig} />

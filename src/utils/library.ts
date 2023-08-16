@@ -68,6 +68,9 @@ export function renderPost(responseText: string | null, url, postDivSelector: st
     const homeBtn = document.querySelector<HTMLButtonElement>('#app-home');
     const backBtn = document.querySelector<HTMLButtonElement>('#app-back');
     const submitBtn = document.querySelector<HTMLButtonElement>('#submit');
+    
+    clearInsights();
+
     if(cozyUrl !== '/') {
       appUrl.value = cozyUrl || '';
       backBtn?.removeAttribute('disabled');
@@ -85,6 +88,14 @@ export function renderPost(responseText: string | null, url, postDivSelector: st
     if(!preventPushState) {
       window.history.pushState({url}, '', url);
     }
+  }
+}
+
+function clearInsights() {
+  const insights = document.querySelector<HTMLDivElement>('#sidebar-wrapper');
+  if(insights) {
+    insights.innerHTML = '';
+    insights.setAttribute('hidden', 'true');
   }
 }
 
