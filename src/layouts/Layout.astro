@@ -48,7 +48,6 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
       <slot />
 
       <div id="main-content">
-<<<<<<< HEAD
         {
           article?.url !== '/' &&
           <div id="sidebar-wrapper">
@@ -56,8 +55,6 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
           </div>
         }
 
-=======
->>>>>>> 1b93670 (feat: implement iogpt)
         <div>
           <div id="post-wrapper">
             <slot name="post" />
@@ -66,12 +63,6 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
             <slot name="library" />
           </div>
         </div>
-        {
-          article?.url !== '/' &&
-          <div id="sidebar-wrapper">
-            <slot name="sidebar" />
-          </div>
-        }
       </div>
       <slot name="footer">
     </div>
@@ -90,11 +81,7 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
   }
   #main-content {
     display: flex;
-<<<<<<< HEAD
     flex-direction: row-reverse;
-=======
-    flex-direction: row;
->>>>>>> 1b93670 (feat: implement iogpt)
 
     :not(#sidebar-wrapper) {
       flex: 2;
@@ -105,11 +92,7 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
   
     #sidebar-wrapper,
     #post-wrapper {
-<<<<<<< HEAD
       margin: 1rem auto 0;
-=======
-      margin: 1rem 0 0;
->>>>>>> 1b93670 (feat: implement iogpt)
       padding: 0 1rem;
       max-width: 650px;
     }

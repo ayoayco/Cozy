@@ -1,26 +1,12 @@
 ---
-<<<<<<< HEAD
-=======
-import Serialize from "@ayco/astro-resume";
->>>>>>> 1b93670 (feat: implement iogpt)
 import { ArticleData } from "@extractus/article-extractor";
 
 export interface Props {
   article: ArticleData | null;
-<<<<<<< HEAD
   prompt: string | null;
 }
 
 const { article, prompt } = Astro.props;
-=======
-}
-
-const { article } = Astro.props;
-const prompts = {
-  summary: `As a teacher, summarize the article ${article?.title && article?.title} ${article?.author ? `by ${article?.author}` : ''} on this web page: ${article?.url} in at most three sentences only.`,
-};
-export type Prompts = typeof prompts;
->>>>>>> 1b93670 (feat: implement iogpt)
 ---
 
 {
@@ -28,16 +14,12 @@ export type Prompts = typeof prompts;
     <>
       <h3>Summary</h3>
       <div id="summary-wrapper"><p class="insight-content">Loading...</p></div>
-<<<<<<< HEAD
       <hr />
       <small><strong>Prompt: </strong>{prompt}</small>
-=======
->>>>>>> 1b93670 (feat: implement iogpt)
     </>
   )
 }
 
-<<<<<<< HEAD
 <script>
   import { deserialize } from "@ayco/astro-resume";
   import { getInsights } from "../utils/insights";
@@ -48,20 +30,6 @@ export type Prompts = typeof prompts;
 
   let insights = await getInsights(prompt, gptKey);
   try {
-=======
-<Serialize data={prompts} id="ai-prompt" />
-
-<script>
-  import { deserialize } from "@ayco/astro-resume";
-  import { getInsights } from "../utils/insights";
-  import type { Prompts } from "./Insights.astro";
-  const { summary } = deserialize<Prompts>("ai-prompt");
-
-  // summary
-  let insights = await getInsights(summary);
-  try {
-    console.log(insights?.choices?.map((choice) => choice.message));
->>>>>>> 1b93670 (feat: implement iogpt)
     const list = document.querySelector("#summary-wrapper");
     if (list)
       list.innerHTML = insights?.choices
@@ -79,10 +47,7 @@ export type Prompts = typeof prompts;
   ul, ol {
     margin-left: -25px;
   }
-<<<<<<< HEAD
   hr, small {
     margin-top: 1em;
   }
-=======
->>>>>>> 1b93670 (feat: implement iogpt)
 </style>
