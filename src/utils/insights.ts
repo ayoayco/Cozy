@@ -1,3 +1,6 @@
+
+import {secret} from '../../secret.mjs'
+
 export function getInsights(
   content: string,
 //   stream = false,
@@ -10,7 +13,7 @@ export function getInsights(
       headers: {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache",
-        "iO-GPT-Subscription-Key": "e8abb061d1884c4bbdd34e35f39b6114",
+        "iO-GPT-Subscription-Key": secret,
       },
       body: JSON.stringify({
         model: "gpt-35-turbo",
