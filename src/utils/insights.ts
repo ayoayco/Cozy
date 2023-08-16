@@ -1,4 +1,5 @@
 export function getInsights(
+<<<<<<< HEAD
   prompt: string | null,
   key: string
   //   stream = false,
@@ -28,6 +29,32 @@ export function getInsights(
       }
     ).then((res) => res.json());
   else return Promise.resolve(null);
+=======
+  content: string,
+//   stream = false,
+//   max_tokens = 20
+): Promise<any> {
+  return fetch(
+    "https://iogpt-api-management-service.azure-api.net/openai/api/proxy/openai/chat/completions",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache",
+        "iO-GPT-Subscription-Key": "e8abb061d1884c4bbdd34e35f39b6114",
+      },
+      body: JSON.stringify({
+        model: "gpt-35-turbo",
+        messages: [
+          {
+            role: "user",
+            content,
+          },
+        ],
+      }),
+    }
+  ).then((res) => res.json());
+>>>>>>> 1b93670 (feat: implement iogpt)
 }
 
 /**

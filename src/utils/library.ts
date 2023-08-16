@@ -95,7 +95,10 @@ function clearInsights() {
   const insights = document.querySelector<HTMLDivElement>('#sidebar-wrapper');
   if(insights) {
     insights.innerHTML = '';
+<<<<<<< HEAD
     insights.setAttribute('hidden', 'true');
+=======
+>>>>>>> 1b93670 (feat: implement iogpt)
   }
 }
 
