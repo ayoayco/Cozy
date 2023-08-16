@@ -13,7 +13,7 @@ export function getInsights(
       headers: {
         "Content-Type": "application/json",
         "Cache-Control": "no-cache",
-        "iO-GPT-Subscription-Key": secret,
+        "iO-GPT-Subscription-Key": secret ?? process.env.IOGPT_KEY,
       },
       body: JSON.stringify({
         model: "gpt-35-turbo",
