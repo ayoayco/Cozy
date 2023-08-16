@@ -67,10 +67,13 @@ export function renderPost(responseText: string | null, url, postDivSelector: st
     const appUrl = document.getElementById('app-url') as HTMLInputElement;
     const homeBtn = document.querySelector<HTMLButtonElement>('#app-home');
     const backBtn = document.querySelector<HTMLButtonElement>('#app-back');
-    const submitBtn = document.querySelector<HTMLButtonElement>('#app-submit');
+    const submitBtn = document.querySelector<HTMLButtonElement>('#submit');
     
     clearInsights();
 
+    console.log(
+      {cozyUrl, submitBtn}
+    )
     if(cozyUrl !== '/') {
       appUrl.value = cozyUrl || '';
       backBtn?.removeAttribute('disabled');
