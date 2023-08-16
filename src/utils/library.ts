@@ -71,9 +71,6 @@ export function renderPost(responseText: string | null, url, postDivSelector: st
     
     clearInsights();
 
-    console.log(
-      {cozyUrl, submitBtn}
-    )
     if(cozyUrl !== '/') {
       appUrl.value = cozyUrl || '';
       backBtn?.removeAttribute('disabled');
@@ -98,10 +95,7 @@ function clearInsights() {
   const insights = document.querySelector<HTMLDivElement>('#sidebar-wrapper');
   if(insights) {
     insights.innerHTML = '';
-<<<<<<< HEAD
     insights.setAttribute('hidden', 'true');
-=======
->>>>>>> 1b93670 (feat: implement iogpt)
   }
 }
 
