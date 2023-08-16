@@ -71,6 +71,9 @@ export function renderPost(responseText: string | null, url, postDivSelector: st
     
     clearInsights();
 
+    console.log(
+      {cozyUrl, submitBtn}
+    )
     if(cozyUrl !== '/') {
       appUrl.value = cozyUrl || '';
       backBtn?.removeAttribute('disabled');
