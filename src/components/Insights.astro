@@ -9,7 +9,7 @@ export interface Props {
 const { article } = Astro.props;
 const key = import.meta.env.SECRET_IOGPT_KEY;
 const prompts = {
-  summary: `As a teacher, summarize the article ${article?.title && article?.title} ${article?.author ? `by ${article?.author}` : ''} on this web page: ${article?.url} in at most three sentences only.`,
+  summary: `As a teacher for a five-year-old kid, summarize the article "${article?.title && article?.title}" ${article?.author ? `by ${article?.author}` : ''} on this web page: ${article?.url} in at most three sentences only. Send as an ordered list. Send your answer in HTML format without headings`,
   key
 };
 export type Prompts = typeof prompts;
@@ -31,6 +31,8 @@ export type Prompts = typeof prompts;
   import { getInsights } from "../utils/insights";
   import type { Prompts } from "./Insights.astro";
   const { summary, key } = deserialize<Prompts>("ai-prompt");
+
+    console.log(summary)
 
   // summary
   let insights = await getInsights(summary, key);
