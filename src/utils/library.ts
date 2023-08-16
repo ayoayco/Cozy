@@ -95,6 +95,7 @@ function clearInsights() {
   const insights = document.querySelector<HTMLDivElement>('#sidebar-wrapper');
   if(insights) {
     insights.innerHTML = '';
+    insights.setAttribute('hidden', 'true');
   }
 }
 
