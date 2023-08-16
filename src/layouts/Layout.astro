@@ -1,7 +1,6 @@
 ---
 import { ArticleData } from "@extractus/article-extractor";
 import "./reset.css";
-import Footer from "../components/Footer.astro";
 export interface Props {
   article: ArticleData | null
 }
@@ -49,6 +48,13 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
       <slot />
 
       <div id="main-content">
+        {
+          article?.url !== '/' &&
+          <div id="sidebar-wrapper">
+            <slot name="sidebar" />
+          </div>
+        }
+
         <div>
           <div id="post-wrapper">
             <slot name="post" />
@@ -57,12 +63,6 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
             <slot name="library" />
           </div>
         </div>
-        {
-          article?.url !== '/' &&
-          <div id="sidebar-wrapper">
-            <slot name="sidebar" />
-          </div>
-        }
       </div>
       <slot name="footer">
     </div>
@@ -70,6 +70,7 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
 </html>
 
 <style lang="scss">
+
   #app-wrapper {
     width: 100%;
     max-width: 1000px;
@@ -80,7 +81,7 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
   }
   #main-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
 
     :not(#sidebar-wrapper) {
       flex: 2;
@@ -95,6 +96,17 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
       padding: 0 1rem;
     }
   }
+
+  @media (max-width: 600px) {
+    #main-content {
+      flex-direction: column;
+
+      #sidebar-wrapper,
+      #post-wrapper {
+        flex: 1;
+      }
+    }
+  }
 </style>
 <style is:global lang="scss">
   :root {
@@ -105,4 +117,6 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
   html * {
     font-family: var(--system-ui);
   }
+
+
 </style>
