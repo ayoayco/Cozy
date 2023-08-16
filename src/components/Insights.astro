@@ -35,7 +35,6 @@ export type Prompts = typeof prompts;
   // summary
   let insights = await getInsights(summary, key);
   try {
-    console.log(insights?.choices?.map((choice) => choice.message));
     const list = document.querySelector("#summary-wrapper");
     if (list)
       list.innerHTML = insights?.choices
