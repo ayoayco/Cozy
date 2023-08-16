@@ -26,7 +26,7 @@ if (url)
 const appConfig = {
   routerOutlet: 'router-outlet',
   gptKey: import.meta.env.SECRET_IOGPT_KEY,
-  prompt: article ? `As a teacher for a five-year-old kid, summarize the article "${article?.title && article?.title}" ${article?.author ? `by ${article?.author}` : ''} on this web page: ${article?.url}. Sumarry should be in at most three sentences only. Send as an ordered list in HTML format without headings` : null
+  prompt: article ? `As a teacher for a five-year-old kid, summarize the article "${article?.title && article?.title}" ${article?.author ? `by ${article?.author}` : ''} on this web page: ${article?.url}. The summary should be in at most three sentences only. Send as an ordered list in HTML format without headings` : null
 };
 export type AppConfig = typeof appConfig;
 ---
