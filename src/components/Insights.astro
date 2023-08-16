@@ -1,18 +1,12 @@
 ---
-import Serialize from "@ayco/astro-resume";
 import { ArticleData } from "@extractus/article-extractor";
 
 export interface Props {
   article: ArticleData | null;
+  prompt: string | null;
 }
 
-const { article } = Astro.props;
-const key = import.meta.env.SECRET_IOGPT_KEY;
-const prompts = {
-  summary: `As a teacher for a five-year-old kid, summarize the article "${article?.title && article?.title}" ${article?.author ? `by ${article?.author}` : ''} on this web page: ${article?.url} in at most three sentences only. Send as an ordered list. Send your answer in HTML format without headings`,
-  key
-};
-export type Prompts = typeof prompts;
+const { article, prompt } = Astro.props;
 ---
 
 {
@@ -20,22 +14,21 @@ export type Prompts = typeof prompts;
     <>
       <h3>Summary</h3>
       <div id="summary-wrapper"><p class="insight-content">Loading...</p></div>
+      <hr />
+      <small><strong>Prompt: </strong>{prompt}</small>
     </>
   )
 }
 
-<Serialize data={prompts} id="ai-prompt" />
-
 <script>
   import { deserialize } from "@ayco/astro-resume";
   import { getInsights } from "../utils/insights";
-  import type { Prompts } from "./Insights.astro";
-  const { summary, key } = deserialize<Prompts>("ai-prompt");
+  import { AppConfig } from "../pages/index.astro";
+  const { prompt, gptKey } = deserialize<AppConfig>("app-config");
 
-    console.log(summary)
+  console.log(prompt)
 
-  // summary
-  let insights = await getInsights(summary, key);
+  let insights = await getInsights(prompt, gptKey);
   try {
     const list = document.querySelector("#summary-wrapper");
     if (list)
@@ -53,5 +46,8 @@ export type Prompts = typeof prompts;
   }
   ul, ol {
     margin-left: -25px;
+  }
+  hr, small {
+    margin-top: 1em;
   }
 </style>

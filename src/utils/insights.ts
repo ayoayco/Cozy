@@ -1,34 +1,33 @@
-
-
 export function getInsights(
-  content: string,
-  key: string,
-//   stream = false,
-//   max_tokens = 20
+  prompt: string | null,
+  key: string
+  //   stream = false,
+  //   max_tokens = 20
 ): Promise<any> {
-
   if (!key) throw new Error("IOGPT_KEY is not set");
 
-  return fetch(
-    "https://iogpt-api-management-service.azure-api.net/openai/api/proxy/openai/chat/completions",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": "no-cache",
-        "iO-GPT-Subscription-Key":  key,
-      },
-      body: JSON.stringify({
-        model: "gpt-35-turbo",
-        messages: [
-          {
-            role: "user",
-            content,
-          },
-        ],
-      }),
-    }
-  ).then((res) => res.json());
+  if (prompt)
+    return fetch(
+      "https://iogpt-api-management-service.azure-api.net/openai/api/proxy/openai/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Cache-Control": "no-cache",
+          "iO-GPT-Subscription-Key": key,
+        },
+        body: JSON.stringify({
+          model: "gpt-35-turbo",
+          messages: [
+            {
+              role: "user",
+              content: prompt,
+            },
+          ],
+        }),
+      }
+    ).then((res) => res.json());
+  else return Promise.resolve(null);
 }
 
 /**
