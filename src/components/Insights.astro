@@ -1,0 +1,54 @@
+---
+import Serialize from "@ayco/astro-resume";
+import { ArticleData } from "@extractus/article-extractor";
+
+export interface Props {
+  article: ArticleData | null;
+}
+
+const { article } = Astro.props;
+const prompts = {
+  summary: `As a teacher, summarize the article ${article?.title && article?.title} ${article?.author ? `by ${article?.author}` : ''} on this web page: ${article?.url} in at most three sentences only.`,
+};
+export type Prompts = typeof prompts;
+---
+
+{
+  article && (
+    <>
+      <h3>Summary</h3>
+      <div id="summary-wrapper"><p class="insight-content">Loading...</p></div>
+    </>
+  )
+}
+
+<Serialize data={prompts} id="ai-prompt" />
+
+<script>
+  import { deserialize } from "@ayco/astro-resume";
+  import { getInsights } from "../utils/insights";
+  import type { Prompts } from "./Insights.astro";
+  const { summary } = deserialize<Prompts>("ai-prompt");
+
+  // summary
+  let insights = await getInsights(summary);
+  try {
+    console.log(insights?.choices?.map((choice) => choice.message));
+    const list = document.querySelector("#summary-wrapper");
+    if (list)
+      list.innerHTML = insights?.choices
+        ?.map((choice) => `<p class="insight-content">${choice.message.content}</p>`)
+        .join("");
+  } catch (e) {
+    console.error(e);
+  }
+</script>
+
+<style is:inline>
+  p.insight-content {
+    margin: 1em 0 !important;
+  }
+  ul, ol {
+    margin-left: -25px;
+  }
+</style>

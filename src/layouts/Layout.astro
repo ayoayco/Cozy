@@ -47,13 +47,22 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
   <body>
     <div id="app-wrapper">
       <slot />
+
       <div id="main-content">
-        <div id="post-wrapper">
-          <slot name="post" />
+        <div>
+          <div id="post-wrapper">
+            <slot name="post" />
+          </div>
+          <div id="library-wrapper">
+            <slot name="library" />
+          </div>
         </div>
-        <div id="library-wrapper">
-          <slot name="library" />
-        </div>
+        {
+          article?.url !== '/' &&
+          <div id="sidebar-wrapper">
+            <slot name="sidebar" />
+          </div>
+        }
       </div>
       <slot name="footer">
     </div>
@@ -63,17 +72,26 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
 <style lang="scss">
   #app-wrapper {
     width: 100%;
-    max-width: 650px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 0.5rem;
     padding-bottom: 2rem;
+
   }
   #main-content {
-    * {
-      margin: 1rem 0 0;
+    display: flex;
+    flex-direction: row;
+
+    :not(#sidebar-wrapper) {
+      flex: 2;
+    }
+    #sidebar-wrapper {
+      flex:1
     }
   
+    #sidebar-wrapper,
     #post-wrapper {
+      margin: 1rem 0 0;
       padding: 0 1rem;
     }
   }
