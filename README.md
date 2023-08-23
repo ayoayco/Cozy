@@ -7,12 +7,12 @@
   Remove distractions. Save for later.<br />
   Cozy is your modern-day reading assistant.<br /><br />
   <a href="https://cozy-reader.netlify.app" target="_blank"><img src="https://raw.githubusercontent.com/ayoayco/cozy/main/.github/assets/screenshot.png" /></a><br />
-  <a href="https://cozy-reader.netlify.app" target="_blank">&nearr; Try the App! &nearr;</a><br />
+  <a href="https://cozy-reader.netlify.app" target="_blank">Try the App!</a><br />
 </p>
 
 ## How is this app different?
-Well here's what I’m building:
-1. An app that just works, no sign ups or setups.
+Here's what this project is building:
+1. An app that just works, no sign-ups or set-ups.
 2. Progressively enhanced experience. Main feature works even without JS. Removing distractions happen on the server and dead clean HTML gets delivered
 3. All your data are cached and does not leave your device;  offline access is by default
 4. Cloud-sync will be opt-in, with your choice of provider
