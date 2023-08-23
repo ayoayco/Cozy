@@ -38,14 +38,14 @@ const { toggle } = Astro.props;
   <small>This is where feature flags will be set once made available. <a href="https://github.com/ayoayco/cozy/issues/new" target="_blank">Request features or report bugs here.</a></small>
 </form>
 
-<Serialize id="settings-toggle" data={{toggle}} />
+<Serialize id="settings-toggle-id" data={{toggle}} />
 
 <script>
   /**
    * temporary JS solution, should be replaced with CSS
    */
   import { deserialize } from "@ayco/astro-resume";
-  const {toggle} = deserialize("settings-toggle");
+  const {toggle} = deserialize("settings-toggle-id");
   document
     .getElementById(toggle)
     ?.addEventListener("change", (e) => {
