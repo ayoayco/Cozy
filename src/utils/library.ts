@@ -65,7 +65,6 @@ export function renderPost(responseText: string | null, url, postDivSelector: st
     postDiv.innerHTML = postText;
 
     const appUrl = document.getElementById('app-url') as HTMLInputElement;
-    const homeBtn = document.querySelector<HTMLButtonElement>('#app-home');
     const backBtn = document.querySelector<HTMLButtonElement>('#app-back');
     const submitBtn = document.querySelector<HTMLButtonElement>('#submit');
     
@@ -75,13 +74,11 @@ export function renderPost(responseText: string | null, url, postDivSelector: st
       appUrl.value = cozyUrl || '';
       backBtn?.removeAttribute('disabled');
       submitBtn?.removeAttribute('disabled');
-      homeBtn?.removeAttribute('disabled');
       document.title = cozyTitle;
     } else {
       appUrl.value = '';
       backBtn?.setAttribute('disabled', 'true');
       submitBtn?.setAttribute('disabled', 'true');
-      homeBtn?.setAttribute('disabled', 'true');
       document.title = `Cozy`;
     }
 
