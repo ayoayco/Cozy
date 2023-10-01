@@ -71,3 +71,5 @@ We are thankful for all the building blocks provided by the following projects:
 ## Contributing
 If any of the above seems to need improvement for you, we are always eager to hear feedback and welcome all contributions. See our [CONTRIBUTING](/CONTRIBUTING.md) guide for more info.
 
+Join our [Discord](https://discord.gg/kkvW7GYNAp) if you need help!
+
