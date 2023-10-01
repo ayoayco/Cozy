@@ -26,7 +26,8 @@ Here's what this project is building:
 | --- | --- | --- |
 | Remove distractions| ✅ DONE | v0.0.x |
 | Save viewed history | ✅ DONE | v0.1.x |
-| Set items as Favorites | 🛠️ In-progress | v0.2.x |
+| Open links within Cozy | ✅ DONE | v0.2.x |
+| Set items as Favorites | 🛠️ In-progress | v0.3.x |
 | PWA: full Offline access | | v1.0.x |
 | AI insights | | v1.1.x |
 | Browser Extensions | | |
