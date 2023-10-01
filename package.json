@@ -11,13 +11,15 @@
     "build": "astro build"
   },
   "devDependencies": {
-    "astro": "^2.9.1"
+    "astro": "^3.2.0"
   },
   "dependencies": {
-    "@astrojs/netlify": "^2.2.2",
-    "@ayco/astro-resume": "^0.3.4",
-    "@extractus/article-extractor": "^7.2.15",
+    "@astrojs/netlify": "^3.0.2",
+    "@astrojs/prefetch": "^0.4.0",
+    "@ayco/astro-resume": "^0.3.9",
+    "@extractus/article-extractor": "^8.0.2",
     "astro-iconify": "^1.2.0",
-    "sass": "^1.62.1"
+    "sass": "^1.68.0",
+    "ultrahtml": "^1.5.2"
   }
 }

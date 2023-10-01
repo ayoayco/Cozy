@@ -1,5 +1,6 @@
 ---
 import { ArticleData } from "@extractus/article-extractor";
+import clean from '../utils/sanitizer';
 export interface Props {
   article: ArticleData | null;
 }
@@ -12,6 +13,8 @@ let { article } = Astro.props;
 article ??= error;
 const datePublished =
   article?.published && new Date(article.published).toDateString();
+
+const cleanContent = clean(article.content ?? '')
 ---
 
 <!-- 
@@ -29,7 +32,7 @@ const datePublished =
             {datePublished && <li>️{datePublished}</li>}
           </ul>
         )}
-        <content set:html={article.content} />
+        <content set:html={cleanContent} />
       </>
   }
 </div>
