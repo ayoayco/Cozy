@@ -1,6 +1,6 @@
 ---
 import { ArticleData } from "@extractus/article-extractor";
-import clean from '../utils/sanitizer';
+import { cozify } from "../utils/sanitizer"
 export interface Props {
   article: ArticleData | null;
 }
@@ -14,7 +14,7 @@ article ??= error;
 const datePublished =
   article?.published && new Date(article.published).toDateString();
 
-const cleanContent = clean(article.content ?? '')
+const cleanContent = await cozify(article.content ?? '', Astro.url.origin)
 ---
 
 <!-- 
