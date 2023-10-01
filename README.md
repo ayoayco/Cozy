@@ -57,5 +57,17 @@ This is possible on all major browsers, including Safari on iOS (where I persona
 
 It doesn't exist yet... I'll probably get to creating a browser extension at some point. But for now, PRs welcome! :)
 
+## Credits
+We are thankful for all the building blocks provided by the following projects:
+1. [Astro] for our server-side rendering framework
+1. [Netlify] for hosting our official deployed service
+1. [@astrojs/prefetch] for our experimental prefetch strategy (not sure if working yet 🤣); only while we don't have a more aggressive prefetch-and-cache strategy
+1. [@ayco/astro-resume] for communicating necessary data from server to client
+1. [@extractus/article-extractor] for the amazing scraping of articles
+1. [astro-iconify] for icons
+1. [sass] for some nested styling
+1. [ultrahtml] for any cleanup and transformation we do on the received article content
+
 ## Contributing
-Speaking of PRs being welcome, see our [CONTRIBUTING guide](/CONTRIBUTING.md).
+If any of the above seems to need improvement for you, we are always eager to hear feedback and welcome all contributions. See our [CONTRIBUTING](/CONTRIBUTING.md) guide for more info.
+
