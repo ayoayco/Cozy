@@ -59,14 +59,14 @@ It doesn't exist yet... I'll probably get to creating a browser extension at som
 
 ## Credits
 We are thankful for all the building blocks provided by the following projects:
-1. [Astro] for our server-side rendering framework
-1. [Netlify] for hosting our official deployed service
-1. [@astrojs/prefetch] for our experimental prefetch strategy (not sure if working yet 🤣); only while we don't have a more aggressive prefetch-and-cache strategy
-1. [@ayco/astro-resume] for communicating necessary data from server to client
-1. [@extractus/article-extractor] for the amazing scraping of articles
-1. [astro-iconify] for icons
-1. [sass] for some nested styling
-1. [ultrahtml] for any cleanup and transformation we do on the received article content
+1. [Astro](https://www.npmjs.com/package/astro) for our server-side rendering framework
+1. [Netlify](https://www.npmjs.com/package/@astrojs/netlify) for hosting our official deployed service
+1. [@astrojs/prefetch](https://www.npmjs.com/package/@astrojs/prefetch) for our experimental prefetch strategy (not sure if working yet 🤣); only while we don't have a more aggressive prefetch-and-cache strategy
+1. [@ayco/astro-resume](https://www.npmjs.com/package/@ayco/astro-resume) for communicating necessary data from server to client
+1. [@extractus/article-extractor](https://www.npmjs.com/package/@extractus/article-extractor) for the amazing scraping of articles
+1. [astro-iconify](https://www.npmjs.com/package/astro-iconify) for easily icon-sets in [iconify](https://icon-sets.iconify.design/)
+1. [sass](https://www.npmjs.com/package/sass) for some nested styling
+1. [ultrahtml](https://www.npmjs.com/package/ultrahtml) for any cleanup and transformation we do on the received article content
 
 ## Contributing
 If any of the above seems to need improvement for you, we are always eager to hear feedback and welcome all contributions. See our [CONTRIBUTING](/CONTRIBUTING.md) guide for more info.
