@@ -1,3 +1,5 @@
+> 📣 we moved to vercel
+
 <h1 align="center">Cozy</h1>
 <p align="center">
   <a href="https://github.com/ayoayco/cozy">
