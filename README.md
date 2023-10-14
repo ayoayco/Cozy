@@ -1,4 +1,4 @@
-> 📣 We moved to a new address here: https://cozy-reader.vercel.app/ -- As the app is still in *Alpha* the project will have to make decisions that might cause changes to users' experience. We try to minimize big decisions, but being a free service, we don't have a choice but find a more sustainable setup for now. That said, please bear with the project for a bit, as we put down the previous deployment.
+> 📣 We moved to a new address here: https://cozy-reader.vercel.app/
 
 <h1 align="center">Cozy</h1>
 <p align="center">
