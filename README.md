@@ -31,7 +31,7 @@ Here's what this project is building:
 | Open links within Cozy | ✅ DONE | v0.2.x |
 | Set items as Favorites | 🛠️ In-progress | v0.3.x |
 | PWA: full Offline access | | v1.0.x |
-| AI insights | | v1.1.x |
+| Smart insights | | v1.1.x |
 | Browser Extensions | | |
 | Native Apps | | |
 
