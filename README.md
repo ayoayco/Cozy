@@ -1,3 +1,5 @@
+> 📣 We moved to a new address here: https://cozy-reader.vercel.app/
+
 <h1 align="center">Cozy</h1>
 <p align="center">
   <a href="https://github.com/ayoayco/cozy">
@@ -6,8 +8,8 @@
   <a href="https://github.com/ayoayco/cozy-reader/releases/latest"><img alt="Alpha Version" src="https://img.shields.io/github/package-json/v/ayoayco/cozy?label=alpha" /></a><br />
   Remove distractions. Save for later.<br />
   Cozy is your modern-day reading assistant.<br /><br />
-  <a href="https://cozy-reader.netlify.app" target="_blank"><img src="https://raw.githubusercontent.com/ayoayco/cozy/main/.github/assets/screenshot.png" /></a><br />
-  <a href="https://cozy-reader.netlify.app" target="_blank">Try the App!</a><br />
+  <a href="https://cozy-reader.vercel.app/" target="_blank"><img src="https://raw.githubusercontent.com/ayoayco/cozy/main/.github/assets/screenshot.png" /></a><br />
+  <a href="https://cozy-reader.vercel.app/" target="_blank">Try the App!</a><br />
 </p>
 
 ## How is this app different?
@@ -26,9 +28,10 @@ Here's what this project is building:
 | --- | --- | --- |
 | Remove distractions| ✅ DONE | v0.0.x |
 | Save viewed history | ✅ DONE | v0.1.x |
-| Set items as Favorites | 🛠️ In-progress | v0.2.x |
+| Open links within Cozy | ✅ DONE | v0.2.x |
+| Set items as Favorites | 🛠️ In-progress | v0.3.x |
 | PWA: full Offline access | | v1.0.x |
-| AI insights | | v1.1.x |
+| Smart insights | | v1.1.x |
 | Browser Extensions | | |
 | Native Apps | | |
 
@@ -36,14 +39,14 @@ Here's what this project is building:
 
 **1. Copy, Paste**
 
-It's simple. When you open an article and want to turn it into a more cozy reading experience, just copy the url and paste it to the [app's](https://cozy-reader.netlify.app/) address bar.  
+It's simple. When you open an article and want to turn it into a more cozy reading experience, just copy the url and paste it to the [app's](https://cozy-reader.vercel.app//) address bar.  
 
 **2. One-click Bookmark**
 
 A bookmarklet could run a script to open the current page for you on ~~Cozy~~. You can create this new bookmark titled 'Get cozy!' and put the following as value for the URL:
 
 ```
-javascript:(function(){ window.open('https://cozy-reader.netlify.app/?url=%27 + window.location.href, %27_self%27); })();
+javascript:(function(){ window.open('https://cozy-reader.vercel.app/?url=%27 + window.location.href, %27_self%27); })();
 ```
 
 This is possible on all major browsers, including Safari on iOS (where I personally use this often). Some screenshots:
@@ -56,5 +59,19 @@ This is possible on all major browsers, including Safari on iOS (where I persona
 
 It doesn't exist yet... I'll probably get to creating a browser extension at some point. But for now, PRs welcome! :)
 
+## Credits
+We are thankful for all the building blocks provided by the following projects:
+1. [Astro](https://www.npmjs.com/package/astro) for our server-side rendering framework
+1. [Vercel](https://www.npmjs.com/package/@astrojs/vercel) for hosting our official deployed service
+1. [@astrojs/prefetch](https://www.npmjs.com/package/@astrojs/prefetch) for our experimental prefetch strategy (not sure if working yet 🤣); only while we don't have a more aggressive prefetch-and-cache strategy
+1. [@ayco/astro-resume](https://www.npmjs.com/package/@ayco/astro-resume) for communicating necessary data from server to client
+1. [@extractus/article-extractor](https://www.npmjs.com/package/@extractus/article-extractor) for the amazing scraping of articles
+1. [astro-iconify](https://www.npmjs.com/package/astro-iconify) for easily icon-sets in [iconify](https://icon-sets.iconify.design/)
+1. [sass](https://www.npmjs.com/package/sass) for some nested styling
+1. [ultrahtml](https://www.npmjs.com/package/ultrahtml) for any cleanup and transformation we do on the received article content
+
 ## Contributing
-Speaking of PRs being welcome, see our [CONTRIBUTING guide](/CONTRIBUTING.md).
+If any of the above seems to need improvement for you, we are always eager to hear feedback and welcome all contributions. See our [CONTRIBUTING](/CONTRIBUTING.md) guide for more info.
+
+Join our [Discord](https://discord.gg/kkvW7GYNAp) if you need help!
+
