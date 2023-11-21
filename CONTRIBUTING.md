@@ -2,8 +2,6 @@
 
 Thank you for your interest in building the coziest web experience for people like you and me.
 
-Join our [Discord](https://discord.gg/kkvW7GYNAp) if you need help!
-
 ## Tech Stack
 
 This project is built with the following tech
