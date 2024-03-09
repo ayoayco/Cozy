@@ -4,6 +4,8 @@ Thank you for your interest in building the coziest web experience for people li
 
 ## Tech Stack
 
+You will need [to install nodejs](https://nodejs.org/en/download) and [pnpm](https://pnpm.io/installation) if you do not have them yet in your machine.
+
 This project is built with the following tech
 1. TypeScript, HTML, SCSS - even just knowing basic JS and CSS will give you familiarity of the code
 1. [Astro](https://astro.build) - Astro is the chosen framework, please read throught the basics on their docs if you are unfamiliar
@@ -18,17 +20,17 @@ This project is built with the following tech
 git clone https://github.com/ayoayco/cozy.git
 ```
 
-2. install dependencies
+2. install dependencies using `pnpm`
 
 ```
 cd cozy
-npm install
+pnpm install
 ```
 
 3. run the dev server
 
 ```
-npm start
+pnpm start
 ```
 
 ## Good first issues
