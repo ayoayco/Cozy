@@ -1,4 +1,6 @@
-> 📣 We moved to a new address here: https://cozy-reader.vercel.app/
+> [!IMPORTANT]
+> We have problems with our deployed service, and I'm now working on it. In the meantime, you can easily fork and deploy your own :)
+> -ayo
 
 <h1 align="center">Cozy</h1>
 <p align="center">
@@ -8,8 +10,7 @@
   <a href="https://github.com/ayoayco/cozy-reader/releases/latest"><img alt="Alpha Version" src="https://img.shields.io/github/package-json/v/ayoayco/cozy?label=alpha" /></a><br />
   Remove distractions. Save for later.<br />
   Cozy is your modern-day reading assistant.<br /><br />
-  <a href="https://cozy-reader.vercel.app/" target="_blank"><img src="https://raw.githubusercontent.com/ayoayco/cozy/main/.github/assets/screenshot.png" /></a><br />
-  <a href="https://cozy-reader.vercel.app/" target="_blank">Try the App!</a><br />
+  <img src="https://raw.githubusercontent.com/ayoayco/cozy/main/.github/assets/screenshot.png" /><br />
 </p>
 
 ## How is this app different?
@@ -39,11 +40,14 @@ Here's what this project is building:
 
 **1. Copy, Paste**
 
-It's simple. When you open an article and want to turn it into a more cozy reading experience, just copy the url and paste it to the [app's](https://cozy-reader.vercel.app//) address bar.  
+It's simple. When you open an article and want to turn it into a more cozy reading experience, just copy the url and paste it to the app's address bar.  
 
 **2. One-click Bookmark**
 
 A bookmarklet could run a script to open the current page for you on ~~Cozy~~. You can create this new bookmark titled 'Get cozy!' and put the following as value for the URL:
+
+> [!WARNING]
+> This is not working, until we fix our deployed service
 
 ```
 javascript:(function(){ window.open('https://cozy-reader.vercel.app/?url=%27 + window.location.href, %27_self%27); })();
@@ -62,7 +66,6 @@ It doesn't exist yet... I'll probably get to creating a browser extension at som
 ## Credits
 We are thankful for all the building blocks provided by the following projects:
 1. [Astro](https://www.npmjs.com/package/astro) for our server-side rendering framework
-1. [Vercel](https://www.npmjs.com/package/@astrojs/vercel) for hosting our official deployed service
 1. [@astrojs/prefetch](https://www.npmjs.com/package/@astrojs/prefetch) for our experimental prefetch strategy (not sure if working yet 🤣); only while we don't have a more aggressive prefetch-and-cache strategy
 1. [@ayco/astro-resume](https://www.npmjs.com/package/@ayco/astro-resume) for communicating necessary data from server to client
 1. [@extractus/article-extractor](https://www.npmjs.com/package/@extractus/article-extractor) for the amazing scraping of articles
@@ -72,4 +75,6 @@ We are thankful for all the building blocks provided by the following projects:
 
 ## Contributing
 If any of the above seems to need improvement for you, we are always eager to hear feedback and welcome all contributions. See our [CONTRIBUTING](/CONTRIBUTING.md) guide for more info.
+
+Join our [Discord](https://discord.gg/kkvW7GYNAp) if you need help!
 
