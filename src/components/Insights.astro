@@ -1,0 +1,53 @@
+---
+import { ArticleData } from "@extractus/article-extractor";
+
+export interface Props {
+  article: ArticleData | null;
+  prompt: string | null;
+}
+
+const { article, prompt } = Astro.props;
+---
+
+{
+  article && (
+    <>
+      <h3>Summary</h3>
+      <div id="summary-wrapper"><p class="insight-content">Loading...</p></div>
+      <hr />
+      <small><strong>Prompt: </strong>{prompt}</small>
+    </>
+  )
+}
+
+<script>
+  import { deserialize } from "@ayco/astro-resume";
+  import { getInsights } from "../utils/insights";
+  import { AppConfig } from "../pages/index.astro";
+  const { prompt, gptKey } = deserialize<AppConfig>("app-config");
+
+  console.log(prompt)
+
+  let insights = await getInsights(prompt, gptKey);
+  try {
+    const list = document.querySelector("#summary-wrapper");
+    if (list)
+      list.innerHTML = insights?.choices
+        ?.map((choice) => `<p class="insight-content">${choice.message.content}</p>`)
+        .join("");
+  } catch (e) {
+    console.error(e);
+  }
+</script>
+
+<style is:inline>
+  p.insight-content {
+    margin: 1em 0 !important;
+  }
+  ul, ol {
+    margin-left: -25px;
+  }
+  hr, small {
+    margin-top: 1em;
+  }
+</style>
