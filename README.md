@@ -69,6 +69,7 @@ We are thankful for all the building blocks provided by the following projects:
 1. [astro-iconify](https://www.npmjs.com/package/astro-iconify) for easily icon-sets in [iconify](https://icon-sets.iconify.design/)
 1. [sass](https://www.npmjs.com/package/sass) for some nested styling
 1. [ultrahtml](https://www.npmjs.com/package/ultrahtml) for any cleanup and transformation we do on the received article content
+1. [fastify](https://fastify.dev/) for our production server and [nginx](https://nginx.org/) as reverse proxy
 
 ## Contributing
 If any of the above seems to need improvement for you, we are always eager to hear feedback and welcome all contributions. See our [CONTRIBUTING](/CONTRIBUTING.md) guide for more info.
