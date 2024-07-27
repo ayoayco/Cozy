@@ -18,7 +18,8 @@
     "deploy": "astro build && scp -r dist ayo@ayco.io:~/cozy/"
   },
   "devDependencies": {
-    "astro": "^4.12.2"
+    "astro": "^4.12.2",
+    "fastify-cli": "^6.3.0"
   },
   "dependencies": {
     "@astrojs/node": "^8.3.2",
