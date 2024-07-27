@@ -63,7 +63,6 @@ It doesn't exist yet... I'll probably get to creating a browser extension at som
 ## Credits
 We are thankful for all the building blocks provided by the following projects:
 1. [Astro](https://www.npmjs.com/package/astro) for our server-side rendering framework
-1. [@astrojs/prefetch](https://www.npmjs.com/package/@astrojs/prefetch) for our experimental prefetch strategy (not sure if working yet 🤣); only while we don't have a more aggressive prefetch-and-cache strategy
 1. [@ayco/astro-resume](https://www.npmjs.com/package/@ayco/astro-resume) for communicating necessary data from server to client
 1. [@extractus/article-extractor](https://www.npmjs.com/package/@extractus/article-extractor) for the amazing scraping of articles
 1. [astro-iconify](https://www.npmjs.com/package/astro-iconify) for easily icon-sets in [iconify](https://icon-sets.iconify.design/)
