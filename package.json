@@ -14,16 +14,19 @@
     "build": "astro build",
     "publish:patch": "npm version patch && npm publish --access public",
     "publish:minor": "npm version minor && npm publish --access public",
-     "deploy": "astro build && scp -r dist ayo@ayco.io:~/cozy/"
+    "deploy": "astro build && scp -r dist ayo@ayco.io:~/cozy/"
   },
   "devDependencies": {
     "astro": "^4.12.2"
   },
   "dependencies": {
     "@astrojs/node": "^8.3.2",
-    "@ayco/astro-resume": "^0.4.0",
+    "@ayco/astro-resume": "^0.4.1",
     "@extractus/article-extractor": "^8.0.10",
+    "@fastify/middie": "^8.3.1",
+    "@fastify/static": "^7.0.4",
     "astro-iconify": "^1.2.0",
+    "fastify": "^4.28.1",
     "sass": "^1.77.8",
     "ultrahtml": "^1.5.3"
   }
