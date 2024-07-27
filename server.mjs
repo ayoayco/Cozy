@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import Fastify from 'fastify';
 import fastifyMiddie from '@fastify/middie';
 import fastifyStatic from '@fastify/static';
