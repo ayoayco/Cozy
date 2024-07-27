@@ -13,7 +13,8 @@
     "start": "astro dev",
     "build": "astro build",
     "publish:patch": "npm version patch && npm publish --access public",
-    "publish:minor": "npm version minor && npm publish --access public"
+    "publish:minor": "npm version minor && npm publish --access public",
+     "deploy": "astro build && scp -r dist ayo@ayco.io:~/cozy/"
   },
   "devDependencies": {
     "astro": "^4.12.2"
