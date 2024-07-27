@@ -12,6 +12,7 @@
   "scripts": {
     "start": "astro dev",
     "build": "astro build",
+    "build:preview": "astro build && node ./src/server.mjs",
     "publish:patch": "npm version patch && npm publish --access public",
     "publish:minor": "npm version minor && npm publish --access public",
     "deploy": "astro build && scp -r dist ayo@ayco.io:~/cozy/"

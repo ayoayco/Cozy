@@ -2,7 +2,7 @@ import Fastify from 'fastify';
 import fastifyMiddie from '@fastify/middie';
 import fastifyStatic from '@fastify/static';
 import { fileURLToPath } from 'node:url';
-import { handler as ssrHandler } from './dist/server/entry.mjs';
+import { handler as ssrHandler } from '../dist/server/entry.mjs';
 
 const app = Fastify({ logger: true });
 
@@ -13,4 +13,4 @@ await app
   .register(fastifyMiddie);
 app.use(ssrHandler);
 
-app.listen({ port: 8080 });
+app.listen({ port: 4321 });
