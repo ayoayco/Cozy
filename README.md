@@ -46,9 +46,6 @@ It's simple. When you open an article and want to turn it into a more cozy readi
 
 A bookmarklet could run a script to open the current page for you on ~~Cozy~~. You can create this new bookmark titled 'Get cozy!' and put the following as value for the URL:
 
-> [!WARNING]
-> This is not working, until we fix our deployed service
-
 ```
 javascript:(function(){ window.open('https://cozy.ayco.io/?url=%27 + window.location.href, %27_self%27); })();
 ```
