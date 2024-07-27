@@ -1,5 +1,5 @@
 > [!IMPORTANT]
-> We have problems with our deployed service, and I'm now working on it. In the meantime, you can easily fork and deploy your own :)
+> ...aaaaaand we're back: [cozy.ayco.io](https://cozy.ayco.io)
 > -ayo
 
 <h1 align="center">Cozy</h1>
@@ -50,7 +50,7 @@ A bookmarklet could run a script to open the current page for you on ~~Cozy~~. Y
 > This is not working, until we fix our deployed service
 
 ```
-javascript:(function(){ window.open('https://cozy-reader.vercel.app/?url=%27 + window.location.href, %27_self%27); })();
+javascript:(function(){ window.open('https://cozy.ayco.io/?url=%27 + window.location.href, %27_self%27); })();
 ```
 
 This is possible on all major browsers, including Safari on iOS (where I personally use this often). Some screenshots:
