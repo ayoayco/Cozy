@@ -9,16 +9,16 @@ let assets: string[] = [];
 export type ServiceWorkerConfig = {
     assetCachePrefix?: string,
     assetCacheVersionID?: string,
-    serviceWorkerPath: string,
+    path: string,
 }
 
 const plugin_dir = path.resolve(path.dirname('.'));
 
 export default (config: ServiceWorkerConfig): AstroIntegration => {
-    let { 
+    let {
         assetCachePrefix,
         assetCacheVersionID = randomUUID(),
-        serviceWorkerPath
+        path: serviceWorkerPath
     } = config;
 
     console.log('[astro-sw] dir', plugin_dir)
@@ -34,7 +34,7 @@ export default (config: ServiceWorkerConfig): AstroIntegration => {
                 let originalScript;
                 try {
                     const __dirname = path.resolve(path.dirname('.'));
-                    const swPath = path.join(__dirname,serviceWorkerPath ?? '');
+                    const swPath = path.join(__dirname, serviceWorkerPath ?? '');
                     console.log('[astro-sw] Using service worker:', swPath);
                     originalScript = await readFile(swPath);
                 } catch {

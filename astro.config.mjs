@@ -10,8 +10,8 @@ export default defineConfig({
   }),
   integrations: [
     serviceWorker({
+      path: "./src/utils/sw.js",
       assetCachePrefix: 'cozy-reader',
-      serviceWorkerPath: './src/utils/sw.js'
     })
   ]
 });
