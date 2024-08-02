@@ -70,7 +70,7 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         addResourcesToCache([
             './',
-            './favicon.ico',
+            ...(assets ?? [])
         ])
     );
 });
