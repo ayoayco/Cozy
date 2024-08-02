@@ -40,6 +40,9 @@ if (url)
 <Serialize id="app-config" data={appConfig} />
 
 <script>
+  /**
+   * TODO: registration should be handled by astro-sw integration 
+   */
   const registerSW = async () => {
     if ("serviceWorker" in navigator) {
       try {
