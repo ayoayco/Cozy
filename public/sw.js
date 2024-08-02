@@ -1,12 +1,13 @@
 
+const cacheName = 'cozy-reader-app-v' + (version ?? '000')
 const addResourcesToCache = async (resources) => {
-    const cache = await caches.open('cozy-reader-app-v1');
+    const cache = await caches.open(cacheName);
     console.log('adding resources to cache...', resources)
     await cache.addAll(resources);
 };
 
 const putInCache = async (request, response) => {
-    const cache = await caches.open('cozy-reader-app-v1');
+    const cache = await caches.open(cacheName);
     console.log('adding one response to cache...', request)
     await cache.put(request, response);
 };
