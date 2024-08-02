@@ -1,4 +1,9 @@
 
+/**
+ * TODO: create virtual imports for `version` & `assets`
+ *  - currently injected by ../plugins/astro-sw.ts
+ */
+
 const cacheName = 'cozy-reader-app-v' + (version ?? '000')
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(cacheName);

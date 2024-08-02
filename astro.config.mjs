@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import node from "@astrojs/node";
-import cozyBuild from "./src/plugins/cozy-build.ts";
+import { randomUUID } from "node:crypto";
+import serviceWorker from "./src/plugins/astro-sw.ts";
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,6 +10,9 @@ export default defineConfig({
     mode: "middleware"
   }),
   integrations: [
-    cozyBuild()
+    serviceWorker({
+      assetCacheVersionID: randomUUID(),
+      serviceWorkerPath: './src/utils/sw.js'
+    })
   ]
 });
