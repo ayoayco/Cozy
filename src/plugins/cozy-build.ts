@@ -1,6 +1,7 @@
 import { AstroIntegration } from 'astro';
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
 let assets: string[] = [];
 
@@ -14,6 +15,7 @@ function getBuildTime() {
     return mm + dd + yyyy + time;
 }
 
+
 const config: AstroIntegration = {
     'name': 'astro-cozy-build',
     'hooks': {
@@ -23,7 +25,8 @@ const config: AstroIntegration = {
         },
         'astro:build:done': async ({ dir }) => {
             const outFile = fileURLToPath(new URL('./sw.js', dir));
-            const originalScript = await readFile(outFile);
+            const __dirname = path.resolve(path.dirname('.'));
+            const originalScript = await readFile(__dirname + '/src/plugins/sw.js');
             const assetsDeclaration = `const assets = ${JSON.stringify(assets)};\n`;
             const versionDeclaration = `const version = ${JSON.stringify(getBuildTime())};\n`;
             await writeFile(outFile, assetsDeclaration + versionDeclaration  + originalScript);
