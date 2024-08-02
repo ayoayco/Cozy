@@ -40,14 +40,6 @@ if (url)
 <Serialize id="app-config" data={appConfig} />
 
 <script>
-
-navigator.serviceWorker.getRegistrations().then(registrations => {
-    for (const registration of registrations) {
-      console.log('unregistering sw...')
-      registration.unregister();
-    } 
-});
-
   const registerSW = async () => {
     if ("serviceWorker" in navigator) {
       try {

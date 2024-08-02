@@ -1,3 +1,4 @@
+
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open('cozy-reader-app-v1');
     console.log('adding resources to cache...', resources)
