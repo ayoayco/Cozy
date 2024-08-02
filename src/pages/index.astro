@@ -38,3 +38,12 @@ if (url)
 </Layout>
 
 <Serialize id="app-config" data={appConfig} />
+
+<script>
+  if ('serviceWorker' in navigator) {
+    console.log('trying to register service worker...')
+    navigator.serviceWorker.register("/sw.js");
+  } else {
+    console.log('browser doesn\'t support service workers. boo')
+  }
+</script>
