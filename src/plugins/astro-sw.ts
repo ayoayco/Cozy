@@ -2,16 +2,26 @@ import { AstroIntegration } from 'astro';
 import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { randomUUID } from "node:crypto";
 
 let assets: string[] = [];
 
 export type ServiceWorkerConfig = {
-    assetCacheVersionID: string,
+    assetCachePrefix?: string,
+    assetCacheVersionID?: string,
     serviceWorkerPath: string,
 }
 
-export default (config?: ServiceWorkerConfig): AstroIntegration => {
-    const { assetCacheVersionID, serviceWorkerPath } = config ?? {};
+const plugin_dir = path.resolve(path.dirname('.'));
+
+export default (config: ServiceWorkerConfig): AstroIntegration => {
+    let { 
+        assetCachePrefix,
+        assetCacheVersionID = randomUUID(),
+        serviceWorkerPath
+    } = config;
+
+    console.log('[astro-sw] dir', plugin_dir)
 
     return {
         'name': 'astro-sw',
@@ -32,7 +42,12 @@ export default (config?: ServiceWorkerConfig): AstroIntegration => {
                 }
                 const assetsDeclaration = `const assets = ${JSON.stringify(assets)};\n`;
                 const versionDeclaration = `const version = ${JSON.stringify(assetCacheVersionID)};\n`;
-                await writeFile(outFile, assetsDeclaration + versionDeclaration + originalScript);
+                const prefixDeclaration = `const prefix = ${JSON.stringify(assetCachePrefix)};\n`;
+
+                await writeFile(
+                    outFile,
+                    assetsDeclaration + versionDeclaration + prefixDeclaration + originalScript
+                );
             }
         }
     }
