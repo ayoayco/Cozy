@@ -1,10 +1,12 @@
 const addResourcesToCache = async (resources) => {
-    const cache = await caches.open('v1');
+    const cache = await caches.open('cozy-reader-app-v1');
+    console.log('adding resources to cache...', resources)
     await cache.addAll(resources);
 };
 
 const putInCache = async (request, response) => {
-    const cache = await caches.open('v1');
+    const cache = await caches.open('cozy-reader-app-v1');
+    console.log('adding one response to cache...', request)
     await cache.put(request, response);
 };
 
@@ -59,25 +61,27 @@ const enableNavigationPreload = async () => {
 };
 
 self.addEventListener('activate', (event) => {
+    console.log('activating...', event)
     event.waitUntil(enableNavigationPreload());
 });
 
 self.addEventListener('install', (event) => {
+    console.log('installing...', event)
     event.waitUntil(
         addResourcesToCache([
             './',
-            './index.html',
-            './favicon.ico'
+            './favicon.ico',
         ])
     );
 });
 
 self.addEventListener('fetch', (event) => {
+    console.log('fetch happened', event.request)
     event.respondWith(
         cacheFirst({
             request: event.request,
             preloadResponsePromise: event.preloadResponse,
-            fallbackUrl: './index.html',
+            fallbackUrl: './',
         })
     );
 });
