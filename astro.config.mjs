@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
-import cozyBuild from './src/plugins/cozy-build.ts';
-
 import node from "@astrojs/node";
+import cozyBuild from "./src/plugins/cozy-build.ts";
 
 // https://astro.build/config
 export default defineConfig({
