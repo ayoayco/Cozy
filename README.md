@@ -30,9 +30,9 @@ Here's what this project is building:
 | Remove distractions| ✅ DONE | v0.0.x |
 | Save viewed history | ✅ DONE | v0.1.x |
 | Open links within Cozy | ✅ DONE | v0.2.x |
-| Set items as Favorites | 🛠️ In-progress | v0.3.x |
-| PWA: full Offline access | | v1.0.x |
-| Smart insights | | v1.1.x |
+| Offline access | ✅ DONE | v0.3.x |
+| Set items as Favorites | 🛠️ In-progress | v0.4.x |
+| Smart insights | | v0.5.x |
 | Browser Extensions | | |
 | Native Apps | | |
 
