@@ -1,10 +1,8 @@
 
 /**
- * TODO: create virtual imports for `prefix`, `version` & `assets`
- *  - currently injected by ../plugins/astro-sw.ts
+ * Note: astro-sw integration injects variables `__prefix`, `__version`, & `__assets`
  */
-
-const cacheName = `${prefix ?? 'app'}-v${version ?? '000'}`
+const cacheName = `${__prefix ?? 'app'}-v${__version ?? '000'}`
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(cacheName);
     console.log('adding resources to cache...', resources)
@@ -77,7 +75,7 @@ self.addEventListener('install', (event) => {
     event.waitUntil(
         addResourcesToCache([
             './',
-            ...(assets ?? [])
+            ...(__assets ?? [])
         ])
     );
 });

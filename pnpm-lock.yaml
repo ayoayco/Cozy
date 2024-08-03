@@ -36,6 +36,9 @@ importers:
         specifier: ^1.5.3
         version: 1.5.3
     devDependencies:
+      '@ayco/astro-sw':
+        specifier: ^0.0.1
+        version: 0.0.1
       astro:
         specifier: ^4.12.2
         version: 4.12.2(@types/node@20.14.12)(sass@1.77.8)
@@ -78,6 +81,10 @@ packages:
     resolution: {integrity: sha512-6xhPU0wCau7s9ONSFPXkXAwdUifOS73KG6ejFQN8jQJ06qftDi3pt9v+7UOS6YcYUYd0oY+atJt7T07W5dVLxQ==}
     peerDependencies:
       astro: ^4.12.2
+
+  '@ayco/astro-sw@0.0.1':
+    resolution: {integrity: sha512-zzuOjXBKmnm9cvyFPckk/dLmWkwHZs1ZS5L7YVzcPXJfGnEre01awqy0fIvw2ErGc3DDULo1llPtAfW31b6EGQ==}
+    engines: {node: '>=18.0.0'}
 
   '@babel/code-frame@7.24.7':
     resolution: {integrity: sha512-BcYH1CVJBO9tvyIZ2jVeXgSIMvGZ2FDRvDdOIVQyuklNKSsx+eppDEBq/g47Ayw+RqNFE+URvOShmf+f/qwAlA==}
@@ -2442,6 +2449,8 @@ snapshots:
   '@ayco/astro-resume@0.4.1(astro@4.12.2(@types/node@20.14.12)(sass@1.77.8))':
     dependencies:
       astro: 4.12.2(@types/node@20.14.12)(sass@1.77.8)
+
+  '@ayco/astro-sw@0.0.1': {}
 
   '@babel/code-frame@7.24.7':
     dependencies:

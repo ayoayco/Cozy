@@ -1,6 +1,6 @@
 import { defineConfig } from "astro/config";
 import node from "@astrojs/node";
-import serviceWorker from "./src/plugins/astro-sw.ts";
+import serviceWorker from "@ayco/astro-sw";
 
 // https://astro.build/config
 export default defineConfig({

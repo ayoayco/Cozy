@@ -18,6 +18,7 @@
     "deploy": "astro build && scp -r dist ayo@ayco.io:~/cozy/"
   },
   "devDependencies": {
+    "@ayco/astro-sw": "^0.0.1",
     "astro": "^4.12.2"
   },
   "dependencies": {
