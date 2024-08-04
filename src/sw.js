@@ -79,6 +79,7 @@ self.addEventListener('install', (event) => {
             ...(__assets ?? [])
         ])
     );
+    self.skipWaiting(); // activate updated SW
 });
 
 self.addEventListener('fetch', (event) => {
