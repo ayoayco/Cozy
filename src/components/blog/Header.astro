@@ -4,9 +4,11 @@ import { SITE_AUTHOR_MASTODON, SITE_PROJECT_REPO, SITE_TITLE } from '../../const
 
 <header>
 	<nav>
-		<h2><a href="/" target="_blank">Get Cozy!</a></h2>
-		<span><a href="/blog">{SITE_TITLE}</a></span>
+		<h2><a href="/blog">{SITE_TITLE}</a></h2>
 		<div class="social-links">
+			<a href="/" target="_blank">
+				<span class="primary-btn">Get Cozy!</span>
+			</a>
 			<a href={SITE_AUTHOR_MASTODON} target="_blank">
 				<span class="sr-only">Follow Ayo on Mastodon</span>
 				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
@@ -48,13 +50,37 @@ import { SITE_AUTHOR_MASTODON, SITE_PROJECT_REPO, SITE_TITLE } from '../../const
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+
+		& span.primary-btn {
+			background-color: rgba(var(--black), 95%);
+			box-shadow: 0 2px 8px rgba(var(--black), 5%);
+			color: white;
+			border-radius: 5px;
+			display: inline-block;
+			text-align: center;
+			padding: 0 0.5em;
+		}
+
 	}
+
+	nav .social-links a:hover {
+		& span {
+			background-color: var(--accent);
+			box-shadow: 0 2px 8px var(--accent);
+		}
+	}
+
 	nav a {
 		padding: 1em 0.5em;
 		color: var(--black);
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
+
+		&:hover {
+			color: var(--accent);
+		}
 	}
+
 	nav a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
@@ -62,7 +88,10 @@ import { SITE_AUTHOR_MASTODON, SITE_PROJECT_REPO, SITE_TITLE } from '../../const
 	.social-links,
 	.social-links a {
 		display: flex;
+
+
 	}
+
 	@media (max-width: 720px) {
 		.social-links {
 			display: none;
