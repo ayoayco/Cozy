@@ -30,14 +30,14 @@ const tryCache = async (request, fallbackUrl) => {
     // Try get the resource from the cache
     const responseFromCache = await cache.match(request);
     if (responseFromCache) {
-        console.info('[cozy-sw]: using cached response', responseFromCache);
+        console.info('[cozy-sw]: using cached response', responseFromCache.url);
         return responseFromCache;
     }
 
     // Try the fallback
     const fallbackResponse = await cache.match(fallbackUrl);
     if (fallbackResponse) {
-        console.info('[cozy-sw]: using fallback cached response', fallbackResponse);
+        console.info('[cozy-sw]: using fallback cached response', fallbackResponse.url);
         return fallbackResponse;
     }
 }
@@ -52,7 +52,7 @@ const networkFirst = async ({ request, preloadResponsePromise, fallbackUrl }) =>
         // code along with enableNavigationPreload() and the "activate" listener.
         const preloadResponse = await preloadResponsePromise;
         if (preloadResponse) {
-            console.info('[cozy-sw]: using preload response', preloadResponse);
+            console.info('[cozy-sw]: using preload response', preloadResponse.url);
             putInCache(request, preloadResponse.clone());
             return preloadResponse;
         }
@@ -65,7 +65,7 @@ const networkFirst = async ({ request, preloadResponsePromise, fallbackUrl }) =>
         // and serve second one
         if (responseFromNetwork) {
             putInCache(request, responseFromNetwork.clone());
-            console.info('[cozy-sw]: using network response', responseFromNetwork);
+            console.info('[cozy-sw]: using network response', responseFromNetwork.url);
             return responseFromNetwork;
         }
 
