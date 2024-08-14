@@ -4,6 +4,7 @@
  * @see https://ayco.io/n/@ayco/astro-sw
  */
 const cacheName = `${__prefix ?? 'app'}-v${__version ?? '000'}`
+
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(cacheName);
     console.log('[cozy-sw]: adding resources to cache...', resources)
@@ -13,19 +14,28 @@ const addResourcesToCache = async (resources) => {
 const putInCache = async (request, response) => {
     const cache = await caches.open(cacheName);
     console.log('[cozy-sw]: adding one response to cache...', request)
+    // if exists, replace
+
+    const keys = await cache.keys();
+    if(keys.includes(request)) {
+        cache.delete(request);
+    }
+
     await cache.put(request, response);
 };
 
 const tryCache = async (request, fallbackUrl) => {
+    const cache = await caches.open(cacheName);
+
     // Try get the resource from the cache
-    const responseFromCache = await caches.match(request);
+    const responseFromCache = await cache.match(request);
     if (responseFromCache) {
         console.info('[cozy-sw]: using cached response', responseFromCache);
         return responseFromCache;
     }
 
     // Try the fallback
-    const fallbackResponse = await caches.match(fallbackUrl);
+    const fallbackResponse = await cache.match(fallbackUrl);
     if (fallbackResponse) {
         console.info('[cozy-sw]: using fallback cached response', fallbackResponse);
         return fallbackResponse;

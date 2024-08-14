@@ -1,5 +1,6 @@
 ---
 import Icon from 'astro-iconify'
+import {VERSION} from '../consts';
 ---
 
 <footer>
@@ -13,7 +14,9 @@ import Icon from 'astro-iconify'
     <br />
     <a href="/blog">Blog</a> •
     <a href="https://github.com/ayoayco/cozy">GitHub</a> •
-    <a href="https://social.ayco.io/@ayo">Mastodon</a> • Groggily2-Armband9
+    <a href="https://social.ayco.io/@ayo">Mastodon</a>
+    <br />
+    {VERSION}
   </section>
 
   <section class="disclaimer">All rights reserved to content owners.</section>

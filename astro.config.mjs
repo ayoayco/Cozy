@@ -4,6 +4,8 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import serviceWorker from "@ayco/astro-sw";
 
+import {VERSION} from './src/consts';
+
 // https://astro.build/config
 export default defineConfig({
   output: "hybrid",
@@ -16,6 +18,7 @@ export default defineConfig({
     serviceWorker({
       path: "./src/sw.js",
       assetCachePrefix: 'cozy-reader',
+      assetCacheVersionID: VERSION
     })
   ]
 });
