@@ -13,7 +13,7 @@ const addResourcesToCache = async (resources) => {
 
 const putInCache = async (request, response) => {
     const cache = await caches.open(cacheName);
-    console.log('[cozy-sw]: adding one response to cache...', request)
+    console.log('[cozy-sw]: adding one response to cache...', request.url)
     // if exists, replace
 
     const keys = await cache.keys();
@@ -108,8 +108,6 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    console.log('[cozy-sw]: fetch happened, trying network first', event.request)
-
     // ... else, use cache first
     event.respondWith(
         networkFirst({
