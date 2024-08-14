@@ -1,10 +1,12 @@
 ---
-import { SITE_AUTHOR_MASTODON, SITE_PROJECT_REPO, SITE_TITLE } from '../../consts';
+import { SITE_AUTHOR_MASTODON, SITE_DESCRIPTION, SITE_PROJECT_REPO, SITE_TITLE } from '../../consts';
 ---
 
 <header>
 	<nav>
-		<h2><a href="/blog">{SITE_TITLE}</a></h2>
+		<div>
+			<h2><a href="/blog">{SITE_TITLE} • {SITE_DESCRIPTION}</a></h2>
+		</div>
 		<div class="social-links">
 			<a href="/" target="_blank">
 				<span class="primary-btn">Get Cozy!</span>
