@@ -16,8 +16,23 @@ const putInCache = async (request, response) => {
     await cache.put(request, response);
 };
 
-const networkFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
+const tryCache = async (request, fallbackUrl) => {
+    // Try get the resource from the cache
+    const responseFromCache = await caches.match(request);
+    if (responseFromCache) {
+        console.info('[cozy-sw]: using cached response', responseFromCache);
+        return responseFromCache;
+    }
 
+    // Try the fallback
+    const fallbackResponse = await caches.match(fallbackUrl);
+    if (fallbackResponse) {
+        console.info('[cozy-sw]: using fallback cached response', fallbackResponse);
+        return fallbackResponse;
+    }
+}
+
+const networkFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
     try {
         // Try to use the preloaded response, if it's there
         // NOTE: Chrome throws errors regarding preloadResponse, see:
@@ -27,31 +42,27 @@ const networkFirst = async ({ request, preloadResponsePromise, fallbackUrl }) =>
         // code along with enableNavigationPreload() and the "activate" listener.
         const preloadResponse = await preloadResponsePromise;
         if (preloadResponse) {
-            console.info('using preload response', preloadResponse);
+            console.info('[cozy-sw]: using preload response', preloadResponse);
             putInCache(request, preloadResponse.clone());
             return preloadResponse;
         }
+
 
         // Next try to get the resource from the network
         const responseFromNetwork = await fetch(request.clone());
         // response may be used only once
         // we need to save clone to put one copy in cache
         // and serve second one
-        putInCache(request, responseFromNetwork.clone());
-        return responseFromNetwork;
+        if (responseFromNetwork) {
+            putInCache(request, responseFromNetwork.clone());
+            console.info('[cozy-sw]: using network response', responseFromNetwork);
+            return responseFromNetwork;
+        }
+
+        return tryCache(request, fallbackUrl);
     } catch (error) {
 
-        // Try get the resource from the cache
-        const responseFromCache = await caches.match(request);
-        if (responseFromCache) {
-            return responseFromCache;
-        }
-
-        // Try the fallback
-        const fallbackResponse = await caches.match(fallbackUrl);
-        if (fallbackResponse) {
-            return fallbackResponse;
-        }
+        return tryCache(request, fallbackUrl);
 
         // when even the fallback response is not available,
         // there is nothing we can do, but we must always
@@ -61,7 +72,6 @@ const networkFirst = async ({ request, preloadResponsePromise, fallbackUrl }) =>
             headers: { 'Content-Type': 'text/plain' },
         });
     }
-
 };
 
 const enableNavigationPreload = async () => {
