@@ -54,6 +54,11 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			@media (max-width: 720px) {
 				main {
 					width: 100%;
+
+					.prose {
+						max-width: calc(100% - 1em);
+						padding: 0;
+					}
 				}
 			}
 		</style>

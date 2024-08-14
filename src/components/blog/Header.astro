@@ -4,8 +4,9 @@ import { SITE_AUTHOR_MASTODON, SITE_DESCRIPTION, SITE_PROJECT_REPO, SITE_TITLE }
 
 <header>
 	<nav>
-		<div>
-			<h2><a href="/blog">{SITE_TITLE} • {SITE_DESCRIPTION}</a></h2>
+		<div class="site-title">
+			<h2><a href="/blog">{SITE_TITLE}</a></h2>
+			<small class="site-description">{SITE_DESCRIPTION}</small>
 		</div>
 		<div class="social-links">
 			<a href="/" target="_blank">
@@ -41,7 +42,7 @@ import { SITE_AUTHOR_MASTODON, SITE_DESCRIPTION, SITE_PROJECT_REPO, SITE_TITLE }
 	}
 	h2 {
 		margin: 0;
-		font-size: 1em;
+		font-size: x-large;
 	}
 
 	h2 a,
@@ -52,6 +53,7 @@ import { SITE_AUTHOR_MASTODON, SITE_DESCRIPTION, SITE_PROJECT_REPO, SITE_TITLE }
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		padding: 1em 0.5em;
 
 		& span.primary-btn {
 			background-color: rgba(var(--black), 95%);
@@ -72,15 +74,22 @@ import { SITE_AUTHOR_MASTODON, SITE_DESCRIPTION, SITE_PROJECT_REPO, SITE_TITLE }
 		}
 	}
 
-	nav a {
-		padding: 1em 0.5em;
+	nav .site-title {
+		display: flex;
+	}
+
+	nav a,
+	nav .site-description {
 		color: var(--black);
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
+	}
 
-		&:hover {
-			color: var(--accent);
-		}
+	nav a {
+		padding: 0 0.5em;
+	}
+	nav a:hover {
+		color: var(--accent);
 	}
 
 	nav a.active {
@@ -90,13 +99,32 @@ import { SITE_AUTHOR_MASTODON, SITE_DESCRIPTION, SITE_PROJECT_REPO, SITE_TITLE }
 	.social-links,
 	.social-links a {
 		display: flex;
-
-
 	}
 
 	@media (max-width: 720px) {
-		.social-links {
-			display: none;
+		nav {
+			display: block;
+			padding: 1em 0;
+
+			& .site-description {
+				font-size: 1rem;
+			}
+
+			& span.primary-btn { 
+				line-height: 1.5rem;
+				height: 1.5rem;
+			}
+
+			& .social-links a {
+				font-size: small;
+
+				svg {
+					height: 1.5rem;
+				}
+			}
+		}
+		nav a {
+			padding: 0.5em;
 		}
 	}
 </style>
