@@ -5,7 +5,7 @@ pubDate: 'Aug 14 2024'
 heroImage: '/cozy.jpg'
 ---
 
-> This was originally posted in [Ayo's Blog](https://ayos.blog/building-a-cozy-web).
+> This was originally posted on [Ayo's Blog](https://ayos.blog/building-a-cozy-web).
 
 Have you ever clicked a link to an article, all hyped up to read the content, only to be slapped in the face with popups over popups of requests to subscribe and asking consent to track you with cookies?
 
