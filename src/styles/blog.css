@@ -41,6 +41,7 @@ body {
 	color: rgb(var(--gray-dark));
 	font-size: 20px;
 	line-height: 1.7;
+
 }
 main {
 	width: 720px;
@@ -83,12 +84,25 @@ a {
 a:hover {
 	color: var(--accent);
 }
-p {
+
+p,
+ul,
+ol,
+table {
 	margin-bottom: 1em;
 }
-.prose p {
-	margin-bottom: 2em;
+
+.prose
+{
+	& p,
+	& ul,
+	& ol,
+	& table
+	{
+		margin-bottom: 2em;
+	}
 }
+
 textarea {
 	width: 100%;
 	font-size: 16px;
