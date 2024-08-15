@@ -16,7 +16,7 @@ export interface Props {
   import type { Props } from './Library.astro';
   import type { AppConfig } from '../pages/index.astro';
   import { getPostCard, renderPost } from '../utils/library'
-import { cozify } from '../utils/sanitizer';
+  import { cozify } from '../utils/sanitizer';
   const cache = await caches.open('cozy-reader');
   let url= new URL(window.location.href);
   // only cached unencoded url param

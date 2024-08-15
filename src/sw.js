@@ -31,6 +31,18 @@ const tryCache = async (request, fallbackUrl) => {
     const responseFromCache = await cache.match(request);
     if (responseFromCache) {
         console.info('[cozy-sw]: using cached response', responseFromCache.url);
+
+        try {
+            // get network response for revalidation of stale assets
+            const responseFromNetwork = await fetch(request.clone(), {signal: AbortSignal.timeout(5000)});
+            if (responseFromNetwork) {
+                console.info('[cozy-sw]: fetched updated assets', responseFromNetwork.url);
+                putInCache(request, responseFromNetwork.clone());
+            }
+        } catch {
+            console.info('[cozy-sw]: failed to fetch updated assets', request.url);
+        }
+
         return responseFromCache;
     }
 
@@ -42,7 +54,10 @@ const tryCache = async (request, fallbackUrl) => {
     }
 }
 
-const networkFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
+const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl }) => {
+    
+    tryCache(request, fallbackUrl);
+
     try {
         // Try to use the preloaded response, if it's there
         // NOTE: Chrome throws errors regarding preloadResponse, see:
@@ -51,51 +66,46 @@ const networkFirst = async ({ request, preloadResponsePromise, fallbackUrl }) =>
         // To avoid those errors, remove or comment out this block of preloadResponse
         // code along with enableNavigationPreload() and the "activate" listener.
         // const preloadResponse = await preloadResponsePromise;
-        // if (preloadResponse) {
-        //     console.info('[cozy-sw]: using preload response', preloadResponse.url);
-        //     putInCache(request, preloadResponse.clone());
-        //     return preloadResponse;
-        // }
-
+        if (preloadResponse) {
+            console.info('[cozy-sw]: using preload response', preloadResponse.url);
+            putInCache(request, preloadResponse.clone());
+            return preloadResponse;
+        }
 
         // Try to get the resource from the network for 5 seconds
         const responseFromNetwork = await fetch(request.clone(), {signal: AbortSignal.timeout(5000)});
         // response may be used only once
         // we need to save clone to put one copy in cache
         // and serve second one
-        if (responseFromNetwork) {
-            putInCache(request, responseFromNetwork.clone());
-            console.info('[cozy-sw]: using network response', responseFromNetwork.url);
-            return responseFromNetwork;
-        } else {
-            return tryCache(request, fallbackUrl);
-        }
+        putInCache(request, responseFromNetwork.clone());
+        console.info('[cozy-sw]: using network response', responseFromNetwork.url);
+        return responseFromNetwork;
 
     } catch (error) {
 
-        return tryCache(request, fallbackUrl);
+        return tryCache(request, fallbackUrl)
 
         // when even the fallback response is not available,
         // there is nothing we can do, but we must always
         // return a Response object
-        return new Response('Network error happened', {
+        ?? new Response('Network error happened', {
             status: 408,
             headers: { 'Content-Type': 'text/plain' },
         });
     }
 };
 
-// const enableNavigationPreload = async () => {
-//     if (self.registration.navigationPreload) {
-//         // Enable navigation preloads!
-//         await self.registration.navigationPreload.enable();
-//     }
-// };
+const enableNavigationPreload = async () => {
+    if (self.registration.navigationPreload) {
+        // Enable navigation preloads!
+        await self.registration.navigationPreload.enable();
+    }
+};
 
-// self.addEventListener('activate', (event) => {
-//     console.log('[cozy-sw]: activating...', event)
-//     // event.waitUntil(enableNavigationPreload());
-// });
+self.addEventListener('activate', (event) => {
+    console.log('[cozy-sw]: activating...', event)
+    event.waitUntil(enableNavigationPreload());
+});
 
 self.addEventListener('install', (event) => {
     console.log('[cozy-sw]: installing...', event)
@@ -111,7 +121,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', (event) => {
     // ... else, use network first
     event.respondWith(
-        networkFirst({
+        cacheAndRevalidate({
             request: event.request,
             preloadResponsePromise: event.preloadResponse,
             fallbackUrl: './',
