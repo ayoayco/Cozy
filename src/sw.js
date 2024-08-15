@@ -24,54 +24,50 @@ const putInCache = async (request, response) => {
     await cache.put(request, response);
 };
 
-const tryCache = async (request, fallbackUrl) => {
+
+const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl }) => {
+    
     const cache = await caches.open(cacheName);
 
     // Try get the resource from the cache
     const responseFromCache = await cache.match(request);
-    if (responseFromCache) {
-        console.info('[cozy-sw]: using cached response', responseFromCache.url);
-
-        try {
-            // get network response for revalidation of stale assets
-            const responseFromNetwork = await fetch(request.clone());
-            if (responseFromNetwork) {
-                console.info('[cozy-sw]: fetched updated assets', responseFromNetwork.url);
-                putInCache(request, responseFromNetwork.clone());
-            }
-        } catch(error) {
-            console.info('[cozy-sw]: failed to fetch updated assets', request.url);
+    try {
+        // get network response for revalidation of stale assets
+        const responseFromNetwork = await fetch(request.clone());
+        if (responseFromNetwork) {
+            console.info('[cozy-sw]: fetched updated assets', responseFromNetwork.url);
+            putInCache(request, responseFromNetwork.clone());
         }
 
-        return responseFromCache;
+        if (responseFromCache) {
+            console.info('[cozy-sw]: using cached response', responseFromCache.url);
+            return responseFromCache;
+        } else{
+            console.info('[cozy-sw]: using network response', responseFromNetwork.url);
+            return responseFromNetwork;
+        }
+    } catch(error) {
+        console.info('[cozy-sw]: failed to fetch updated assets', request.url);
+        if (responseFromCache) {
+            console.info('[cozy-sw]: using cached response', responseFromCache.url);
+            return responseFromCache;
+        }
     }
 
-    // Try the fallback
-    const fallbackResponse = await cache.match(fallbackUrl);
-    if (fallbackResponse) {
-        console.info('[cozy-sw]: using fallback cached response', fallbackResponse.url);
-        return fallbackResponse;
+    // Try to use the preloaded response, if it's there
+    // NOTE: Chrome throws errors regarding preloadResponse, see:
+    // https://bugs.chromium.org/p/chromium/issues/detail?id=1420515
+    // https://github.com/mdn/dom-examples/issues/145
+    // To avoid those errors, remove or comment out this block of preloadResponse
+    // code along with enableNavigationPreload() and the "activate" listener.
+    const preloadResponse = await preloadResponsePromise;
+    if (preloadResponse) {
+        putInCache(request, preloadResponse.clone());
+        console.info('[cozy-sw]: using preload response', preloadResponse.url);
+        return preloadResponse;
     }
-}
-
-const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl }) => {
-    
-    return tryCache(request, fallbackUrl);
 
     try {
-        // Try to use the preloaded response, if it's there
-        // NOTE: Chrome throws errors regarding preloadResponse, see:
-        // https://bugs.chromium.org/p/chromium/issues/detail?id=1420515
-        // https://github.com/mdn/dom-examples/issues/145
-        // To avoid those errors, remove or comment out this block of preloadResponse
-        // code along with enableNavigationPreload() and the "activate" listener.
-        const preloadResponse = await preloadResponsePromise;
-        if (preloadResponse) {
-            console.info('[cozy-sw]: using preload response', preloadResponse.url);
-            putInCache(request, preloadResponse.clone());
-            return preloadResponse;
-        }
-
         // Try to get the resource from the network for 5 seconds
         const responseFromNetwork = await fetch(request.clone(), {signal: AbortSignal.timeout(5000)});
         // response may be used only once
@@ -83,12 +79,17 @@ const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl
 
     } catch (error) {
 
-        return tryCache(request, fallbackUrl)
+        // Try the fallback
+        const fallbackResponse = await cache.match(fallbackUrl);
+        if (fallbackResponse) {
+            console.info('[cozy-sw]: using fallback cached response', fallbackResponse.url);
+            return fallbackResponse;
+        }
 
         // when even the fallback response is not available,
         // there is nothing we can do, but we must always
         // return a Response object
-        ?? new Response('Network error happened', {
+        return new Response('Network error happened', {
             status: 408,
             headers: { 'Content-Type': 'text/plain' },
         });
@@ -111,7 +112,6 @@ self.addEventListener('install', (event) => {
     console.log('[cozy-sw]: installing...', event)
     event.waitUntil(
         addResourcesToCache([
-            './',
             ...(__assets ?? [])
         ])
     );
