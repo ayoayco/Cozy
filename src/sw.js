@@ -50,16 +50,16 @@ const networkFirst = async ({ request, preloadResponsePromise, fallbackUrl }) =>
         // https://github.com/mdn/dom-examples/issues/145
         // To avoid those errors, remove or comment out this block of preloadResponse
         // code along with enableNavigationPreload() and the "activate" listener.
-        const preloadResponse = await preloadResponsePromise;
-        if (preloadResponse) {
-            console.info('[cozy-sw]: using preload response', preloadResponse.url);
-            putInCache(request, preloadResponse.clone());
-            return preloadResponse;
-        }
+        // const preloadResponse = await preloadResponsePromise;
+        // if (preloadResponse) {
+        //     console.info('[cozy-sw]: using preload response', preloadResponse.url);
+        //     putInCache(request, preloadResponse.clone());
+        //     return preloadResponse;
+        // }
 
 
-        // Next try to get the resource from the network
-        const responseFromNetwork = await fetch(request.clone());
+        // Try to get the resource from the network for 5 seconds
+        const responseFromNetwork = await fetch(request.clone(), {signal: AbortSignal.timeout(5000)});
         // response may be used only once
         // we need to save clone to put one copy in cache
         // and serve second one
@@ -67,9 +67,10 @@ const networkFirst = async ({ request, preloadResponsePromise, fallbackUrl }) =>
             putInCache(request, responseFromNetwork.clone());
             console.info('[cozy-sw]: using network response', responseFromNetwork.url);
             return responseFromNetwork;
+        } else {
+            return tryCache(request, fallbackUrl);
         }
 
-        return tryCache(request, fallbackUrl);
     } catch (error) {
 
         return tryCache(request, fallbackUrl);
@@ -84,17 +85,17 @@ const networkFirst = async ({ request, preloadResponsePromise, fallbackUrl }) =>
     }
 };
 
-const enableNavigationPreload = async () => {
-    if (self.registration.navigationPreload) {
-        // Enable navigation preloads!
-        await self.registration.navigationPreload.enable();
-    }
-};
+// const enableNavigationPreload = async () => {
+//     if (self.registration.navigationPreload) {
+//         // Enable navigation preloads!
+//         await self.registration.navigationPreload.enable();
+//     }
+// };
 
-self.addEventListener('activate', (event) => {
-    console.log('[cozy-sw]: activating...', event)
-    event.waitUntil(enableNavigationPreload());
-});
+// self.addEventListener('activate', (event) => {
+//     console.log('[cozy-sw]: activating...', event)
+//     // event.waitUntil(enableNavigationPreload());
+// });
 
 self.addEventListener('install', (event) => {
     console.log('[cozy-sw]: installing...', event)
@@ -108,7 +109,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    // ... else, use cache first
+    // ... else, use network first
     event.respondWith(
         networkFirst({
             request: event.request,
