@@ -34,12 +34,12 @@ const tryCache = async (request, fallbackUrl) => {
 
         try {
             // get network response for revalidation of stale assets
-            const responseFromNetwork = await fetch(request.clone(), {signal: AbortSignal.timeout(5000)});
+            const responseFromNetwork = await fetch(request.clone());
             if (responseFromNetwork) {
                 console.info('[cozy-sw]: fetched updated assets', responseFromNetwork.url);
                 putInCache(request, responseFromNetwork.clone());
             }
-        } catch {
+        } catch(error) {
             console.info('[cozy-sw]: failed to fetch updated assets', request.url);
         }
 
@@ -56,7 +56,7 @@ const tryCache = async (request, fallbackUrl) => {
 
 const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl }) => {
     
-    tryCache(request, fallbackUrl);
+    return tryCache(request, fallbackUrl);
 
     try {
         // Try to use the preloaded response, if it's there
@@ -65,7 +65,7 @@ const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl
         // https://github.com/mdn/dom-examples/issues/145
         // To avoid those errors, remove or comment out this block of preloadResponse
         // code along with enableNavigationPreload() and the "activate" listener.
-        // const preloadResponse = await preloadResponsePromise;
+        const preloadResponse = await preloadResponsePromise;
         if (preloadResponse) {
             console.info('[cozy-sw]: using preload response', preloadResponse.url);
             putInCache(request, preloadResponse.clone());
