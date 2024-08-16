@@ -27,8 +27,8 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2(astro@4.14.2(@types/node@22.3.0)(rollup@4.20.0)(sass@1.77.8)(typescript@5.5.4))
       '@ayco/astro-sw':
-        specifier: ^0.5.1
-        version: 0.5.1
+        specifier: ^0.6.2
+        version: 0.6.2
       '@extractus/article-extractor':
         specifier: ^8.0.10
         version: 8.0.10
@@ -129,8 +129,8 @@ packages:
     peerDependencies:
       astro: ^4.12.2
 
-  '@ayco/astro-sw@0.5.1':
-    resolution: {integrity: sha512-RFDJQK5IHYRPI+fo3Sd9gBh/gkJD1w8VYobc2ISwI0+khMf0qZ7PUbESigEtgKJ3YlB0FEQ9Hv9CdQAriiv0Kw==}
+  '@ayco/astro-sw@0.6.2':
+    resolution: {integrity: sha512-h50aYmnpkbSsWjWvW8gvDPtdBc/TfrPZ2aMEDDvc9Reee7MVc9FawM5q6Nv+l7VMCJgd8CdTwYLTa4KGBOO+fQ==}
     engines: {node: '>=18.0.0'}
 
   '@babel/code-frame@7.24.7':
@@ -1174,8 +1174,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.8:
-    resolution: {integrity: sha512-4Nx0gP2tPNBLTrFxBMHpkQbtn2hidPVr/+/FTtcCiBYTucqc70zRyVZiOLj17Ui3wTO7SQ1/N+hkHYzJjBzt6A==}
+  electron-to-chromium@1.5.9:
+    resolution: {integrity: sha512-HfkT8ndXR0SEkU8gBQQM3rz035bpE/hxkZ1YIt4KJPEFES68HfIU6LzKukH0H794Lm83WJtkSAMfEToxCs15VA==}
 
   emmet@2.4.7:
     resolution: {integrity: sha512-O5O5QNqtdlnQM2bmKHtJgyChcrFMgQuulI+WdiOw2NArzprUqqxUW6bgYtKvzKgrsYpuLWalOkdhNP+1jluhCA==}
@@ -3015,7 +3015,7 @@ snapshots:
     dependencies:
       astro: 4.14.2(@types/node@22.3.0)(rollup@4.20.0)(sass@1.77.8)(typescript@5.5.4)
 
-  '@ayco/astro-sw@0.5.1': {}
+  '@ayco/astro-sw@0.6.2': {}
 
   '@babel/code-frame@7.24.7':
     dependencies:
@@ -3893,7 +3893,7 @@ snapshots:
   browserslist@4.23.3:
     dependencies:
       caniuse-lite: 1.0.30001651
-      electron-to-chromium: 1.5.8
+      electron-to-chromium: 1.5.9
       node-releases: 2.0.18
       update-browserslist-db: 1.1.0(browserslist@4.23.3)
 
@@ -4132,7 +4132,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.8: {}
+  electron-to-chromium@1.5.9: {}
 
   emmet@2.4.7:
     dependencies:
