@@ -39,6 +39,7 @@ import { SITE_AUTHOR_MASTODON, SITE_DESCRIPTION, SITE_PROJECT_REPO, SITE_TITLE }
 		padding: 0 1em;
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		width: 100%;
 	}
 	h2 {
 		margin: 0;
@@ -50,10 +51,13 @@ import { SITE_AUTHOR_MASTODON, SITE_DESCRIPTION, SITE_PROJECT_REPO, SITE_TITLE }
 		text-decoration: none;
 	}
 	nav {
+		width: 900px;
+		max-width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		padding: 1em 0.5em;
+		margin: 0 auto;
 
 		& span.primary-btn {
 			background-color: rgba(var(--black), 95%);
@@ -62,7 +66,9 @@ import { SITE_AUTHOR_MASTODON, SITE_DESCRIPTION, SITE_PROJECT_REPO, SITE_TITLE }
 			border-radius: 5px;
 			display: inline-block;
 			text-align: center;
-			padding: 0 0.5em;
+			padding: 1px 0.5em 0;
+			text-transform: uppercase;
+			transition: 0.2s ease;
 		}
 
 	}
