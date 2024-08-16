@@ -4,20 +4,35 @@
  * @see https://ayco.io/n/@ayco/astro-sw
  */
 const cacheName = `${__prefix ?? 'app'}-v${__version ?? '000'}`
+// const forceLogging = true;
+
+/**
+ * TODO: remove this once astro-sw allows importing utils
+ */
+function logInfo(message, {context, force, data} = {}) {
+    context = context !== ''
+        ? `[${context}]: `
+        : ''
+
+    if (force || isDev) {
+        console.info(`!!! ${context}${message}`, data ?? '');
+    }
+}
+
 
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(cacheName);
-    console.log('[cozy-sw]: adding resources to cache...', resources)
+    logInfo('adding resources to cache...', { force: forceLogging, context: 'cozy-sw', data: resources })
     await cache.addAll(resources);
 };
 
 const putInCache = async (request, response) => {
     const cache = await caches.open(cacheName);
-    console.log('[cozy-sw]: adding one response to cache...', request.url)
+    logInfo('adding one response to cache...', { force: forceLogging, context: 'cozy-sw', data: request.url })
     // if exists, replace
 
     const keys = await cache.keys();
-    if(keys.includes(request)) {
+    if (keys.includes(request)) {
         cache.delete(request);
     }
 
@@ -26,7 +41,7 @@ const putInCache = async (request, response) => {
 
 
 const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl }) => {
-    
+
     const cache = await caches.open(cacheName);
 
     // Try get the resource from the cache
@@ -35,21 +50,21 @@ const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl
         // get network response for revalidation of stale assets
         const responseFromNetwork = await fetch(request.clone());
         if (responseFromNetwork) {
-            console.info('[cozy-sw]: fetched updated assets', responseFromNetwork.url);
+            logInfo('updated cached resource...', { force: forceLogging, context: 'cozy-sw', data: responseFromNetwork.url })
             putInCache(request, responseFromNetwork.clone());
         }
 
         if (responseFromCache) {
-            console.info('[cozy-sw]: using cached response', responseFromCache.url);
+            logInfo('using cached response...', { force: forceLogging, context: 'cozy-sw', data: responseFromCache.url })
             return responseFromCache;
-        } else{
-            console.info('[cozy-sw]: using network response', responseFromNetwork.url);
+        } else {
+            logInfo('using network response...', { force: forceLogging, context: 'cozy-sw', data: responseFromNetwork.url })
             return responseFromNetwork;
         }
-    } catch(error) {
-        console.info('[cozy-sw]: failed to fetch updated assets', request.url);
+    } catch (error) {
+        logInfo('failed to fetch updated resource', { force: forceLogging, context: 'cozy-sw', data: request.url })
         if (responseFromCache) {
-            console.info('[cozy-sw]: using cached response', responseFromCache.url);
+            logInfo('using cached response', { force: forceLogging, context: 'cozy-sw', data: responseFromCache.url })
             return responseFromCache;
         }
     }
@@ -63,18 +78,18 @@ const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl
     const preloadResponse = await preloadResponsePromise;
     if (preloadResponse) {
         putInCache(request, preloadResponse.clone());
-        console.info('[cozy-sw]: using preload response', preloadResponse.url);
+        logInfo('using preload response', { force: forceLogging, context: 'cozy-sw', data: preloadResponse.url })
         return preloadResponse;
     }
 
     try {
         // Try to get the resource from the network for 5 seconds
-        const responseFromNetwork = await fetch(request.clone(), {signal: AbortSignal.timeout(5000)});
+        const responseFromNetwork = await fetch(request.clone(), { signal: AbortSignal.timeout(5000) });
         // response may be used only once
         // we need to save clone to put one copy in cache
         // and serve second one
         putInCache(request, responseFromNetwork.clone());
-        console.info('[cozy-sw]: using network response', responseFromNetwork.url);
+        logInfo('using network response', { force: forceLogging, context: 'cozy-sw', data: responseFromNetwork.url })
         return responseFromNetwork;
 
     } catch (error) {
@@ -82,7 +97,7 @@ const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl
         // Try the fallback
         const fallbackResponse = await cache.match(fallbackUrl);
         if (fallbackResponse) {
-            console.info('[cozy-sw]: using fallback cached response', fallbackResponse.url);
+            logInfo('using fallback cached response...', { force: forceLogging, context: 'cozy-sw', data: fallbackResponse.url })
             return fallbackResponse;
         }
 
@@ -104,12 +119,12 @@ const enableNavigationPreload = async () => {
 };
 
 self.addEventListener('activate', (event) => {
-    console.log('[cozy-sw]: activating...', event)
+    logInfo('activating service worker...', { force: forceLogging, context: 'cozy-sw' })
     event.waitUntil(enableNavigationPreload());
 });
 
 self.addEventListener('install', (event) => {
-    console.log('[cozy-sw]: installing...', event)
+    logInfo('installing service worker...', { force: forceLogging, context: 'cozy-sw' })
     event.waitUntil(
         addResourcesToCache([
             ...(__assets ?? [])

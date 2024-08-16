@@ -17,7 +17,9 @@ export interface Props {
   import type { AppConfig } from '../pages/index.astro';
   import { getPostCard, renderPost } from '../utils/library'
   import { cozify } from '../utils/sanitizer';
+  import { logError, logInfo } from '../utils/logger.mjs';
   const cache = await caches.open('cozy-reader');
+  const baseUrl = window.location.origin;
   let url= new URL(window.location.href);
   // only cached unencoded url param
   const urlParam = url.searchParams.get('url')
@@ -26,16 +28,15 @@ export interface Props {
   }
   const { skipSave } = deserialize<Props>('preferences');
   const { routerOutlet } = deserialize<AppConfig>('app-config');
-  const includesAppURL = urlParam?.includes(window.location.origin)
+  const includesAppURL = urlParam?.includes(baseUrl) ?? false;
 
   try {
-    const responseFromNetwork = await fetch (url);
-    if (responseFromNetwork && !skipSave && !includesAppURL) {
-      console.info('[cozy-reader]: adding one to cache', url.pathname)
-      await cache.put(url, responseFromNetwork);
+    if (url.href.slice(0, url.href.length - 1) !== baseUrl && !skipSave && !includesAppURL) {
+      logInfo('adding one to cache', {context: 'cozy-reader', data: url})
+      await cache.add(url);
     }
   } catch(error) {
-    console.error('[cozy-reader]: ', error)
+      logError('ERR', {context: 'cozy-reader', data: error})
   } 
 
   const cachedRequests = (await cache.keys())
@@ -44,7 +45,7 @@ export interface Props {
       const urlParam = urlObj.searchParams.get('url'); 
 
       return urlObj.search !== ''
-      && !urlParam?.startsWith(window.location.origin)
+      && !urlParam?.startsWith(baseUrl)
       && urlParam !== ''
       && urlParam !== 'null';
     });
@@ -63,9 +64,19 @@ export interface Props {
       let responseText;
 
       const fullResponse = await cache.match(url)
+
+      try {
+        const responseFromNetwork = await fetch(url, {method: 'GET'});
+        if (responseFromNetwork && url.slice(0, url.length - 1) !== baseUrl && !skipSave && !includesAppURL) {
+          logInfo('updating cached', {context: 'cozy-reader', data: url})
+          await cache.put(url, responseFromNetwork);
+        }
+      } catch(error) {
+          logError('failed to update cached', {context: 'cozy-reader', data: {url, error}})
+      } 
+
       fullResponse?.text().then(async data => {
         responseText = data;
-        const { baseUrl } = deserialize<AppConfig>('app-config');
         const cleanedResponse = await cozify(responseText, baseUrl)
         const html = document.createElement('html');
         html.innerHTML = cleanedResponse;
@@ -82,6 +93,7 @@ export interface Props {
           e.preventDefault();
           localStorage.setItem('scrollPosition', window.scrollY.toString());
           scrollTo(0,0);
+          logInfo('using cached response', {context: 'cozy-reader', data: url})
           renderPost(cleanedResponse, url, routerOutlet)
         }
         const item = document.createElement('li');
@@ -105,8 +117,8 @@ export interface Props {
       const fullResponse = await cache.match(url)
       fullResponse?.text().then(async (data) => {
         const responseText = data;
-        const { baseUrl } = deserialize<AppConfig>('app-config');
         const cleanedResponse = await cozify(responseText, baseUrl);
+        logInfo('using cached response', {context: 'cozy-reader', data: url})
         renderPost(cleanedResponse, url, routerOutlet, true);
         if (isHome) {
           const scrollPosition = localStorage.getItem('scrollPosition');
