@@ -21,7 +21,7 @@ export function logMessage(message, {context, force, data} = {}) {
         : ''
 
     if (force || isDev) {
-        console.log(`!!! ${context}${message}`, data ?? '');
+        console.log(`${context}${message}`, data ?? '');
     }
 }
 
@@ -35,7 +35,7 @@ export function logInfo(message, {context, force, data} = {}) {
         : ''
 
     if (force || isDev) {
-        console.info(`!!! ${context}${message}`, data ?? '');
+        console.info(`${context}${message}`, data ?? '');
     }
 }
 
@@ -49,6 +49,6 @@ export function logError(message, {context, force, data} = {}) {
         : ''
 
     if (force || isDev) {
-        console.error(`!!! ${context}${message}`, data ?? '');
+        console.error(`${context}${message}`, data ?? '');
     }
 }

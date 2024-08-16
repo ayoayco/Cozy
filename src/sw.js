@@ -15,7 +15,7 @@ function logInfo(message, {context, force, data} = {}) {
         : ''
 
     if (force || isDev) {
-        console.info(`!!! ${context}${message}`, data ?? '');
+        console.info(`${context}${message}`, data ?? '');
     }
 }
 
