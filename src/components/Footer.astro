@@ -1,7 +1,6 @@
 ---
 import Icon from 'astro-iconify'
 import {VERSION} from '../consts';
-import CurrentVersion from './CurrentVersion.astro';
 ---
 
 <footer>
@@ -17,7 +16,7 @@ import CurrentVersion from './CurrentVersion.astro';
     <a href="https://github.com/ayoayco/cozy">GitHub</a> •
     <a href="https://social.ayco.io/@ayo">Mastodon</a>
     <br />
-    <CurrentVersion />
+    <span>{VERSION}</span>
   </section>
 
   <section class="disclaimer">All rights reserved to content owners.</section>

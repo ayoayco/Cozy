@@ -58,7 +58,7 @@ h1 {
 }
 
 h2 {
-	font-size: 1.953em;
+	font-size: 1.753em;
 }
 
 h3 {
@@ -66,7 +66,7 @@ h3 {
 }
 
 h4 {
-	font-size: 1.25em;
+	font-size: 1.35em;
 }
 
 h5 {
@@ -95,7 +95,6 @@ pre.astro-code {
 }
 
 .prose {
-
 	& p,
 	& ul,
 	& ol,
