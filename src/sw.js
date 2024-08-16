@@ -4,7 +4,7 @@
  * @see https://ayco.io/n/@ayco/astro-sw
  */
 const cacheName = `${__prefix ?? 'app'}-v${__version ?? '000'}`
-// const forceLogging = true;
+const forceLogging = false;
 
 /**
  * TODO: remove this once astro-sw allows importing utils
@@ -14,7 +14,7 @@ function logInfo(message, {context, force, data} = {}) {
         ? `[${context}]: `
         : ''
 
-    if (force || isDev) {
+    if (force) {
         console.info(`${context}${message}`, data ?? '');
     }
 }
