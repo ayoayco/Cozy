@@ -12,7 +12,7 @@ export interface Props {
 <Serialize id="preferences" data={{...Astro.props}} />
 
 <script>
-  import {deserialize} from '@ayco/astro-resume';
+  import { deserialize } from '@ayco/astro-resume';
   import type { Props } from './Library.astro';
   import type { AppConfig } from '../pages/index.astro';
   import { getPostCard, renderPost } from '../utils/library'
@@ -24,14 +24,19 @@ export interface Props {
   if (urlParam) {
     url = new URL(`${url.origin}/?url=${urlParam}`);
   }
-  const response = await cache.match(url);
   const { skipSave } = deserialize<Props>('preferences');
   const { routerOutlet } = deserialize<AppConfig>('app-config');
   const includesAppURL = urlParam?.includes(window.location.origin)
 
-  if (!response && !skipSave && !includesAppURL) {
-    await cache.add(url);
-  }
+  try {
+    const responseFromNetwork = await fetch (url);
+    if (responseFromNetwork && !skipSave && !includesAppURL) {
+      console.info('[cozy-reader]: adding one to cache', url.pathname)
+      await cache.put(url, responseFromNetwork);
+    }
+  } catch(error) {
+    console.error('[cozy-reader]: ', error)
+  } 
 
   const cachedRequests = (await cache.keys())
     .filter(request => {
