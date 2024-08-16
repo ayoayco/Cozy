@@ -22,7 +22,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			}
 
 			& .cta-wrapper {
-				width: 250px;
+				width: 300px;
 				max-width: 100%;
 				text-align: center;
 				padding: 1em 0;
@@ -78,7 +78,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				border-radius: 12px;
 			}
 			.prose {
-				width: 720px;
+				width: 650px;
 				max-width: calc(100% - 2em);
 				margin: auto;
 				padding: 0 1em;
@@ -118,9 +118,16 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				main {
 					width: 100%;
 
-					.prose {
+					& .prose {
 						max-width: calc(100% - 1em);
 						padding: 0;
+					}
+
+					& .cta-wrapper {
+						width: 250px;
+						& a {
+							font-size: 0.75em;
+						}
 					}
 				}
 			}
@@ -162,7 +169,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					</div>
 					<slot />
 				</div>
-				<hr />
 			</article>
 			<div class="cta-wrapper">
 				<a href="/">
