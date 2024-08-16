@@ -41,34 +41,46 @@ const posts = (await getCollection('blog')).sort(
 				color: rgb(var(--black));
 				position: relative;
 				background-color: white;
-			}
 
-			.card img {
-				width: 100%;
-				max-width: 800px;
-			}
+				& img {
+					width: 100%;
+					max-width: 800px;
+				}
 
-			.card .title {
-				font-size: 2.369rem;
-				margin: 1rem;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
+				& .title {
+					font-size: 2.369rem;
+					margin: 1rem;
+					color: rgb(var(--black));
+					line-height: 1;
+				}
 
-			.card h4 a::after {
-				position: absolute;
-				left: 0;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				cursor: pointer;
-			}
+				& .description {
+					margin-bottom: 0;
+				}
 
-			.card h4 a {
-				color: blue;
-			}
-			.card h4:hover a {
-				text-decoration: underline;
+				& h4 a::after {
+					position: absolute;
+					left: 0;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					cursor: pointer;
+				}
+
+				& h4 {
+					text-decoration: underline !important;
+					color: var(--accent);
+					text-decoration-thickness: 2px !important;
+
+					& a {
+						color: rgb(var(--black));
+						text-decoration: none;
+					}
+
+					&:hover a {
+						color: var(--accent);
+					}
+				}
 			}
 
 			.date {
@@ -82,12 +94,6 @@ const posts = (await getCollection('blog')).sort(
 				ul li {
 					width: 100%;
 					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
 				}
 			}
 		</style>

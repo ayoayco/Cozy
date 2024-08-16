@@ -1,10 +1,11 @@
 ---
-import { SITE_AUTHOR, SITE_AUTHOR_MASTODON, SITE_PROJECT_REPO } from "../../consts";
+import { SITE_AUTHOR, SITE_AUTHOR_EMAIL, SITE_AUTHOR_MASTODON, SITE_PROJECT_REPO } from "../../consts";
 const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} {SITE_AUTHOR}. All rights reserved.
+	<p>&copy; {today.getFullYear()} {SITE_AUTHOR}. All rights reserved.</p>
+	<p>Get in touch: <a href={`mailto:${SITE_AUTHOR_EMAIL}`}>cozy at ayco.io</a></p>
 	<div class="social-links">
 		<a href={SITE_AUTHOR_MASTODON} target="_blank">
 			<span class="sr-only">Follow Ayo on Mastodon</span>
@@ -37,6 +38,18 @@ const today = new Date();
 		background: linear-gradient(var(--gray-gradient)) no-repeat;
 		color: rgb(var(--gray));
 		text-align: center;
+
+		& p {
+			margin-bottom: 0;
+
+			& a {
+				color: rgb(var(--gray));
+
+				&:hover {
+					color: rgb(var(--gray-dark));
+				}
+			}
+		}
 	}
 	.social-links {
 		display: flex;
