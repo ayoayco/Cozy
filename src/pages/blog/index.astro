@@ -17,7 +17,7 @@ const posts = (await getCollection('blog')).sort(
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			main {
-				width: 960px;
+				width: 700px;
 			}
 			ul {
 				display: flex;
@@ -27,47 +27,53 @@ const posts = (await getCollection('blog')).sort(
 				margin: 0;
 				padding: 0;
 			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
 			ul li * {
 				text-decoration: none;
 				transition: 0.2s ease;
 			}
-			ul li:first-child {
+			.card {
+				border: 1px solid rgb(var(--gray));
+				border-radius: 12px;
 				width: 100%;
+				padding: 1em;
 				margin-bottom: 1rem;
 				text-align: center;
+				color: rgb(var(--black));
+				position: relative;
+				background-color: white;
 			}
-			ul li:first-child img {
+
+			.card img {
 				width: 100%;
 				max-width: 800px;
 			}
-			ul li:first-child .title {
+
+			.card .title {
 				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
+				margin: 1rem;
 				color: rgb(var(--black));
 				line-height: 1;
 			}
+
+			.card h4 a::after {
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				cursor: pointer;
+			}
+
+			.card h4 a {
+				color: blue;
+			}
+			.card h4:hover a {
+				text-decoration: underline;
+			}
+
 			.date {
 				margin: 0;
 				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
 			}
 			@media (max-width: 720px) {
 				ul {
@@ -93,18 +99,23 @@ const posts = (await getCollection('blog')).sort(
 				<ul>
 					{
 						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.slug}/`}>
-									{
+							<li class="card">
+									{/* {
 									 post.data.heroImage
 									 	?	<img width={720} height={360} src={post.data.heroImage} alt="" />
 									 	:	<img width={720} height={360} src="/blog-placeholder-4.jpg" alt="" />
-									}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
+									} */}
+									<small class="date">
 										<FormattedDate date={post.data.pubDate} />
+									</small>
+									<h4 class="title">
+										<a href={`/blog/${post.slug}/`}>
+											{post.data.title}
+										</a>
+									</h4>
+									<p class="description">
+										{post.data.description}
 									</p>
-								</a>
 							</li>
 						))
 					}

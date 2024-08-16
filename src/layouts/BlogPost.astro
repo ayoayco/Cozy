@@ -4,6 +4,7 @@ import Header from "../components/blog/Header.astro";
 import Footer from "../components/blog/Footer.astro";
 import FormattedDate from "../components/blog/FormattedDate.astro";
 import type { CollectionEntry } from "astro:content";
+import { SITE_AUTHOR, SITE_AUTHOR_URL } from "../consts";
 
 type Props = CollectionEntry<"blog">["data"];
 
@@ -17,8 +18,30 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			main {
 				width: calc(100% - 2em);
 				max-width: 100%;
-				margin: 0;
+				margin: 0 auto;
 			}
+
+			& .cta-wrapper {
+				width: 100%;
+				text-align: center;
+				padding: 1em 0;
+			}
+
+			& span.primary-btn {
+				background-color: rgba(var(--black), 95%);
+				box-shadow: 0 2px 8px rgba(var(--black), 5%);
+				color: white;
+				border-radius: 5px;
+				display: inline-block;
+				text-align: center;
+				padding: 0 0.5em;
+			}
+
+			& span.primary-btn:hover {
+				background-color: var(--accent);
+				box-shadow: 0 2px 8px var(--accent);
+			}
+
 			.hero-image {
 				width: 100%;
 			}
@@ -26,13 +49,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				display: block;
 				margin: 0 auto;
 				border-radius: 12px;
-				box-shadow: var(--box-shadow);
 			}
 			.prose {
 				width: 720px;
 				max-width: calc(100% - 2em);
 				margin: auto;
-				padding: 1em;
+				padding: 0 1em;
 				color: rgb(var(--gray-dark));
 			}
 			.title {
@@ -40,9 +62,23 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				padding: 1em 0;
 				text-align: center;
 				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
+
+				& .avatar {
+					width: 32px;
+					height: 32px;
+					border-radius: 50%;
+					display: inline;
+					/* height: calc(1rem + 6px); */
+					margin: 0 0.5rem;
+					margin-bottom: -10px;
+				}
+
+				& a[rel='author'] {
+					color: rgb(var(--black));
+				}
+				& a[rel='author']:hover {
+					color: var(--accent);
+				}
 			}
 			.date {
 				margin-bottom: 0.5em;
@@ -93,11 +129,19 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 							}
 						</div>
 						<h1>{title}</h1>
-						<hr />
+						<address style="display:inline">
+							By <img class="avatar" src="/ayoayco-avatar.jpg" alt="Ayo Ayco's Avatar" /> <a rel="author" href={ SITE_AUTHOR_URL }>{ SITE_AUTHOR }</a>
+						</address>
 					</div>
 					<slot />
 				</div>
 			</article>
+			<hr />
+			<div class="cta-wrapper">
+				<a href="/">
+					<span class="primary-btn">Get Cozy!</span>
+				</a>
+			</div>
 		</main>
 		<Footer />
 	</body>

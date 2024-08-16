@@ -48,10 +48,10 @@ body {
 }
 
 main {
-	width: 720px;
+	width: 700px;
 	max-width: calc(100% - 2em);
 	margin: auto;
-	padding: 3em 1em;
+	padding: 1em;
 }
 
 h1,
@@ -66,23 +66,23 @@ h6 {
 }
 
 h1 {
-	font-size: 3.052em;
-}
-
-h2 {
 	font-size: 2.441em;
 }
 
-h3 {
+h2 {
 	font-size: 1.953em;
 }
 
-h4 {
+h3 {
 	font-size: 1.563em;
 }
 
-h5 {
+h4 {
 	font-size: 1.25em;
+}
+
+h5 {
+	font-size: 1.15em;
 }
 
 strong,
@@ -101,7 +101,8 @@ a:hover {
 p,
 ul,
 ol,
-table {
+table,
+pre.astro-code {
 	margin-bottom: 1em;
 }
 
@@ -111,7 +112,7 @@ table {
 	& ul,
 	& ol,
 	& table {
-		margin-bottom: 2em;
+		margin-bottom: 1em;
 	}
 }
 
@@ -150,10 +151,10 @@ pre>code {
 }
 
 blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
+	border-left: 2px solid var(--accent);
+	padding: 0 0 0 1em;
 	margin: 0px;
-	font-size: 1.333em;
+	font-size: 1em;
 }
 
 hr {
