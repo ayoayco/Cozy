@@ -63,17 +63,15 @@ export interface Props {
 
       let responseText;
 
-      const fullResponse = await cache.match(url)
+      /**
+       * TODO: determine when & how to revalidate
+       */
 
-      try {
-        const responseFromNetwork = await fetch(url, {method: 'GET'});
-        if (responseFromNetwork && url.slice(0, url.length - 1) !== baseUrl && !skipSave && !includesAppURL) {
-          logInfo('updating cached', {context: 'cozy-reader', data: url})
-          await cache.put(url, responseFromNetwork);
-        }
-      } catch(error) {
-          logError('failed to update cached', {context: 'cozy-reader', data: {url, error}})
-      } 
+      const fullResponse = await cache.match(url)
+      if (!fullResponse && url.slice(0, url.length - 1) !== baseUrl && !skipSave && !includesAppURL) {
+        logInfo('updating cached', {context: 'cozy-reader', data: url})
+        await cache.add(url);
+      }
 
       fullResponse?.text().then(async data => {
         responseText = data;
