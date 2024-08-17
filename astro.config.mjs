@@ -20,6 +20,7 @@ export default defineConfig({
       path: "./src/sw.ts",
       assetCachePrefix: 'cozy-reader',
       assetCacheVersionID: VERSION,
+      logAssets: true,
       esbuild: {
         minify: true,
       }
