@@ -17,7 +17,7 @@ export interface Props {
   import type { AppConfig } from '../pages/index.astro';
   import { getPostCard, renderPost } from '../utils/library'
   import { cozify } from '../utils/sanitizer';
-  import { logError, logInfo } from '../utils/logger.mjs';
+  import { logError, logInfo } from '../utils/logger';
   const cache = await caches.open('cozy-reader');
   const baseUrl = window.location.origin;
   let url= new URL(window.location.href);

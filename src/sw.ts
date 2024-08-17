@@ -1,3 +1,4 @@
+import { logInfo } from './utils/logger'
 /**
  * Note: @ayco/astro-sw integration injects variables `__prefix`, `__version`, & `__assets`
  * -- find usage in `astro.config.mjs` integrations
@@ -6,23 +7,9 @@
 const cacheName = `${__prefix ?? 'app'}-v${__version ?? '000'}`
 const forceLogging = false;
 
-/**
- * TODO: remove this once astro-sw allows importing utils
- */
-function logInfo(message, {context, force, data} = {}) {
-    context = context !== ''
-        ? `[${context}]: `
-        : ''
-
-    if (force) {
-        console.info(`${context}${message}`, data ?? '');
-    }
-}
-
-
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(cacheName);
-    logInfo('adding resources to cache...', { force: forceLogging, context: 'cozy-sw', data: resources })
+    logInfo('adding resources to cache...', { force: !!forceLogging, context: 'cozy-sw', data: resources })
     await cache.addAll(resources);
 };
 
