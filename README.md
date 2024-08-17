@@ -13,6 +13,14 @@
   <img src="https://raw.githubusercontent.com/ayoayco/cozy/main/.github/assets/screenshot.png" /><br />
 </p>
 
+## Why?
+
+Visiting websites in this 'modern' time is a paradox: standard Web technologies are better but most commercial websites are pretty terrible--not only because misinformation abounds online, but also because of Big Tech's personal data farming that puts us all at a disadvantage.
+
+[**Cozy**](https://cozy.ayco.io) addresses this by putting people first by default: no tracking cookies will ever get into your browser, pay the minimum bandwidth to get information you need, and save everything on your browser for accessing them again later offline.
+
+With Cozy: *The Web is Yours.*
+
 ## How is this app different?
 Here's what this project is building:
 1. An app that just works, no sign-ups or set-ups.
