@@ -17,7 +17,7 @@ export default defineConfig({
     mdx(),
     sitemap(),
     serviceWorker({
-      path: "./src/sw.ts",
+      path: "./src/sw.mjs",
       assetCachePrefix: 'cozy-reader',
       assetCacheVersionID: VERSION,
       logAssets: true,

@@ -4,7 +4,7 @@ import { logInfo } from './utils/logger'
  * -- find usage in `astro.config.mjs` integrations
  * @see https://ayco.io/n/@ayco/astro-sw
  */
-const cacheName = `${__prefix ?? 'app'}-v${__version ?? '000'}`
+const cacheName = `${__prefix ?? 'app'}-v${__version + '-' + Date.now()}`
 const forceLogging = false;
 
 const addResourcesToCache = async (resources) => {
@@ -113,9 +113,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('install', (event) => {
     logInfo('installing service worker...', { force: forceLogging, context: 'cozy-sw' })
     event.waitUntil(
-        addResourcesToCache([
-            ...(__assets ?? [])
-        ])
+        addResourcesToCache(__assets ?? [])
     );
     self.skipWaiting(); // activate updated SW
 });
