@@ -149,7 +149,7 @@ hr {
 	border-top: 1px solid rgb(var(--gray-light));
 }
 
-@media (max-width: 720px) {
+@media (max-width: 700px) {
 	body {
 		font-size: 18px;
 	}

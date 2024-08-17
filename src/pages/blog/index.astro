@@ -87,7 +87,7 @@ const posts = (await getCollection('blog')).sort(
 				margin: 0;
 				color: rgb(var(--gray));
 			}
-			@media (max-width: 720px) {
+			@media (max-width: 700px) {
 				ul {
 					gap: 0.5em;
 				}
@@ -108,8 +108,8 @@ const posts = (await getCollection('blog')).sort(
 							<li class="card">
 									{/* {
 									 post.data.heroImage
-									 	?	<img width={720} height={360} src={post.data.heroImage} alt="" />
-									 	:	<img width={720} height={360} src="/blog-placeholder-4.jpg" alt="" />
+									 	?	<img width={700} height={360} src={post.data.heroImage} alt="" />
+									 	:	<img width={700} height={360} src="/blog-placeholder-4.jpg" alt="" />
 									} */}
 									<small class="date">
 										<FormattedDate date={post.data.pubDate} />
