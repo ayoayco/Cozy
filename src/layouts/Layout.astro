@@ -65,7 +65,8 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
             // if there was already an old activated service worker, and a new activating service worker, do the reload
             if(oldSw === 'activated' && newSw === 'activating') {
               refreshing = true;
-              window.location.reload();
+              // window.location.reload();
+              console.log('>>> refreshing... not')
             }
           });
         }
