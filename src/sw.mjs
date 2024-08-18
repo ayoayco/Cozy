@@ -5,7 +5,7 @@ import { logInfo } from './utils/logger'
  * @see https://ayco.io/n/@ayco/astro-sw
  */
 const cacheName = `${__prefix ?? 'app'}-v${__version + '-' + Date.now()}`
-const forceLogging = false;
+const forceLogging = true;
 
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(cacheName);
