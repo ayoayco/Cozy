@@ -3,6 +3,7 @@ import node from "@astrojs/node";
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import serviceWorker from "@ayco/astro-sw";
+import {logInfo} from './src/utils/logger';
 
 import {VERSION} from './src/consts';
 
@@ -23,6 +24,12 @@ export default defineConfig({
       logAssets: true,
       esbuild: {
         minify: true,
+      },
+      registrationHooks: {
+        afterRegistration: async () => {
+          const registeredServiceWorkers = navigator.serviceWorker.getRegistrations();
+          logInfo('Registered SWs', {data: registeredServiceWorkers});
+        }
       }
     })
   ]
