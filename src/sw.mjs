@@ -119,7 +119,8 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    // ... else, use network first
+    logInfo('fetch happened', {data: event});
+    
     event.respondWith(
         cacheAndRevalidate({
             request: event.request,
