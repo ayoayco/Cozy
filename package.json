@@ -24,7 +24,7 @@
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.1.6",
     "@ayco/astro-resume": "^0.4.2",
-    "@ayco/astro-sw": "^0.8.2",
+    "@ayco/astro-sw": "^0.8.4",
     "@extractus/article-extractor": "^8.0.10",
     "@fastify/middie": "^8.3.1",
     "@fastify/static": "^7.0.4",

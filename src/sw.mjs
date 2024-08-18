@@ -12,7 +12,7 @@ const cleanOldCaches = async () => {
     const allCaches = await caches.keys();
     allCaches.forEach(key => {
         if (!allowCacheNames.includes(key)) {
-            logInfo('Deleting old cache', {force: !!forceLogging, data: key});
+            logInfo('Deleting old cache', {force: !!forceLogging, data: key, context: 'cozy-sw'});
             caches.delete(key);
         }
     });
