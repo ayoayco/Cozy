@@ -82,7 +82,7 @@ const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl
 
     try {
         // Try to get the resource from the network for 5 seconds
-        const responseFromNetwork = await fetch(request.clone(), { signal: AbortSignal.timeout(5000) });
+        const responseFromNetwork = await fetch(request.clone());
         // response may be used only once
         // we need to save clone to put one copy in cache
         // and serve second one
