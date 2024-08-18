@@ -53,6 +53,7 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
 
           // check to see if there is a current active service worker
           const oldSw = (await navigator.serviceWorker.getRegistration())?.active?.state;
+          console.log('>>> old sw', oldSw);
 
           navigator.serviceWorker.addEventListener('controllerchange', async () => {
             if (refreshing) return;
