@@ -27,8 +27,8 @@ importers:
         specifier: ^0.4.2
         version: 0.4.2(astro@4.14.2(@types/node@22.4.0)(rollup@4.21.0)(sass@1.77.8)(typescript@5.5.4))
       '@ayco/astro-sw':
-        specifier: ^0.8.1
-        version: 0.8.1
+        specifier: ^0.8.2
+        version: 0.8.2
       '@extractus/article-extractor':
         specifier: ^8.0.10
         version: 8.0.10
@@ -129,8 +129,8 @@ packages:
     peerDependencies:
       astro: ^4.12.2
 
-  '@ayco/astro-sw@0.8.1':
-    resolution: {integrity: sha512-Ojah7X6efhyjcBv2d2ydaeN3EsSEcEo1m3CTIbc86TGCAJwcQHBJ8PIeoAitOOMz2aAeb0Pb+izLl9Qx7kyKUQ==}
+  '@ayco/astro-sw@0.8.2':
+    resolution: {integrity: sha512-v9TzcDSqI9G+VITJfJD0ndWZGW7AM6tfgCioYytacuxwBfRqLb4bxuaTjg6GigU/dj2SyITV086jLV1XkZGe9A==}
     engines: {node: '>=18.0.0'}
 
   '@babel/code-frame@7.24.7':
@@ -3156,7 +3156,7 @@ snapshots:
     dependencies:
       astro: 4.14.2(@types/node@22.4.0)(rollup@4.21.0)(sass@1.77.8)(typescript@5.5.4)
 
-  '@ayco/astro-sw@0.8.1':
+  '@ayco/astro-sw@0.8.2':
     dependencies:
       esbuild: 0.23.1
       pathe: 1.1.2
