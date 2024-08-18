@@ -4,8 +4,19 @@ import { logInfo } from './utils/logger'
  * -- find usage in `astro.config.mjs` integrations
  * @see https://ayco.io/n/@ayco/astro-sw
  */
-const cacheName = `${__prefix ?? 'app'}-v${__version + '-' + Date.now()}`
+const cacheName = `${__prefix ?? 'app'}-v${__version ?? '000'}`
 const forceLogging = true;
+
+const cleanOldCaches = async () => {
+    const allowCacheNames = ['cozy-reader', cacheName];
+    const allCaches = await caches.keys();
+    allCaches.forEach(key => {
+        if (!allowCacheNames.includes(key)) {
+            logInfo('Deleting old cache', {force: !!forceLogging, data: key});
+            caches.delete(key);
+        }
+    });
+}
 
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(cacheName);
@@ -107,6 +118,7 @@ const enableNavigationPreload = async () => {
 
 self.addEventListener('activate', (event) => {
     logInfo('activating service worker...', { force: forceLogging, context: 'cozy-sw' })
+    cleanOldCaches();
     event.waitUntil(enableNavigationPreload());
 });
 
