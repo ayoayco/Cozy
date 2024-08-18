@@ -46,36 +46,6 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
       )
     }
     <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
-    <script is:inline type="module">
-      async function handleUpdate() {
-        if ("serviceWorker"in navigator) {
-          let refreshing;
-
-          // check to see if there is a current active service worker
-          const oldSw = (await navigator.serviceWorker.getRegistration())?.active?.state;
-          console.log('>>> old sw', oldSw);
-
-          navigator.serviceWorker.addEventListener('controllerchange', async () => {
-            if (refreshing) return;
-
-            // when the controllerchange event has fired, we get the new service worker
-            const newSw = (await navigator.serviceWorker.getRegistration())?.active?.state;
-            console.log('>>> new sw', newSw);
-
-            // if there was already an old activated service worker, and a new activating service worker, do the reload
-            if(oldSw === 'activated' && newSw === 'activating') {
-              refreshing = true;
-              // window.location.reload();
-              console.log('>>> refreshing... not')
-            }
-          });
-        }
-      }
-
-console.log('something unique')
-
-      handleUpdate();
-    </script>
   </head>
   <body>
     <div id="app-wrapper">
