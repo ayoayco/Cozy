@@ -44,28 +44,20 @@ const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl
 
     // Try get the resource from the cache
     const responseFromCache = await cache.match(request);
-    try {
-        // get network response for revalidation of stale assets
-        const responseFromNetwork = await fetch(request.clone());
+    if (responseFromCache) {
+        logInfo('using cached response...', { force: forceLogging, context: 'cozy-sw', data: responseFromCache.url })
+        return responseFromCache;
+    }
+
+    // get network response for revalidation of cached assets
+    fetch(request.clone()).then((responseFromNetwork) => {
         if (responseFromNetwork) {
             logInfo('updated cached resource...', { force: forceLogging, context: 'cozy-sw', data: responseFromNetwork.url })
             putInCache(request, responseFromNetwork.clone());
         }
-
-        if (responseFromCache) {
-            logInfo('using cached response...', { force: forceLogging, context: 'cozy-sw', data: responseFromCache.url })
-            return responseFromCache;
-        } else {
-            logInfo('using network response...', { force: forceLogging, context: 'cozy-sw', data: responseFromNetwork.url })
-            return responseFromNetwork;
-        }
-    } catch (error) {
-        logInfo('failed to fetch updated resource', { force: forceLogging, context: 'cozy-sw', data: request.url })
-        if (responseFromCache) {
-            logInfo('using cached response', { force: forceLogging, context: 'cozy-sw', data: responseFromCache.url })
-            return responseFromCache;
-        }
-    }
+    }).catch((error) => {
+        logError('failed to fetch updated resource', { force: forceLogging, context: 'cozy-sw', data: error })
+    });
 
     // Try to use the preloaded response, if it's there
     // NOTE: Chrome throws errors regarding preloadResponse, see:
