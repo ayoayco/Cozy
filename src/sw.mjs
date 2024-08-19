@@ -46,18 +46,20 @@ const cacheAndRevalidate = async ({ request, preloadResponsePromise, fallbackUrl
     const responseFromCache = await cache.match(request);
     if (responseFromCache) {
         logInfo('using cached response...', { force: forceLogging, context: 'cozy-sw', data: responseFromCache.url })
+        // get network response for revalidation of cached assets
+        fetch(request.clone()).then((responseFromNetwork) => {
+            if (responseFromNetwork) {
+                logInfo('fetched updated resource...', { force: forceLogging, context: 'cozy-sw', data: responseFromNetwork.url })
+                putInCache(request, responseFromNetwork.clone());
+            }
+        }).catch((error) => {
+            logError('failed to fetch updated resource', { force: forceLogging, context: 'cozy-sw', data: error })
+        });
+
         return responseFromCache;
     }
 
-    // get network response for revalidation of cached assets
-    fetch(request.clone()).then((responseFromNetwork) => {
-        if (responseFromNetwork) {
-            logInfo('updated cached resource...', { force: forceLogging, context: 'cozy-sw', data: responseFromNetwork.url })
-            putInCache(request, responseFromNetwork.clone());
-        }
-    }).catch((error) => {
-        logError('failed to fetch updated resource', { force: forceLogging, context: 'cozy-sw', data: error })
-    });
+
 
     // Try to use the preloaded response, if it's there
     // NOTE: Chrome throws errors regarding preloadResponse, see:
@@ -115,11 +117,13 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('install', (event) => {
+
     logInfo('installing service worker...', { force: forceLogging, context: 'cozy-sw' })
+    self.skipWaiting(); // go straight to activate
+
     event.waitUntil(
         addResourcesToCache(__assets ?? [])
     );
-    self.skipWaiting(); // activate updated SW
 });
 
 self.addEventListener('fetch', (event) => {
