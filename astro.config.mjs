@@ -23,12 +23,6 @@ export default defineConfig({
       logAssets: true,
       esbuild: {
         minify: true,
-      },
-      registrationHooks: {
-        afterRegistration: async () => {
-          const registeredServiceWorkers = await navigator.serviceWorker.getRegistrations();
-          console.log('Registered SWs', registeredServiceWorkers);
-        }
       }
     })
   ]
