@@ -1,5 +1,9 @@
 // @ts-check
 
+/**
+ * This is just a temporary placeholder for a logger singleton
+ */
+
 export type LogOptions = {
    force?: boolean
    context?: string,
