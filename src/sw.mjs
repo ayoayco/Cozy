@@ -1,4 +1,4 @@
-import { logInfo } from './utils/logger'
+import { logError, logInfo } from './utils/logger'
 /**
  * Note: @ayco/astro-sw integration injects variables `__prefix`, `__version`, & `__assets`
  * -- find usage in `astro.config.mjs` integrations
@@ -21,20 +21,31 @@ const cleanOldCaches = async () => {
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open(cacheName);
     logInfo('adding resources to cache...', { force: !!forceLogging, context: 'cozy-sw', data: resources })
-    await cache.addAll(resources);
+    try {
+        await cache.addAll(resources);
+    } catch(error) {
+        logError('failed to add resources to cache; make sure requests exists and that there are no duplicates', {force: !!forceLogging, context: 'cozy-sw', data: {
+            resources,
+            error
+        }})
+    }
 };
 
 const putInCache = async (request, response) => {
     const cache = await caches.open(cacheName);
-    logInfo('adding one response to cache...', { force: forceLogging, context: 'cozy-sw', data: request.url })
-    // if exists, replace
 
-    const keys = await cache.keys();
-    if (keys.includes(request)) {
-        cache.delete(request);
+    if (response.ok) {
+        logInfo('adding one response to cache...', { force: forceLogging, context: 'cozy-sw', data: request.url })
+
+        // if exists, replace
+        cache.keys().then( keys => {
+            if (keys.includes(request)) {
+                cache.delete(request);
+            }
+        });
+
+        cache.put(request, response);
     }
-
-    await cache.put(request, response);
 };
 
 
