@@ -42,6 +42,12 @@ const { url } = Astro.props;
     position: relative;
   }
 
+  form:has(
+    input[type="url"]:focus
+  ) {
+     border-color: var(--accent);
+  }
+
   form {
     width: 100%;
     padding: 0.15rem 1rem;
