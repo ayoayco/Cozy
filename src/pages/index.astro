@@ -1,11 +1,12 @@
 ---
 import Serialize from "@ayco/astro-resume";
 import { ArticleData, extract } from "@extractus/article-extractor";
-import AddressBar from "../components/AddressBar.astro";
+import SimpleAddressBar from "../components/SimpleAddressBar.astro";
 import Post from "../components/Post.astro";
 import Layout from "../layouts/Layout.astro";
 import Library from "../components/Library.astro";
 import Footer from "../components/Footer.astro";
+import Jumbotron from "../components/Jumbotron.astro";
 
 export const prerender = false;
 
@@ -30,7 +31,8 @@ if (url)
 
 ---
 <Layout article={article}>
-    <AddressBar url={url} />
+    <Jumbotron />
+    <SimpleAddressBar url={url} />
     <div slot="post" id={appConfig.routerOutlet}>
       <Post article={article} />
     </div>
