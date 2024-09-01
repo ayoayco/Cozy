@@ -12,6 +12,9 @@ const { url } = Astro.props;
 
 <div class="address-bar">
   <form>
+    <label for="app-url">
+      <Icon name="ic:round-arrow-forward-ios" />
+    </label>
     <input
       type="url"
       id="app-url"
@@ -20,6 +23,15 @@ const { url } = Astro.props;
       placeholder={placeholder}
       required
     />
+    <button
+      aria-label="Submit"
+      class="btn right-buttons"
+      type="submit"
+      id="submit"
+    >
+      <Icon name="ri:ai-generate" />
+    </button>
+
   </form>
   <SettingsPopover toggle="settings-toggle" />
 </div>
@@ -32,23 +44,26 @@ const { url } = Astro.props;
 
   form {
     width: 100%;
-    border: 0px;
-    padding: 0.5rem;
+    padding: 0.15rem 1rem;
     text-align: center;
     border-radius: 30px;
     border: 1px solid #ccc;
-    background-color: #f5f5f5;
+    background-color: white;
     box-shadow: 0 1px 3px 1px #eee;
     display: flex;
 
+    input[type="url"]:focus {
+      outline: none;
+    }
+
     input[type="url"] {
       flex: 3;
-      background-color: white;
+      border: 0px;
       border-radius: 30px;
-      border: 1px solid #eee;
       font-size: normal;
       padding: 0.5rem;
       color: #555;
+      caret-color: var(--accent);
     }
 
     #app-back,
@@ -56,6 +71,25 @@ const { url } = Astro.props;
       display: none;
     }
 
+    label {
+      display: block;
+      border: 0px;
+      height: 100%;
+      vertical-align: middle;
+      background-color: transparent;
+      padding: 0.5rem 0;
+      color: rgb(var(--gray));
+
+      svg {
+        border: 0px;
+        background-color: transparent;
+        margin-top: 3px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+      }
+    }
+    
     .btn {
       display: block;
       border: 0px;
@@ -63,7 +97,7 @@ const { url } = Astro.props;
       vertical-align: middle;
       background-color: transparent;
       padding: 0.5rem 0;
-      color: black;
+      color: var(--accent);
 
       svg {
         border: 0px;
