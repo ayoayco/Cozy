@@ -8,7 +8,7 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "homepage": "https://ayco.io/gh/cozy",
+  "homepage": "https://cozy.pub",
   "scripts": {
     "start": "astro dev",
     "build": "astro build",

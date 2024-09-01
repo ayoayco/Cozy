@@ -9,7 +9,7 @@ import {VERSION} from './src/consts';
 // https://astro.build/config
 export default defineConfig({
   output: "hybrid",
-  site: "https://cozy.ayco.io/",
+  site: "https://cozy.pub/",
   adapter: node({
     mode: "middleware"
   }),

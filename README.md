@@ -1,5 +1,5 @@
 > [!IMPORTANT]
-> ...aaaaaand we're back: [cozy.ayco.io](https://cozy.ayco.io)
+> ...aaaaaand we're back: [cozy.pub](https://cozy.pub)
 > -ayo
 
 <h1 align="center">Cozy</h1>
@@ -17,7 +17,7 @@
 
 Visiting websites in this 'modern' time is a paradox: standard Web technologies are better but most commercial websites are pretty terrible--not only because misinformation abounds online, but also because of Big Tech's personal data farming that puts us all at a disadvantage.
 
-[**Cozy**](https://cozy.ayco.io) addresses this by putting people first by default: no tracking cookies will ever get into your browser, pay the minimum bandwidth to get information you need, and save everything on your browser for accessing them again later offline.
+[**Cozy**](https://cozy.pub) addresses this by putting people first by default: no tracking cookies will ever get into your browser, pay the minimum bandwidth to get information you need, and save everything on your browser for accessing them again later offline.
 
 With Cozy: *The Web is Yours.*
 
@@ -55,7 +55,7 @@ It's simple. When you open an article and want to turn it into a more cozy readi
 A bookmarklet could run a script to open the current page for you on ~~Cozy~~. You can create this new bookmark titled 'Get cozy!' and put the following as value for the URL:
 
 ```
-javascript:(function(){ window.open('https://cozy.ayco.io/?url=%27 + window.location.href, %27_self%27); })();
+javascript:(function(){ window.open('https://cozy.pub/?url=%27 + window.location.href, %27_self%27); })();
 ```
 
 This is possible on all major browsers, including Safari on iOS (where I personally use this often). Some screenshots:
@@ -72,9 +72,9 @@ It doesn't exist yet... I'll probably get to creating a browser extension at som
 We are thankful for all the building blocks provided by the following projects:
 1. [Astro](https://www.npmjs.com/package/astro) for our server-side rendering framework
 1. [@ayco/astro-resume](https://ayco.io/n/@ayco/astro-resume) for communicating necessary data from server to client
-1. [@ayco/astro-sw](https://ayco.io/n/@ayco/astro-sw) for taking app's service worker, and injecting needed dynamic assets & variables (simple, and dev's retain control)
+1. [@ayco/astro-sw](https://ayco.io/n/@ayco/astro-sw) for taking app's service worker, and injecting needed dynamic assets & variables 
 1. [@extractus/article-extractor](https://www.npmjs.com/package/@extractus/article-extractor) for the amazing scraping of articles
-1. [astro-iconify](https://www.npmjs.com/package/astro-iconify) for easily icon-sets in [iconify](https://icon-sets.iconify.design/)
+1. [astro-iconify](https://www.npmjs.com/package/astro-iconify) for easily using icon-sets in [iconify](https://icon-sets.iconify.design/)
 1. [sass](https://www.npmjs.com/package/sass) for some nested styling
 1. [ultrahtml](https://www.npmjs.com/package/ultrahtml) for any cleanup and transformation we do on the received article content
 1. [fastify](https://fastify.dev/) for our production server and [nginx](https://nginx.org/) as reverse proxy
