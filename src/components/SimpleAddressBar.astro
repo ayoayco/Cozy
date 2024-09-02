@@ -25,15 +25,23 @@ const { url } = Astro.props;
     />
     <button
       aria-label="Submit"
-      class="btn right-buttons"
+      class="btn right-buttons primary"
       type="submit"
       id="submit"
     >
       <Icon name="ri:ai-generate" />
     </button>
+    <a
+      aria-label="Home"
+      class="btn right-buttons"
+      type="button"
+      id="app-home"
+      href="/"
+    >
+      <Icon name="mdi:home" />
+    </a>
 
   </form>
-  <SettingsPopover toggle="settings-toggle" />
 </div>
 
 <style>
@@ -73,11 +81,6 @@ const { url } = Astro.props;
       caret-color: var(--accent);
     }
 
-    #app-back,
-    #app-settings {
-      display: none;
-    }
-
     label {
       display: block;
       border: 0px;
@@ -97,14 +100,18 @@ const { url } = Astro.props;
       }
     }
     
+    .btn.primary {
+      color: var(--accent);
+    }
+
     .btn {
+      color: rgb(var(--gray));
       display: block;
       border: 0px;
       height: 100%;
       vertical-align: middle;
       background-color: transparent;
       padding: 0.5rem 0;
-      color: var(--accent);
 
       svg {
         border: 0px;
