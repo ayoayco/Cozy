@@ -1,0 +1,7 @@
+#app-wrapper {
+    &:has(#router-outlet #post) {
+        #jumbotron {
+            display: none;
+        }
+    }
+}

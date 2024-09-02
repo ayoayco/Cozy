@@ -20,10 +20,9 @@ const cleanContent = await cozify(article.content ?? '', Astro.url.origin)
 <!-- 
   Changing anything inside the #post div can cause a difference in the cached version of the post in users' devices. For this reason, we should avoid changing the HTML and instead do it with CSS when possible.
  -->
-<div id="post">
   {
     article && article.url !== '/'  &&
-      <>
+      <div id="post">
         {article.source && <span class="source">{article.source}</span>}
         {article.title && <h1 class="title">{article.title}</h1>}
         {(article.author || datePublished) && (
@@ -33,6 +32,5 @@ const cleanContent = await cozify(article.content ?? '', Astro.url.origin)
           </ul>
         )}
         <content set:html={cleanContent} />
-      </>
+      </div>
   }
-</div>
