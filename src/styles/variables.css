@@ -1,5 +1,6 @@
 :root {
 	--accent: #3054bf;
+	--svg-filter-accent: invert(25%) sepia(86%) saturate(1533%) hue-rotate(210deg) brightness(91%) contrast(90%); 
 	--accent-dark: #203880;
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
