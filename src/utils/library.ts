@@ -56,7 +56,7 @@ export function renderPost(responseText: string | null, url, postDivSelector: st
     const html = document.createElement('html');
     html.innerHTML = responseText;
     const newPost = html.querySelector('body')?.querySelector('#post');
-    postText = newPost?.innerHTML || '';
+    postText = newPost?.outerHTML || '';
     cozyUrl = html.querySelector('meta[property="cozy:url"]')?.getAttribute('content') ?? '/';
     cozyTitle = `${getCozyTitle(html)} | Cozy`;
   }

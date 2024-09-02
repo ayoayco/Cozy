@@ -46,6 +46,7 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
       )
     }
     <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/article.css" />
   </head>
   <body>
     <div id="app-wrapper">
@@ -63,7 +64,7 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
   </body>
 </html>
 
-<style lang="scss">
+<style>
   #app-wrapper {
     width: 100%;
     max-width: 650px;
@@ -81,7 +82,7 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
     }
   }
 </style>
-<style is:global lang="scss">
+<style is:global>
   :root {
     --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
       "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
