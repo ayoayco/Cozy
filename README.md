@@ -10,7 +10,7 @@
   <a href="https://github.com/ayoayco/cozy-reader/releases/latest"><img alt="Alpha Version" src="https://img.shields.io/github/package-json/v/ayoayco/cozy?label=alpha" /></a><br />
   Remove distractions. Save for later.<br />
   Cozy is your modern-day reading assistant.<br /><br />
-  <img src="https://raw.githubusercontent.com/ayoayco/cozy/main/.github/assets/screenshot.png" /><br />
+  <img src="https://raw.githubusercontent.com/ayoayco/cozy/main/.github/assets/screen-2.png" /><br />
 </p>
 
 ## Why?
