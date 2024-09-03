@@ -1,17 +1,18 @@
-> [!IMPORTANT]
-> ...aaaaaand we're back: [cozy.pub](https://cozy.pub)
-> -ayo
+![logo-cropped-min](https://github.com/user-attachments/assets/e49b56a7-cc0f-45a3-98e0-8bbcbd02a47c)
 
-<h1 align="center">Cozy</h1>
+<p align="center">
+  Remove distractions. Save for later.<br />
+  Cozy is your modern-day reading assistant.
+</p>
 <p align="center">
   <a href="https://github.com/ayoayco/cozy">
     <img alt="Last Commit" src="https://img.shields.io/github/last-commit/ayoayco/cozy?logo=github" />
   </a>
-  <a href="https://github.com/ayoayco/cozy-reader/releases/latest"><img alt="Alpha Version" src="https://img.shields.io/github/package-json/v/ayoayco/cozy?label=alpha" /></a><br />
-  Remove distractions. Save for later.<br />
-  Cozy is your modern-day reading assistant.<br /><br />
-  <img src="https://raw.githubusercontent.com/ayoayco/cozy/main/.github/assets/screen-2.png" /><br />
+  <a href="https://github.com/ayoayco/cozy-reader/releases/latest">
+    <img alt="Alpha" src="https://img.shields.io/github/package-json/v/ayoayco/cozy?label=alpha" />
+  </a><br />
 </p>
+
 
 ## Why?
 
