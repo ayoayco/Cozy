@@ -1,6 +1,6 @@
-![logo-cropped-min](https://github.com/user-attachments/assets/e49b56a7-cc0f-45a3-98e0-8bbcbd02a47c)
 
 <p align="center">
+  <img src="https://github.com/user-attachments/assets/e49b56a7-cc0f-45a3-98e0-8bbcbd02a47c" alt="COZY logo" /><br />
   Remove distractions. Save for later.<br />
   Cozy is your modern-day reading assistant.
 </p>
