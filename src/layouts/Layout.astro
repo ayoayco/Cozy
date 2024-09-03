@@ -71,16 +71,18 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
     padding: 0.5rem;
     padding-bottom: 5em;
 
+    /*
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
+    */
 
     &:has(#router-outlet #post) {
+      /*
       position: default;
       top: 0;
       transform: none;
-      -webkit-transform: none;
+      */
 
       #jumbotron {
           display: none;
