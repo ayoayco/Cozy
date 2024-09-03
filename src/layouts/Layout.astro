@@ -1,6 +1,5 @@
 ---
 import { ArticleData } from "@extractus/article-extractor";
-import "../styles/app.css";
 import "../styles/reset.css";
 import '../styles/variables.css';
 
@@ -70,8 +69,25 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
     max-width: 650px;
     margin: 0 auto;
     padding: 0.5rem;
-    padding-bottom: 2rem;
+    padding-bottom: 5em;
+
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+
+    &:has(#router-outlet #post) {
+      position: default;
+      top: 0;
+      transform: none;
+      -webkit-transform: none;
+
+      #jumbotron {
+          display: none;
+      }
+    }
   }
+
   #main-content {
     * {
       margin: 1rem 0 0;
