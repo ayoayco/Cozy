@@ -62,9 +62,9 @@ const { url } = Astro.props;
     padding: 0.5rem 1rem;
     text-align: center;
     border-radius: 30px;
-    border: 1px solid #ccc;
+    border: 2px solid rgb(var(--gray));
     background-color: white;
-    box-shadow: 0 1px 3px 1px #eee;
+    box-shadow: 0 1px 3px 1px rgb(var(--gray-light));
     display: flex;
 
     input[type="url"]:focus {
@@ -77,7 +77,7 @@ const { url } = Astro.props;
       border-radius: 30px;
       font-size: normal;
       padding: 0.5rem;
-      color: #555;
+      color: rgb(var(--black));
       caret-color: var(--accent);
     }
 
@@ -93,9 +93,8 @@ const { url } = Astro.props;
       svg {
         border: 0px;
         background-color: transparent;
-        margin-top: 3px;
-        width: 18px;
-        height: 18px;
+        width: 24px;
+        height: 24px;
         cursor: pointer;
       }
     }
@@ -134,7 +133,7 @@ const { url } = Astro.props;
     }
 
     .btn[disabled="true"] svg {
-      color: #ccc !important;
+      color: rgb(var(--gray-light)) !important;
       cursor: default !important;
     }
   }
