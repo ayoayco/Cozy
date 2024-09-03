@@ -50,8 +50,8 @@ export interface Props {
       && urlParam !== 'null';
     });
 
-  const list = document.querySelector('#post-list');
   if(cachedRequests?.length && routerOutlet !== null) {
+    const list = document.querySelector('#post-list');
     const heading = document.querySelector('#library span#heading') as HTMLHeadingElement;
     heading.innerHTML = 'History';
 
@@ -124,8 +124,6 @@ export interface Props {
         }
       });
     });
-  } else {
-    list.classList.add('no-items')
   }
 </script>
 
