@@ -51,17 +51,15 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
   <body>
     <div id="app-wrapper">
       <Jumbotron />
-      <main>
-        <slot />
-        <div id="main-content">
-          <div id="post-wrapper">
-            <slot name="post" />
-          </div>
-          <div id="library-wrapper">
-            <slot name="library" />
-          </div>
+      <slot />
+      <div id="main-content">
+        <div id="post-wrapper">
+          <slot name="post" />
         </div>
-      </main>
+        <div id="library-wrapper">
+          <slot name="library" />
+        </div>
+      </div>
       <slot name="footer" />
     </div>
   </body>
@@ -75,26 +73,14 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
   }
 
   #app-wrapper {
-    width: 100%;
-    max-width: 650px;
-    padding: 0.5rem;
-    padding-bottom: 5em;
-
+    padding: 0 0.5em 10em;
+    display: grid;
+    gap: 1em;
 
     &:has(#router-outlet #post) {
       #jumbotron {
           display: none;
       }
-    }
-  }
-
-  #main-content {
-    * {
-      margin: 1rem 0 0;
-    }
-  
-    #post-wrapper {
-      padding: 0 1rem;
     }
   }
 </style>
