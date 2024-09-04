@@ -1,4 +1,5 @@
 ---
+import Jumbotron from "../components/Jumbotron.astro";
 import { ArticleData } from "@extractus/article-extractor";
 import "../styles/reset.css";
 import '../styles/variables.css';
@@ -49,16 +50,19 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
   </head>
   <body>
     <div id="app-wrapper">
-      <slot />
-      <div id="main-content">
-        <div id="post-wrapper">
-          <slot name="post" />
+      <Jumbotron />
+      <main>
+        <slot />
+        <div id="main-content">
+          <div id="post-wrapper">
+            <slot name="post" />
+          </div>
+          <div id="library-wrapper">
+            <slot name="library" />
+          </div>
         </div>
-        <div id="library-wrapper">
-          <slot name="library" />
-        </div>
-      </div>
-      <slot name="footer">
+      </main>
+      <slot name="footer" />
     </div>
   </body>
 </html>
