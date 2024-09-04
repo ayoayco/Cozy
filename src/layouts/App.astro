@@ -73,9 +73,14 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
   }
 
   #app-wrapper {
-    padding: 0 0.5em 10em;
+    padding: 0.5em 0.5em 10em;
+    max-width: 650px;
     display: grid;
     gap: 1em;
+
+    #main-content {
+      padding: 0 1em;
+    }
 
     &:has(#router-outlet #post) {
       #jumbotron {
