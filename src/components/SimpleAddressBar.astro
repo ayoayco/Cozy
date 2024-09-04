@@ -9,7 +9,7 @@ const placeholder = "Type the article URL here";
 const { url } = Astro.props;
 ---
 
-<div class="address-bar">
+<div id="address-bar">
   <form>
     <label for="app-url">
       <Icon name="ic:round-arrow-forward-ios" />
@@ -44,7 +44,7 @@ const { url } = Astro.props;
 </div>
 
 <style>
-  .address-bar {
+  #address-bar {
     width: 100%;
     position: relative;
   }

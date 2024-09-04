@@ -1,15 +1,16 @@
 ---
-import AddressBar from "../components/AddressBar.astro";
 import Layout from "../layouts/Layout.astro";
 import Library from "../components/Library.astro";
 import Footer from "../components/Footer.astro";
+import SimpleAddressBar from "../components/SimpleAddressBar.astro";
 
 export const prerender = false;
 
 ---
+
 <Layout article={null}>
-    <AddressBar url="" />
-    <div slot="post">
+    <SimpleAddressBar url='' />
+    <div slot="post" id="router-outlet">
         <h1>
             404: Not Found
         </h1>
