@@ -23,9 +23,6 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.1.6
         version: 3.1.6
-      '@ayco/astro-resume':
-        specifier: ^0.4.2
-        version: 0.4.2(astro@4.15.1(@types/node@22.5.2)(rollup@4.21.2)(sass@1.77.8)(typescript@5.5.4))
       '@ayco/astro-sw':
         specifier: ^0.8.8
         version: 0.8.8
@@ -123,11 +120,6 @@ packages:
 
   '@astrojs/yaml2ts@0.2.1':
     resolution: {integrity: sha512-CBaNwDQJz20E5WxzQh4thLVfhB3JEEGz72wRA+oJp6fQR37QLAqXZJU0mHC+yqMOQ6oj0GfRPJrz6hjf+zm6zA==}
-
-  '@ayco/astro-resume@0.4.2':
-    resolution: {integrity: sha512-blbFmMxkvLqZ0Fw78ySrfeysdhTlaOIsR7V2Fqd1F20Q0B3SCxFomcNvRMw1j45+tBovxeS44XBtEarhBoQXfw==}
-    peerDependencies:
-      astro: ^4.12.2
 
   '@ayco/astro-sw@0.8.8':
     resolution: {integrity: sha512-0wHLwfT5r45ZjO3kqh2dRTDDlFYjQq/SWSrmtSddZXcV3oqRN0C69LpzohPvwG2Yjfizmt6/IX7aH9LbWP/gbQ==}
@@ -3073,10 +3065,6 @@ snapshots:
   '@astrojs/yaml2ts@0.2.1':
     dependencies:
       yaml: 2.5.0
-
-  '@ayco/astro-resume@0.4.2(astro@4.15.1(@types/node@22.5.2)(rollup@4.21.2)(sass@1.77.8)(typescript@5.5.4))':
-    dependencies:
-      astro: 4.15.1(@types/node@22.5.2)(rollup@4.21.2)(sass@1.77.8)(typescript@5.5.4)
 
   '@ayco/astro-sw@0.8.8':
     dependencies:

@@ -1,5 +1,4 @@
 ---
-import Serialize from "@ayco/astro-resume";
 import { ArticleData, extract } from "@extractus/article-extractor";
 import SimpleAddressBar from "../components/SimpleAddressBar.astro";
 import Post from "../components/Post.astro";
@@ -9,11 +8,6 @@ import Footer from "../components/Footer.astro";
 import Jumbotron from "../components/Jumbotron.astro";
 
 export const prerender = false;
-
-const appConfig = {
-  routerOutlet: 'router-outlet',
-};
-export type AppConfig = typeof appConfig;
 
 let url = Astro.url.searchParams.get('url');
 let article: ArticleData | null = {url: '/'};
@@ -33,11 +27,9 @@ if (url)
 <Layout article={article}>
     <Jumbotron />
     <SimpleAddressBar url={url} />
-    <div slot="post" id={appConfig.routerOutlet}>
+    <div slot="post" id="router-outlet">
       <Post article={article} />
     </div>
     <Library slot="library" skipSave={article === null} />
     <Footer slot="footer" />
 </Layout>
-
-<Serialize id="app-config" data={appConfig} />

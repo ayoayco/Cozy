@@ -1,20 +1,15 @@
 ---
-import Serialize from '@ayco/astro-resume';
 export interface Props {
   skipSave?: boolean
 }
 ---
-<div id="library">
+<div id="library" data-preferences={JSON.stringify(Astro.props)}>
   <span id="heading"></span>
   <ul id="post-list"></ul>
 </div>
 
-<Serialize id="preferences" data={{...Astro.props}} />
 
 <script>
-  import { deserialize } from '@ayco/astro-resume';
-  import type { Props } from './Library.astro';
-  import type { AppConfig } from '../pages/index.astro';
   import { getPostCard, renderPost } from '../utils/library'
   import { cozify } from '../utils/sanitizer';
   import { logError, logInfo } from '../utils/logger';
@@ -26,8 +21,12 @@ export interface Props {
   if (urlParam) {
     url = new URL(`${url.origin}/?url=${urlParam}`);
   }
-  const { skipSave } = deserialize<Props>('preferences');
-  const { routerOutlet } = deserialize<AppConfig>('app-config');
+
+  const preferencesEl = document.querySelector('[data-preferences]') as HTMLElement;
+  const preferencesStr = preferencesEl?.dataset.preferences ?? '';
+  const { skipSave } = JSON.parse(preferencesStr);
+
+  const routerOutlet = 'router-outlet';
   const includesAppURL = urlParam?.includes(baseUrl) ?? false;
 
   try {
