@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { cozify } from "./sanitizer";
+import { cozify } from "../src/utils/sanitizer";
 
 describe("cozify()", async () => {
   const baseUrl = "https://cozy.pub";
