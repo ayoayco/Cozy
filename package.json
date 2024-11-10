@@ -15,7 +15,8 @@
     "build:preview": "astro build && node ./server.mjs",
     "publish:patch": "npm version patch && npm publish --access public",
     "publish:minor": "npm version minor && npm publish --access public",
-    "deploy:client": "astro build && scp -r dist/client/ ayo@ayco.io:~/cozy/dist/"
+    "deploy:client": "astro build && scp -r dist/client/ ayo@ayco.io:~/cozy/dist/",
+    "test": "vitest"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
