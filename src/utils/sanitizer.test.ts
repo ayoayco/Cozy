@@ -23,7 +23,7 @@ describe("cozify()", async () => {
     expect(result).toContain('href="https://cozy.pub?url=#"');
   });
 
-  test("should add prefetch=true of links", async () => {
+  test("should add prefetch=true to links", async () => {
     const html = "<a href=#>hey</a>";
     const result = await cozify(html, baseUrl);
     expect(result).toContain('prefetch="true"');
