@@ -1,79 +1,95 @@
 ---
 export interface Props {
-  skipSave?: boolean
+  skipSave?: boolean;
 }
 ---
+
 <div id="library" data-preferences={JSON.stringify(Astro.props)}>
   <span id="heading"></span>
   <ul id="post-list"></ul>
 </div>
 
-
 <script>
-  import { getPostCard, renderPost } from '../utils/library'
-  import { cozify } from '../utils/sanitizer';
-  import { logError, logInfo } from '../utils/logger';
-  const cache = await caches.open('cozy-reader');
+  import { getPostCard, renderPost } from "../utils/library";
+  import { cozify } from "../utils/sanitizer";
+  const cache = await caches.open("cozy-reader");
   const baseUrl = window.location.origin;
-  let url= new URL(window.location.href);
+  let url = new URL(window.location.href);
   // only cached unencoded url param
-  const urlParam = url.searchParams.get('url')
+  const urlParam = url.searchParams.get("url");
   if (urlParam) {
     url = new URL(`${url.origin}/?url=${urlParam}`);
   }
 
-  const preferencesEl = document.querySelector('[data-preferences]') as HTMLElement;
-  const preferencesStr = preferencesEl?.dataset.preferences ?? '';
+  const preferencesEl = document.querySelector(
+    "[data-preferences]"
+  ) as HTMLElement;
+  const preferencesStr = preferencesEl?.dataset.preferences ?? "";
   const { skipSave } = JSON.parse(preferencesStr);
 
-  const routerOutlet = 'router-outlet';
+  const routerOutlet = "router-outlet";
   const includesAppURL = urlParam?.includes(baseUrl) ?? false;
 
   try {
-    if (url.href.slice(0, url.href.length - 1) !== baseUrl && !skipSave && !includesAppURL) {
-      logInfo('adding one to cache', {context: 'cozy-reader', data: url})
+    if (
+      url.href.slice(0, url.href.length - 1) !== baseUrl &&
+      !skipSave &&
+      !includesAppURL
+    ) {
+      console.info("adding one to cache", {
+        context: "cozy-reader",
+        data: url,
+      });
       await cache.add(url);
     }
-  } catch(error) {
-      logError('ERR', {context: 'cozy-reader', data: error})
-  } 
+  } catch (error) {
+    console.error("ERR", { context: "cozy-reader", data: error });
+  }
 
-  const cachedRequests = (await cache.keys())
-    .filter(request => {
-      const urlObj = new URL(request.url);
-      const urlParam = urlObj.searchParams.get('url'); 
+  const cachedRequests = (await cache.keys()).filter((request) => {
+    const urlObj = new URL(request.url);
+    const urlParam = urlObj.searchParams.get("url");
 
-      return urlObj.search !== ''
-      && !urlParam?.startsWith(baseUrl)
-      && urlParam !== ''
-      && urlParam !== 'null';
-    });
+    return (
+      urlObj.search !== "" &&
+      !urlParam?.startsWith(baseUrl) &&
+      urlParam !== "" &&
+      urlParam !== "null"
+    );
+  });
 
-  if(cachedRequests?.length && routerOutlet !== null) {
-    const list = document.querySelector('#post-list');
-    const heading = document.querySelector('#library span#heading') as HTMLHeadingElement;
-    heading.innerHTML = 'History';
+  if (cachedRequests?.length && routerOutlet !== null) {
+    const list = document.querySelector("#post-list");
+    const heading = document.querySelector(
+      "#library span#heading"
+    ) as HTMLHeadingElement;
+    heading.innerHTML = "History";
 
-    cachedRequests
-    .reverse()
-    .forEach(async (request) => {
-      const {url} = request;
-      const link = document.createElement('a');
+    cachedRequests.reverse().forEach(async (request) => {
+      const { url } = request;
+      const link = document.createElement("a");
 
       let responseText;
-      const fullResponse = await cache.match(url)
-      if (!fullResponse && url.slice(0, url.length - 1) !== baseUrl && !skipSave && !includesAppURL) {
-        logInfo('updating cached', {context: 'cozy-reader', data: url})
+      const fullResponse = await cache.match(url);
+      if (
+        !fullResponse &&
+        url.slice(0, url.length - 1) !== baseUrl &&
+        !skipSave &&
+        !includesAppURL
+      ) {
+        console.info("updating cached", { context: "cozy-reader", data: url });
         await cache.add(url);
       }
 
-      fullResponse?.text().then(async data => {
+      fullResponse?.text().then(async (data) => {
         responseText = data;
-        const cleanedResponse = await cozify(responseText, baseUrl)
-        const html = document.createElement('html');
+        const cleanedResponse = await cozify(responseText, baseUrl);
+        const html = document.createElement("html");
         html.innerHTML = cleanedResponse;
-        const title = html.querySelector('meta[property="cozy:title"]')?.getAttribute('content');
-        if (title === 'Something is not right') {
+        const title = html
+          .querySelector('meta[property="cozy:title"]')
+          ?.getAttribute("content");
+        if (title === "Something is not right") {
           cache.delete(url);
           return; // temporary fix for deleting cached errors
         }
@@ -83,18 +99,21 @@ export interface Props {
         link.href = url;
         link.onclick = async (e) => {
           e.preventDefault();
-          localStorage.setItem('scrollPosition', window.scrollY.toString());
-          scrollTo(0,0);
-          logInfo('using cached response', {context: 'cozy-reader', data: url})
-          renderPost(cleanedResponse, url, routerOutlet)
-        }
-        const item = document.createElement('li');
+          localStorage.setItem("scrollPosition", window.scrollY.toString());
+          scrollTo(0, 0);
+          console.info("using cached response", {
+            context: "cozy-reader",
+            data: url,
+          });
+          renderPost(cleanedResponse, url, routerOutlet);
+        };
+        const item = document.createElement("li");
         item.appendChild(link);
         list?.appendChild(item);
       });
     });
 
-    window.addEventListener('popstate', async (data) => {
+    window.addEventListener("popstate", async (data) => {
       let url = data.state?.url;
       let isHome = false;
 
@@ -103,17 +122,20 @@ export interface Props {
         isHome = true;
       } else {
         // replace scrollPosition
-        localStorage.setItem('scrollPosition', window.scrollY.toString());
+        localStorage.setItem("scrollPosition", window.scrollY.toString());
       }
 
-      const fullResponse = await cache.match(url)
+      const fullResponse = await cache.match(url);
       fullResponse?.text().then(async (data) => {
         const responseText = data;
         const cleanedResponse = await cozify(responseText, baseUrl);
-        logInfo('using cached response', {context: 'cozy-reader', data: url})
+        console.info("using cached response", {
+          context: "cozy-reader",
+          data: url,
+        });
         renderPost(cleanedResponse, url, routerOutlet, true);
         if (isHome) {
-          const scrollPosition = localStorage.getItem('scrollPosition');
+          const scrollPosition = localStorage.getItem("scrollPosition");
           scrollTo(0, scrollPosition ? parseInt(scrollPosition) : 0);
         }
       });
@@ -122,7 +144,6 @@ export interface Props {
 </script>
 
 <style>
-
   #library {
     span#heading {
       color: #555;
@@ -137,7 +158,6 @@ export interface Props {
     gap: 1em;
 
     li {
-
       a {
         text-decoration: none;
         color: #000;
@@ -151,7 +171,8 @@ export interface Props {
           grid-template-columns: calc(70px + 0.5em) auto;
 
           .post-card__image {
-            img, svg {
+            img,
+            svg {
               width: 70px;
               height: 70px;
               object-fit: cover;
@@ -165,26 +186,28 @@ export interface Props {
               padding: 0.5em;
             }
           }
-        
+
           .post-card__content {
             display: flex;
             flex-direction: column;
             justify-content: center;
             min-height: calc(70px + 0.5rem);
           }
-          
-          .post-card__title, .post-card__description {
+
+          .post-card__title,
+          .post-card__description {
             display: -webkit-box;
             -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;  
+            -webkit-box-orient: vertical;
             overflow: hidden;
           }
-          
-          .post-card__meta, .post-card__description {
+
+          .post-card__meta,
+          .post-card__description {
             font-size: smaller;
             color: #555;
           }
-          
+
           .post-card__meta {
             display: flex;
             justify-content: space-between;
@@ -202,7 +225,6 @@ export interface Props {
               text-align: right;
             }
           }
-
         }
       }
     }
