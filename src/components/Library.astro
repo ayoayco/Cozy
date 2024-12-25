@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  skipSave?: boolean;
+  skipSave?: boolean
 }
 ---
 
@@ -10,25 +10,25 @@ export interface Props {
 </div>
 
 <script>
-  import { getPostCard, renderPost } from "../utils/library";
-  import { cozify } from "../utils/sanitizer";
-  const cache = await caches.open("cozy-reader");
-  const baseUrl = window.location.origin;
-  let url = new URL(window.location.href);
+  import { getPostCard, renderPost } from '../utils/library'
+  import { cozify } from '../utils/sanitizer'
+  const cache = await caches.open('cozy-reader')
+  const baseUrl = window.location.origin
+  let url = new URL(window.location.href)
   // only cached unencoded url param
-  const urlParam = url.searchParams.get("url");
+  const urlParam = url.searchParams.get('url')
   if (urlParam) {
-    url = new URL(`${url.origin}/?url=${urlParam}`);
+    url = new URL(`${url.origin}/?url=${urlParam}`)
   }
 
   const preferencesEl = document.querySelector(
-    "[data-preferences]"
-  ) as HTMLElement;
-  const preferencesStr = preferencesEl?.dataset.preferences ?? "";
-  const { skipSave } = JSON.parse(preferencesStr);
+    '[data-preferences]'
+  ) as HTMLElement
+  const preferencesStr = preferencesEl?.dataset.preferences ?? ''
+  const { skipSave } = JSON.parse(preferencesStr)
 
-  const routerOutlet = "router-outlet";
-  const includesAppURL = urlParam?.includes(baseUrl) ?? false;
+  const routerOutlet = 'router-outlet'
+  const includesAppURL = urlParam?.includes(baseUrl) ?? false
 
   try {
     if (
@@ -36,110 +36,110 @@ export interface Props {
       !skipSave &&
       !includesAppURL
     ) {
-      console.info("adding one to cache", {
-        context: "cozy-reader",
+      console.info('adding one to cache', {
+        context: 'cozy-reader',
         data: url,
-      });
-      await cache.add(url);
+      })
+      await cache.add(url)
     }
   } catch (error) {
-    console.error("ERR", { context: "cozy-reader", data: error });
+    console.error('ERR', { context: 'cozy-reader', data: error })
   }
 
   const cachedRequests = (await cache.keys()).filter((request) => {
-    const urlObj = new URL(request.url);
-    const urlParam = urlObj.searchParams.get("url");
+    const urlObj = new URL(request.url)
+    const urlParam = urlObj.searchParams.get('url')
 
     return (
-      urlObj.search !== "" &&
+      urlObj.search !== '' &&
       !urlParam?.startsWith(baseUrl) &&
-      urlParam !== "" &&
-      urlParam !== "null"
-    );
-  });
+      urlParam !== '' &&
+      urlParam !== 'null'
+    )
+  })
 
   if (cachedRequests?.length && routerOutlet !== null) {
-    const list = document.querySelector("#post-list");
+    const list = document.querySelector('#post-list')
     const heading = document.querySelector(
-      "#library span#heading"
-    ) as HTMLHeadingElement;
-    heading.innerHTML = "History";
+      '#library span#heading'
+    ) as HTMLHeadingElement
+    heading.innerHTML = 'History'
 
     cachedRequests.reverse().forEach(async (request) => {
-      const { url } = request;
-      const link = document.createElement("a");
+      const { url } = request
+      const link = document.createElement('a')
 
-      let responseText;
-      const fullResponse = await cache.match(url);
+      let responseText
+      const fullResponse = await cache.match(url)
       if (
         !fullResponse &&
         url.slice(0, url.length - 1) !== baseUrl &&
         !skipSave &&
         !includesAppURL
       ) {
-        console.info("updating cached", { context: "cozy-reader", data: url });
-        await cache.add(url);
+        console.info('updating cached', { context: 'cozy-reader', data: url })
+        await cache.add(url)
       }
 
       fullResponse?.text().then(async (data) => {
-        responseText = data;
-        const cleanedResponse = await cozify(responseText, baseUrl);
-        const html = document.createElement("html");
-        html.innerHTML = cleanedResponse;
+        responseText = data
+        const cleanedResponse = await cozify(responseText, baseUrl)
+        const html = document.createElement('html')
+        html.innerHTML = cleanedResponse
         const title = html
           .querySelector('meta[property="cozy:title"]')
-          ?.getAttribute("content");
-        if (title === "Something is not right") {
-          cache.delete(url);
-          return; // temporary fix for deleting cached errors
+          ?.getAttribute('content')
+        if (title === 'Something is not right') {
+          cache.delete(url)
+          return // temporary fix for deleting cached errors
         }
-        const postCard = getPostCard(html);
-        link.innerHTML = postCard;
+        const postCard = getPostCard(html)
+        link.innerHTML = postCard
 
-        link.href = url;
+        link.href = url
         link.onclick = async (e) => {
-          e.preventDefault();
-          localStorage.setItem("scrollPosition", window.scrollY.toString());
-          scrollTo(0, 0);
-          console.info("using cached response", {
-            context: "cozy-reader",
+          e.preventDefault()
+          localStorage.setItem('scrollPosition', window.scrollY.toString())
+          scrollTo(0, 0)
+          console.info('using cached response', {
+            context: 'cozy-reader',
             data: url,
-          });
-          renderPost(cleanedResponse, url, routerOutlet);
-        };
-        const item = document.createElement("li");
-        item.appendChild(link);
-        list?.appendChild(item);
-      });
-    });
+          })
+          renderPost(cleanedResponse, url, routerOutlet)
+        }
+        const item = document.createElement('li')
+        item.appendChild(link)
+        list?.appendChild(item)
+      })
+    })
 
-    window.addEventListener("popstate", async (data) => {
-      let url = data.state?.url;
-      let isHome = false;
+    window.addEventListener('popstate', async (data) => {
+      let url = data.state?.url
+      let isHome = false
 
       if (!url) {
-        url = window.location.href;
-        isHome = true;
+        url = window.location.href
+        isHome = true
       } else {
         // replace scrollPosition
-        localStorage.setItem("scrollPosition", window.scrollY.toString());
+        localStorage.setItem('scrollPosition', window.scrollY.toString())
       }
 
-      const fullResponse = await cache.match(url);
+      const fullResponse = await cache.match(url)
       fullResponse?.text().then(async (data) => {
-        const responseText = data;
-        const cleanedResponse = await cozify(responseText, baseUrl);
-        console.info("using cached response", {
-          context: "cozy-reader",
+        const responseText = data
+        const cleanedResponse = await cozify(responseText, baseUrl)
+        console.info('using cached response', {
+          context: 'cozy-reader',
           data: url,
-        });
-        renderPost(cleanedResponse, url, routerOutlet, true);
+        })
+        renderPost(cleanedResponse, url, routerOutlet, true)
         if (isHome) {
-          const scrollPosition = localStorage.getItem("scrollPosition");
-          scrollTo(0, scrollPosition ? parseInt(scrollPosition) : 0);
+          const scrollPosition = localStorage.getItem('scrollPosition')
+          scrollTo(0, scrollPosition ? parseInt(scrollPosition) : 0)
         }
-      });
-    });
+      })
+    })
   }
 </script>
 

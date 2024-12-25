@@ -37,7 +37,7 @@ export default [
       parser: astroParser,
       parserOptions: {
         parser: tseslint.parser,
-      }
+      },
     },
   },
 ]

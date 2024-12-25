@@ -1,33 +1,33 @@
 ---
-import { ArticleData, extract } from "@extractus/article-extractor";
-import SimpleAddressBar from "../components/SimpleAddressBar.astro";
-import Post from "../components/Post.astro";
-import App from "../layouts/App.astro";
-import Library from "../components/Library.astro";
-import Footer from "../components/Footer.astro";
+import { ArticleData, extract } from '@extractus/article-extractor'
+import SimpleAddressBar from '../components/SimpleAddressBar.astro'
+import Post from '../components/Post.astro'
+import App from '../layouts/App.astro'
+import Library from '../components/Library.astro'
+import Footer from '../components/Footer.astro'
 
-export const prerender = false;
+export const prerender = false
 
-let url = Astro.url.searchParams.get('url');
-let article: ArticleData | null = {url: '/'};
+let url = Astro.url.searchParams.get('url')
+let article: ArticleData | null = { url: '/' }
 
 while (url?.startsWith(Astro.url.origin)) {
-  url = new URL(url).searchParams.get('url');
+  url = new URL(url).searchParams.get('url')
 }
 
 if (url)
   try {
-    article = await extract(url);
+    article = await extract(url)
   } catch {
-    article = null;
+    article = null
   }
-
 ---
+
 <App article={article}>
-    <SimpleAddressBar url={url} />
-    <div slot="post" id="router-outlet">
-      <Post article={article} />
-    </div>
-    <Library slot="library" skipSave={article === null} />
-    <Footer slot="footer" />
+  <SimpleAddressBar url={url} />
+  <div slot="post" id="router-outlet">
+    <Post article={article} />
+  </div>
+  <Library slot="library" skipSave={article === null} />
+  <Footer slot="footer" />
 </App>

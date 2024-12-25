@@ -1,20 +1,17 @@
 ---
-import App from "../layouts/App.astro";
-import Library from "../components/Library.astro";
-import Footer from "../components/Footer.astro";
-import SimpleAddressBar from "../components/SimpleAddressBar.astro";
+import App from '../layouts/App.astro'
+import Library from '../components/Library.astro'
+import Footer from '../components/Footer.astro'
+import SimpleAddressBar from '../components/SimpleAddressBar.astro'
 
-export const prerender = false;
-
+export const prerender = false
 ---
 
 <App article={null}>
-    <SimpleAddressBar url='' />
-    <div slot="post" id="router-outlet">
-        <h1>
-            404: Not Found
-        </h1>
-    </div>
-    <Library slot="library" skipSave />
-    <Footer slot="footer" />
+  <SimpleAddressBar url="" />
+  <div slot="post" id="router-outlet">
+    <h1>404: Not Found</h1>
+  </div>
+  <Library slot="library" skipSave />
+  <Footer slot="footer" />
 </App>

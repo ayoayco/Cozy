@@ -1,133 +1,129 @@
 ---
-import BaseHead from '../../components/blog/BaseHead.astro';
-import Header from '../../components/blog/Header.astro';
-import Footer from '../../components/blog/Footer.astro';
-import FormattedDate from '../../components/blog/FormattedDate.astro';
-import { getCollection } from 'astro:content';
-import {SITE_TITLE, SITE_DESCRIPTION} from '../../consts';
+import BaseHead from '../../components/blog/BaseHead.astro'
+import Header from '../../components/blog/Header.astro'
+import Footer from '../../components/blog/Footer.astro'
+import FormattedDate from '../../components/blog/FormattedDate.astro'
+import { getCollection } from 'astro:content'
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts'
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+)
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 700px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			.card {
-				border: 1px solid rgb(var(--gray));
-				border-radius: 12px;
-				width: 100%;
-				padding: 1em;
-				margin-bottom: 1rem;
-				text-align: center;
-				color: rgb(var(--black));
-				position: relative;
-				background-color: white;
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      main {
+        width: 700px;
+      }
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      ul li * {
+        text-decoration: none;
+        transition: 0.2s ease;
+      }
+      .card {
+        border: 1px solid rgb(var(--gray));
+        border-radius: 12px;
+        width: 100%;
+        padding: 1em;
+        margin-bottom: 1rem;
+        text-align: center;
+        color: rgb(var(--black));
+        position: relative;
+        background-color: white;
 
-				& img {
-					width: 100%;
-					max-width: 800px;
-				}
+        & img {
+          width: 100%;
+          max-width: 800px;
+        }
 
-				& .title {
-					font-size: 2.369rem;
-					margin: 1rem;
-					color: rgb(var(--black));
-					line-height: 1;
-				}
+        & .title {
+          font-size: 2.369rem;
+          margin: 1rem;
+          color: rgb(var(--black));
+          line-height: 1;
+        }
 
-				& .description {
-					margin-bottom: 0;
-				}
+        & .description {
+          margin-bottom: 0;
+        }
 
-				& h4 a::after {
-					position: absolute;
-					left: 0;
-					top: 0;
-					right: 0;
-					bottom: 0;
-					cursor: pointer;
-				}
+        & h4 a::after {
+          position: absolute;
+          left: 0;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          cursor: pointer;
+        }
 
-				& h4 {
-					text-decoration: underline !important;
-					color: var(--accent);
-					text-decoration-thickness: 2px !important;
+        & h4 {
+          text-decoration: underline !important;
+          color: var(--accent);
+          text-decoration-thickness: 2px !important;
 
-					& a {
-						color: rgb(var(--black));
-						text-decoration: none;
-					}
+          & a {
+            color: rgb(var(--black));
+            text-decoration: none;
+          }
 
-					&:hover a {
-						color: var(--accent);
-					}
-				}
-			}
+          &:hover a {
+            color: var(--accent);
+          }
+        }
+      }
 
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			@media (max-width: 700px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li class="card">
-									{/* {
+      .date {
+        margin: 0;
+        color: rgb(var(--gray));
+      }
+      @media (max-width: 700px) {
+        ul {
+          gap: 0.5em;
+        }
+        ul li {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <section>
+        <ul>
+          {
+            posts.map((post) => (
+              <li class="card">
+                {/* {
 									 post.data.heroImage
 									 	?	<img width={700} height={360} src={post.data.heroImage} alt="" />
 									 	:	<img width={700} height={360} src="/blog-placeholder-4.jpg" alt="" />
 									} */}
-									<small class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</small>
-									<h4 class="title">
-										<a href={`/blog/${post.slug}/`}>
-											{post.data.title}
-										</a>
-									</h4>
-									<p class="description">
-										{post.data.description}
-									</p>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
+                <small class="date">
+                  <FormattedDate date={post.data.pubDate} />
+                </small>
+                <h4 class="title">
+                  <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+                </h4>
+                <p class="description">{post.data.description}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </main>
+    <Footer />
+  </body>
 </html>

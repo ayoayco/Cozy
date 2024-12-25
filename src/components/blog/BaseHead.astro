@@ -1,21 +1,25 @@
 ---
-import '../../styles/reset.css';
-import '../../styles/variables.css';
-import '../../styles/blog.css';
-import { SITE_TITLE, SITE_AUTHOR, SITE_DESCRIPTION } from '../../consts';
+import '../../styles/reset.css'
+import '../../styles/variables.css'
+import '../../styles/blog.css'
+import { SITE_TITLE, SITE_AUTHOR, SITE_DESCRIPTION } from '../../consts'
 
 interface Props {
-	title: string;
-	description: string;
-	isArticle?: boolean;
-	image?: string;
+  title: string
+  description: string
+  isArticle?: boolean
+  image?: string
 }
 
-let {isArticle = false, title, description = 'default description', image = '/cozy.jpg' } = Astro.props;
+let {
+  isArticle = false,
+  title,
+  description = 'default description',
+  image = '/cozy.jpg',
+} = Astro.props
 
-description = title === SITE_TITLE
-	? SITE_DESCRIPTION
-	: `${description} • ${SITE_TITLE}`
+description =
+  title === SITE_TITLE ? SITE_DESCRIPTION : `${description} • ${SITE_TITLE}`
 ---
 
 <!-- Global Metadata -->
@@ -26,8 +30,20 @@ description = title === SITE_TITLE
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
-<link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />
+<link
+  rel="preload"
+  href="/fonts/atkinson-regular.woff"
+  as="font"
+  type="font/woff"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/atkinson-bold.woff"
+  as="font"
+  type="font/woff"
+  crossorigin
+/>
 
 <!-- Primary Meta Tags -->
 <title>{title} • {description}</title>
@@ -36,9 +52,11 @@ description = title === SITE_TITLE
 
 <!-- Open Graph / Facebook -->
 {
-	isArticle
-	? <meta property="og:type" content="article" />
-	: <meta property="og:type" content="website" />
+  isArticle ? (
+    <meta property="og:type" content="article" />
+  ) : (
+    <meta property="og:type" content="website" />
+  )
 }
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
@@ -46,5 +64,3 @@ description = title === SITE_TITLE
 <meta property="og:image" content={new URL(image, Astro.url)} />
 <meta property="og:site_name" content={SITE_TITLE} />
 <meta property="article:author" content={SITE_AUTHOR} />
-
-

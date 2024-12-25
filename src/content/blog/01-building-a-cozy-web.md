@@ -30,6 +30,7 @@ The project and the road map for features are all public on my [GitHub](https://
 Right now, it successfully extracts the content and delivers a clean page to your browser.
 
 I'm working toward bringing the following in the coming weeks:
+
 1. Save favorites to a library
 2. Offline access
 3. Smart Insights about the article
@@ -49,8 +50,8 @@ javascript:(function(){ window.open('https://cozy.pub/?url=%27 + window.location
 
 This is possible on all major browsers, including Safari on iOS (where I personally use this often). Some screenshots:
 
-| Firefox | Chrome |
-| --- | --- |
+| Firefox                                                                                                                            | Chrome                                                                                                                             |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | ![Screenshot from 2023-05-13 08-31-41](https://github.com/ayoayco/cozy-reader/assets/4262489/9b296d4f-2722-483a-bbc2-431c6b2ae996) | ![Screenshot from 2023-05-12 23-32-08](https://github.com/ayoayco/cozy-reader/assets/4262489/144b74f8-3949-46b9-849c-351e4af0ac12) |
 
 ## Join the Project!

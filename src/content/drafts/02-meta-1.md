@@ -10,15 +10,12 @@ At the time, Cozy was just another fun weekend project I built as I played aroun
 
 Since then, I've been using Cozy almost every time I read an article online. I have come to love the feeling of control, privacy, and ownership it gives -- something we have lost in almost all "modern" online experiences nowadays.
 
-You visit a news website, for example, and you just know the content are mostly just a bait 
-
+You visit a news website, for example, and you just know the content are mostly just a bait
 
 Browsers are not helping. AI
 
 Having a web page let's me skip all the noise that plague almost all modern websites
 
-
 [Astro's on-demand rendering](https://docs.astro.build/en/guides/server-side-rendering/) and [JavaScript's Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
 
 The goal for this site is to have a place where I publish about the new features of the [web app](/) and the web development techniques used to achieve them.
-

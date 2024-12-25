@@ -1,12 +1,12 @@
 ---
-import Icon from "astro-iconify";
+import Icon from 'astro-iconify'
 
 export interface Props {
-  url: string | null;
+  url: string | null
 }
 
-const placeholder = "Type the article URL here";
-const { url } = Astro.props;
+const placeholder = 'Type the article URL here'
+const { url } = Astro.props
 ---
 
 <div id="address-bar">
@@ -18,7 +18,7 @@ const { url } = Astro.props;
       type="url"
       id="app-url"
       name="url"
-      value={url ?? ""}
+      value={url ?? ''}
       placeholder={placeholder}
       required
     />
@@ -39,7 +39,6 @@ const { url } = Astro.props;
     >
       <Icon name="mdi:home" />
     </a>
-
   </form>
 </div>
 
@@ -49,9 +48,7 @@ const { url } = Astro.props;
     position: relative;
   }
 
-  form:has(
-    input[type="url"]:focus
-  ) {
+  form:has(input[type='url']:focus) {
     border-color: var(--accent);
     box-shadow: 0 1px 10px 0px var(--accent);
   }
@@ -66,11 +63,11 @@ const { url } = Astro.props;
     box-shadow: 0 1px 3px 1px rgb(var(--gray-light));
     display: flex;
 
-    input[type="url"]:focus {
+    input[type='url']:focus {
       outline: none;
     }
 
-    input[type="url"] {
+    input[type='url'] {
       flex: 3;
       border: 0px;
       border-radius: 30px;
@@ -97,7 +94,7 @@ const { url } = Astro.props;
         cursor: pointer;
       }
     }
-    
+
     .btn.primary {
       color: var(--accent);
     }
@@ -131,7 +128,7 @@ const { url } = Astro.props;
       color: blue !important;
     }
 
-    .btn[disabled="true"] svg {
+    .btn[disabled='true'] svg {
       color: rgb(var(--gray-light)) !important;
       cursor: default !important;
     }
