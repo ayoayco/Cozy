@@ -1,23 +1,43 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import astroSwGlobals from '@ayco/astro-sw/globals';
+import globals from 'globals'
+import eslintPluginAstro from 'eslint-plugin-astro'
+import jsPlugin from '@eslint/js'
+import tseslint from 'typescript-eslint'
+import astroSwGlobals from '@ayco/astro-sw/globals'
+import astroParser from 'astro-eslint-parser'
 
-
-/** @type {import('eslint').Linter.Config[]} */
 export default [
-  {files: ["**/*.{js,mjs,cjs,ts}"]},
-  {languageOptions: { globals: {...globals.browser, ...globals.node, ...astroSwGlobals } }},
-  pluginJs.configs.recommended,
+  {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...astroSwGlobals,
+      },
+    },
+  },
+  // add more generic rule sets here, such as:
+  jsPlugin.configs.recommended,
   ...tseslint.configs.recommended,
+  ...eslintPluginAstro.configs['recommended'],
+  ...eslintPluginAstro.configs['jsx-a11y-recommended'],
   {
     ignores: [
       'dist/*',
       '.output/*',
       '.astro/*',
+      'site/*',
+      'templates/*',
       '**/node_modules/*',
-      '**/coverage/*',
-      '**/env.d.ts'
+      '**/env.d.ts',
     ],
+  },
+  {
+    files: ['**/*.astro'],
+    languageOptions: {
+      parser: astroParser,
+      parserOptions: {
+        parser: tseslint.parser,
+      }
+    },
   },
 ]

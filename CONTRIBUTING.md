@@ -7,9 +7,12 @@ Thank you for your interest in building the coziest web experience for people li
 You will need [to install nodejs](https://nodejs.org/en/download) and [pnpm](https://pnpm.io/installation) if you do not have them yet in your machine.
 
 This project is built with the following tech
+
 1. TypeScript, HTML, CSS - even just knowing basic JS and CSS will give you familiarity of the code
 1. [Astro](https://astro.build) - Astro is the chosen framework, please read throught the basics on their docs if you are unfamiliar
- - we don't use any framework that ships to the browser, we only write Astro components for server-side rendering, and vanilla DOM manipulation via `script` tags.
+
+- we don't use any framework that ships to the browser, we only write Astro components for server-side rendering, and vanilla DOM manipulation via `script` tags.
+
 1. [@extractus/article-extractor](https://www.npmjs.com/package/@extractus/article-extractor) - Article Extractor is the library we use to fetch and extract article content
 
 ## Setting up the project
