@@ -58,11 +58,11 @@ const cacheAndRevalidate = async ({ request, fallbackUrl }) => {
         // get network response for revalidation of cached assets
         fetch(request.clone()).then((responseFromNetwork) => {
             if (responseFromNetwork) {
-                console.info('fetched updated resource...', { force: forceLogging, context: 'cozy-sw', data: responseFromNetwork.url })
+                console.info('fetched updated resource...', responseFromNetwork.url)
                 putInCache(request, responseFromNetwork.clone());
             }
         }).catch((error) => {
-            console.info('failed to fetch updated resource', { force: forceLogging, context: 'cozy-sw', data: error })
+            console.info('failed to fetch updated resource', error)
         });
 
         return responseFromCache;
@@ -75,15 +75,16 @@ const cacheAndRevalidate = async ({ request, fallbackUrl }) => {
         // we need to save clone to put one copy in cache
         // and serve second one
         putInCache(request, responseFromNetwork.clone());
-        console.info('using network response', { force: forceLogging, context: 'cozy-sw', data: responseFromNetwork.url })
+        console.info('using network response', responseFromNetwork.url)
         return responseFromNetwork;
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
 
         // Try the fallback
         const fallbackResponse = await cache.match(fallbackUrl);
         if (fallbackResponse) {
-            console.info('using fallback cached response...', { force: forceLogging, context: 'cozy-sw', data: fallbackResponse.url })
+            console.info('using fallback cached response...', fallbackResponse.url)
             return fallbackResponse;
         }
 
@@ -97,14 +98,15 @@ const cacheAndRevalidate = async ({ request, fallbackUrl }) => {
     }
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 self.addEventListener('activate', (event) => {
-    console.info('activating service worker...', { force: forceLogging, context: 'cozy-sw' })
+    console.info('activating service worker...')
     cleanOldCaches();
 });
 
 self.addEventListener('install', (event) => {
 
-    console.info('installing service worker...', { force: forceLogging, context: 'cozy-sw' })
+    console.info('installing service worker...')
     self.skipWaiting(); // go straight to activate
 
     event.waitUntil(

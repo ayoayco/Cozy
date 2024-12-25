@@ -24,6 +24,3 @@ export async function cozify(html: string, baseUrl: string): Promise<string> {
     ])
 }
 
-function set(value: string) {
-    return () => value
-}
