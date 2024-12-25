@@ -11,6 +11,7 @@
   "homepage": "https://cozy.pub",
   "scripts": {
     "start": "astro dev",
+    "dev": "astro dev",
     "build": "astro build",
     "build:preview": "astro build && node ./server.mjs",
     "publish:patch": "npm version patch && npm publish --access public",
