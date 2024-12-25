@@ -1,18 +1,18 @@
 ---
-import Jumbotron from "../components/Jumbotron.astro";
-import { ArticleData } from "@extractus/article-extractor";
-import "../styles/reset.css";
-import '../styles/variables.css';
+import Jumbotron from '../components/Jumbotron.astro'
+import { ArticleData } from '@extractus/article-extractor'
+import '../styles/reset.css'
+import '../styles/variables.css'
 
 export interface Props {
   article: ArticleData | null
 }
 
-const { article } = Astro.props;
-const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
+const { article } = Astro.props
+const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy'
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -27,22 +27,35 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
        *  - add cozy metadata for the app to use
        */
       article && article?.url !== '/' ? (
-        <meta name="robots" content="noindex">
-        <meta name="googlebot" content="noindex">
+        <>
+          <meta name="robots" content="noindex" />
+          <meta name="googlebot" content="noindex" />
 
-        <meta property="cozy:title" content={article.title} />
-        <meta property="cozy:url" content={article.url} />
-        <meta property="cozy:description" content={article.description} />
-        <meta property="cozy:image" content={article.image} />
-        <meta property="cozy:source" content={article.source} />
-        <meta property="cozy:author" content={article.author} />
-        <meta property="cozy:published" content={article.published} />
+          <meta property="cozy:title" content={article.title} />
+          <meta property="cozy:url" content={article.url} />
+          <meta property="cozy:description" content={article.description} />
+          <meta property="cozy:image" content={article.image} />
+          <meta property="cozy:source" content={article.source} />
+          <meta property="cozy:author" content={article.author} />
+          <meta property="cozy:published" content={article.published} />
+        </>
       ) : (
-        <meta property="og:title" content={appTitle} />
-        <meta property="og:url" content={Astro.url.href} />
-        <meta property="og:description" content="Remove distractions. Save your favorites. Get useful insights. Cozy is your modern-day reading companion." />
-        <meta name="description" content="Remove distractions. Save your favorites. Get useful insights. Cozy is your modern-day reading companion." />
-        <meta itemprop="description" content="Remove distractions. Save your favorites. Get useful insights. Cozy is your modern-day reading companion." />
+        <>
+          <meta property="og:title" content={appTitle} />
+          <meta property="og:url" content={Astro.url.href} />
+          <meta
+            property="og:description"
+            content="Remove distractions. Save your favorites. Get useful insights. Cozy is your modern-day reading companion."
+          />
+          <meta
+            name="description"
+            content="Remove distractions. Save your favorites. Get useful insights. Cozy is your modern-day reading companion."
+          />
+          <meta
+            itemprop="description"
+            content="Remove distractions. Save your favorites. Get useful insights. Cozy is your modern-day reading companion."
+          />
+        </>
       )
     }
     <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
@@ -65,7 +78,6 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
 </html>
 
 <style>
-
   body {
     display: grid;
     place-content: safe center;
@@ -84,15 +96,15 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy';
 
     &:has(#router-outlet #post) {
       #jumbotron {
-          display: none;
+        display: none;
       }
     }
   }
 </style>
 <style is:global>
   :root {
-    --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --system-ui: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   }
 
   html * {
