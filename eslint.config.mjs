@@ -5,6 +5,14 @@ import tseslint from 'typescript-eslint'
 import astroSwGlobals from '@ayco/astro-sw/globals'
 import astroParser from 'astro-eslint-parser'
 
+import { includeIgnoreFile } from '@eslint/compat'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const gitignorePath = path.resolve(__dirname, '.gitignore')
+
 export default [
   {
     languageOptions: {
@@ -20,16 +28,9 @@ export default [
   ...tseslint.configs.recommended,
   ...eslintPluginAstro.configs['recommended'],
   ...eslintPluginAstro.configs['jsx-a11y-recommended'],
+  includeIgnoreFile(gitignorePath),
   {
-    ignores: [
-      'dist/*',
-      '.output/*',
-      '.astro/*',
-      'site/*',
-      'templates/*',
-      '**/node_modules/*',
-      '**/env.d.ts',
-    ],
+    ignores: ['**/env.d.ts'],
   },
   {
     files: ['**/*.astro'],

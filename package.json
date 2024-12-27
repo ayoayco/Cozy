@@ -29,6 +29,7 @@
     "@astrojs/rss": "^4.0.9",
     "@astrojs/sitemap": "^3.2.1",
     "@ayco/astro-sw": "^0.8.14",
+    "@eslint/compat": "^1.2.4",
     "@eslint/js": "^9.17.0",
     "@extractus/article-extractor": "^8.0.10",
     "@fastify/middie": "^8.3.1",
