@@ -19,7 +19,7 @@
     "deploy:client": "astro build && scp -r dist/client/ ayo@ayco.io:~/cozy/dist/",
     "test": "vitest",
     "prepare": "husky && husky install",
-    "lint": "eslint . --config eslint.config.mjs",
+    "lint": "eslint . --config eslint.config.mjs --cache",
     "format": "prettier . --write"
   },
   "devDependencies": {
@@ -38,8 +38,10 @@
     "astro-eslint-parser": "^1.1.0",
     "astro-iconify": "^1.2.0",
     "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-astro": "^1.3.1",
     "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^5.2.1",
     "fastify": "^5.2.0",
     "globals": "^15.14.0",
     "husky": "^9.1.7",

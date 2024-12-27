@@ -4,6 +4,7 @@ import jsPlugin from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import astroSwGlobals from '@ayco/astro-sw/globals'
 import astroParser from 'astro-eslint-parser'
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
 import { includeIgnoreFile } from '@eslint/compat'
 import path from 'node:path'
@@ -25,6 +26,7 @@ export default [
   },
   // add more generic rule sets here, such as:
   jsPlugin.configs.recommended,
+  eslintPluginPrettierRecommended,
   ...tseslint.configs.recommended,
   ...eslintPluginAstro.configs['recommended'],
   ...eslintPluginAstro.configs['jsx-a11y-recommended'],
