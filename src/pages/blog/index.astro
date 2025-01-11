@@ -115,7 +115,7 @@ const posts = (await getCollection('blog')).sort(
                   <FormattedDate date={post.data.pubDate} />
                 </small>
                 <h4 class="title">
-                  <a href={`/blog/${post.slug}/`}>{post.data.title}</a>
+                  <a href={`/blog/${post.id}/`}>{post.data.title}</a>
                 </h4>
                 <p class="description">{post.data.description}</p>
               </li>
