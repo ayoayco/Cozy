@@ -12,7 +12,7 @@
   "scripts": {
     "start": "astro dev",
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro telemetry disable && astro build",
     "build:preview": "astro build && node ./server.mjs",
     "publish:patch": "npm version patch && npm publish --access public",
     "publish:minor": "npm version minor && npm publish --access public",
