@@ -12,6 +12,10 @@
   </a><br />
 </p>
 
+## Links
+- [Repository](https://git.sr.ht/~ayoayco/cozy)
+- [Issues](https://todo.sr.ht/~ayoayco/cozy)
+
 ## Why?
 
 Visiting websites in this 'modern' time is a paradox: standard Web technologies are better but most commercial websites are pretty terrible--not only because misinformation abounds online, but also because of Big Tech's personal data farming that puts us all at a disadvantage.
