@@ -1,6 +1,6 @@
 image: alpine/edge
 secrets:
-  - 291f0e35-9b8d-43ff-844c-77c5f29c1876
+  - bbfcb6dc-7c4a-42ee-a11a-022f0339a133
 environment:
   REPO: cozy
   GH_USER: ayoayco
