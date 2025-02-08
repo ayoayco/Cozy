@@ -1,0 +1,11 @@
+image: alpine/edge
+secrets:
+  - 291f0e35-9b8d-43ff-844c-77c5f29c1876
+environment:
+  REPO: cozy
+  GH_USER: ayoayco
+tasks:
+  - push-mirror: |
+      cd ~/"${REPO}"
+      git config --global credential.helper store
+      git push --mirror "https://github.com/${GH_USER}/${REPO}"
