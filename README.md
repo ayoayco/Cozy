@@ -1,3 +1,6 @@
+> [!NOTE]
+> The project is now in [SourceHut](https://git.sr.ht/~ayoayco/cozy), and all other places are just [git mirrors](https://www.educative.io/answers/beginners-guide-git-mirrors). Please submit issues or requests via our [Todo Page](https://todo.sr.ht/~ayoayco/cozy).
+
 <p align="center">
   <img src="https://github.com/user-attachments/assets/e49b56a7-cc0f-45a3-98e0-8bbcbd02a47c" alt="COZY logo" /><br />
   Remove distractions. Save for later.<br />
