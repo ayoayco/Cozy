@@ -58,7 +58,11 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy'
         </>
       )
     }
-    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Icons -->
+    <link rel="icon" href="favicon.svg" />
+    <link rel="mask-icon" href="mask-icon.svg" color="#000000" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   </head>
   <body>
     <div id="app-wrapper">
@@ -103,7 +107,8 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy'
 </style>
 <style is:global>
   :root {
-    --system-ui: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    --system-ui:
+      system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
       'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   }
 
