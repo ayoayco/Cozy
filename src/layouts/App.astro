@@ -10,6 +10,7 @@ export interface Props {
 
 const { article } = Astro.props
 const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy'
+const siteName = 'cozy.pub'
 ---
 
 <!doctype html>
@@ -66,7 +67,7 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy'
     <meta property="og:title" content={appTitle} />
     <meta property="og:url" content={Astro.url.href} />
     <meta property="og:image" content="/touch-icon-large.png" />
-    <meta property="og:site_name" content={appTitle} />
+    <meta property="og:site_name" content={siteName} />
 
     <!-- Icons -->
     <link rel="icon" href="favicon.svg" />
