@@ -8,14 +8,12 @@ interface Props {
   title: string
   description: string
   isArticle?: boolean
-  image?: string
 }
 
 let {
   isArticle = false,
   title,
   description = 'default description',
-  image = '/cozy.jpg',
 } = Astro.props
 
 description =
@@ -64,6 +62,6 @@ description =
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content="/touch-icon-large.png" />
 <meta property="og:site_name" content={SITE_TITLE} />
 <meta property="article:author" content={SITE_AUTHOR} />
