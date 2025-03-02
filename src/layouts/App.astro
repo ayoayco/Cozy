@@ -89,13 +89,27 @@ const appTitle = article?.title ? `${article.title} | Cozy` : 'Cozy'
 
   #app-wrapper {
     padding: 0.5em 0.5em 10em;
-    max-width: 650px;
+    --app-width: 650px;
     width: 100%;
+    max-width: var(--app-width);
     display: grid;
     gap: 1em;
 
     #main-content {
+      width: 100%;
+      max-width: calc(var(--app-width) - 2em);
       padding: 0 1em;
+
+      & img,
+      & picture,
+      & video,
+      & canvas,
+      & svg,
+      & iframe,
+      & table {
+        overflow-x: auto;
+        display: block;
+      }
     }
 
     &:has(#router-outlet #post) {
