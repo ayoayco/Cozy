@@ -1,6 +1,3 @@
-> [!NOTE]
-> The project is now in [SourceHut](https://git.sr.ht/~ayoayco/cozy). Please submit issues or requests via our [Todo Page](https://todo.sr.ht/~ayoayco/cozy) or [via email](mailto:~ayoayco/cozy@todo.sr.ht).
-
 <p align="center">
   <img src="https://github.com/user-attachments/assets/e49b56a7-cc0f-45a3-98e0-8bbcbd02a47c" alt="COZY logo" /><br />
   Remove distractions. Save for later.<br />
@@ -35,6 +32,12 @@ Here's what this project is building:
    1. text summarization
    2. dominant emotion
    3. other sources for lateral reading
+
+## Report bugs or contribute
+
+The project is now in [SourceHut](https://git.sr.ht/~ayoayco/cozy). Please submit issues or requests via our [Todo Page](https://todo.sr.ht/~ayoayco/cozy) or [via email](mailto:~ayoayco/cozy@todo.sr.ht).
+
+You can also contribute code via the [GitHub mirror](https://github.com/ayoayco/cozy) by opening Pull Requests there.
 
 ## Roadmap
 
