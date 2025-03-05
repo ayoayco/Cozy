@@ -82,6 +82,7 @@ We are thankful for all the building blocks provided by the following projects:
 
 1. [Astro](https://www.npmjs.com/package/astro) for our server-side rendering framework
 1. [@ayco/astro-sw](https://ayco.io/n/@ayco/astro-sw) for taking app's service worker, and injecting needed dynamic assets & variables
+1. [@ayco/astro-resume](https://ayco.io/n/@ayco/astro-resume) for serializing server data to be used in the client
 1. [@extractus/article-extractor](https://www.npmjs.com/package/@extractus/article-extractor) for the amazing scraping of articles
 1. [astro-iconify](https://www.npmjs.com/package/astro-iconify) for easily using icon-sets in [iconify](https://icon-sets.iconify.design/)
 1. [ultrahtml](https://www.npmjs.com/package/ultrahtml) for any cleanup and transformation we do on the received article content

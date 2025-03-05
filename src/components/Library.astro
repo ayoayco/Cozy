@@ -1,19 +1,24 @@
 ---
+import Serialize from '@ayco/astro-resume'
 export interface Props {
   skipSave?: boolean
+  isIndex: boolean
 }
 ---
 
-<div id="library" data-preferences={JSON.stringify(Astro.props)}>
+<div id="library">
   <span id="heading"></span>
   <ul id="post-list"></ul>
 </div>
 
+<Serialize id="preferences" data={Astro.props} />
+
 <script>
   import { getPostCard, renderPost } from '../utils/library'
   import { cozify } from '../utils/sanitizer'
+  import { deserialize } from '@ayco/astro-resume'
   const cache = await caches.open('cozy-reader')
-  const baseUrl = window.location.origin
+  const baseUrl = window.location.origin + '/a'
   let url = new URL(window.location.href)
   // only cached unencoded url param
   const urlParam = url.searchParams.get('url')
@@ -21,11 +26,7 @@ export interface Props {
     url = new URL(`${url.origin}/?url=${urlParam}`)
   }
 
-  const preferencesEl = document.querySelector(
-    '[data-preferences]'
-  ) as HTMLElement
-  const preferencesStr = preferencesEl?.dataset.preferences ?? ''
-  const { skipSave } = JSON.parse(preferencesStr)
+  const { skipSave } = deserialize('preferences') ?? ''
 
   const routerOutlet = 'router-outlet'
   const includesAppURL = urlParam?.includes(baseUrl) ?? false
