@@ -12,6 +12,13 @@ export default defineConfig({
   adapter: node({
     mode: 'middleware',
   }),
+  vite: {
+    server: {
+      fs: {
+        strict: false,
+      },
+    },
+  },
   integrations: [
     sitemap(),
     serviceWorker({
