@@ -1,0 +1,24 @@
+---
+/**
+ * NOTE: this page is a fix for old cached articles w/ cozified links going to an `a` route
+ */
+import SimpleAddressBar from '../components/SimpleAddressBar.astro'
+import App from '../layouts/App.astro'
+import Library from '../components/Library.astro'
+import Footer from '../components/Footer.astro'
+
+export const prerender = false
+const url = Astro.url.searchParams.get('url')
+return Astro.redirect(`/?url=${url}`)
+---
+
+<App article={null}>
+  <SimpleAddressBar url={url} />
+
+  <div>
+    Go to the correct <a href={`/?url=${url}`}>Page</a>
+  </div>
+
+  <Library slot="library" skipSave={true} />
+  <Footer slot="footer" />
+</App>
