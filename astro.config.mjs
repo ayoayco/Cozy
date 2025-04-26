@@ -1,3 +1,4 @@
+// @ts-check
 import { defineConfig } from 'astro/config'
 import node from '@astrojs/node'
 import sitemap from '@astrojs/sitemap'
@@ -5,7 +6,6 @@ import serviceWorker from '@ayco/astro-sw'
 
 import { VERSION } from './src/consts'
 
-// https://astro.build/config
 export default defineConfig({
   output: 'static',
   site: 'https://cozy.pub/',
