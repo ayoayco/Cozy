@@ -35,9 +35,11 @@ Here's what this project is building:
 
 ## Report bugs or contribute
 
-The project is now in [SourceHut](https://git.sr.ht/~ayoayco/cozy). Please submit issues or requests via our [Todo Page](https://todo.sr.ht/~ayoayco/cozy) or [via email](mailto:~ayoayco/cozy@todo.sr.ht).
-
-You can also contribute code via the [GitHub mirror](https://github.com/ayoayco/cozy) by opening Pull Requests there.
+Get in touch:
+1. Chat via Discord: [Ayo's Projects](https://discord.gg/kkvW7GYNAp)
+1. Submit tickets via [SourceHut todo](https://todo.sr.ht/~ayoayco/astro-sw)
+1. Start a [GitHub discussion](https://github.com/ayoayco/astro-sw/discussions)
+1. Email me: [ayo@ayco.io](mailto:ayo@ayco.io)
 
 ## Roadmap
 
