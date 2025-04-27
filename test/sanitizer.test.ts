@@ -18,7 +18,7 @@ describe('cozify()', async () => {
   })
 
   test('should add base url to href of links', async () => {
-    const html = '<a href=#>hey</a>'
+    const html = '<a href="#">hey</a>'
     const result = await cozify(html, baseUrl)
     expect(result).toContain('href="https://cozy.pub?url=#"')
   })
