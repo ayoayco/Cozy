@@ -34,6 +34,7 @@
     "astro": "^5.12.8",
     "astro-iconify": "^1.2.0",
     "fastify": "^5.4.0",
+    "redis": "^5.8.0",
     "ultrahtml": "^1.6.0"
   },
   "devDependencies": {

@@ -1,11 +1,16 @@
 ---
-import { ArticleData, extract } from '@extractus/article-extractor'
+import { createClient } from 'redis'
+import { type ArticleData, extract } from '@extractus/article-extractor'
 import SimpleAddressBar from '../components/SimpleAddressBar.astro'
 import Post from '../components/Post.astro'
 import App from '../layouts/App.astro'
 import Library from '../components/Library.astro'
 import Footer from '../components/Footer.astro'
 
+const client = createClient()
+// TODO: put on a log file
+client.on('error', (err) => console.error('Redis Client Error', err))
+await client.connect()
 export const prerender = false
 
 let url = Astro.url.searchParams.get('url')
@@ -15,12 +20,25 @@ while (url?.startsWith(Astro.url.origin)) {
   url = new URL(url).searchParams.get('url')
 }
 
-if (url)
-  try {
-    article = await extract(url)
-  } catch {
-    article = null
+if (url) {
+  // try cache
+  article = (await client.json.get(url)) as ArticleData
+  if (article !== null) {
+    console.log('>>> Using cached content', article.url)
+  } else {
+    try {
+      article = await extract(url)
+      console.log('>>> Using fetched content', article?.url)
+      if (article !== null) {
+        // cache via redis
+        await client.json.set(url, '$', article)
+        console.log('>>> Added to cache', article.url)
+      }
+    } catch {
+      article = null
+    }
   }
+}
 ---
 
 <App article={article}>
