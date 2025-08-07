@@ -14,13 +14,13 @@ await client.connect()
 export const prerender = false
 
 let url = Astro.url.searchParams.get('url')
-let article: ArticleData | null = { url: '/' }
+let article: ArticleData | null = null
 
 while (url?.startsWith(Astro.url.origin)) {
   url = new URL(url).searchParams.get('url')
 }
 
-if (url) {
+if (url && url !== '/' && url !== '') {
   // try cache
   article = (await client.json.get('cozy:url:' + url)) as ArticleData
   if (article !== null) {
