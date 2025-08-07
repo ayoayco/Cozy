@@ -1,0 +1,7 @@
+services:
+  cozy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 4321:4321
