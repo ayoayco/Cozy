@@ -10,13 +10,13 @@ const app = Fastify({ logger: true })
 await app.register(import('@fastify/rate-limit'), {
   global: true,
   max: 25,
-  timeWindow: 1000 * 60,
+  timeWindow: 1000,
 })
 
 await app.setNotFoundHandler(
   {
     preHandler: app.rateLimit({
-      max: 100,
+      max: 10,
       timeWindow: 1000,
     }),
   },
