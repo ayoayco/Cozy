@@ -22,7 +22,7 @@ while (url?.startsWith(Astro.url.origin)) {
 
 if (url) {
   // try cache
-  article = (await client.json.get(url)) as ArticleData
+  article = (await client.json.get('cozy:url:' + url)) as ArticleData
   if (article !== null) {
     console.log('>>> Using cached content', article.url)
   } else {
@@ -31,7 +31,7 @@ if (url) {
       console.log('>>> Using fetched content', article?.url)
       if (article !== null) {
         // cache via redis
-        await client.json.set(url, '$', article)
+        await client.json.set('cozy:url:' + url, '$', article)
         console.log('>>> Added to cache', article.url)
       }
     } catch {
