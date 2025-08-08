@@ -21,9 +21,10 @@ while (url?.startsWith(Astro.url.origin)) {
 }
 
 if (url && url !== '/' && url !== '') {
+  const exists = await client.exists('cozy:url:' + url)
   // try cache
-  article = (await client.json.get('cozy:url:' + url)) as ArticleData
-  if (article !== null) {
+  if (exists) {
+    article = (await client.json.get('cozy:url:' + url)) as ArticleData
     console.log('>>> Using cached content', article.url)
   } else {
     try {
