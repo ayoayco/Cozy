@@ -8,7 +8,6 @@ import Library from '../components/Library.astro'
 import Footer from '../components/Footer.astro'
 
 const client = createClient()
-// TODO: put on a log file
 client.on('error', (err) => console.error('Redis Client Error', err))
 await client.connect()
 export const prerender = false
