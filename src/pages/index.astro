@@ -1,6 +1,7 @@
 ---
-import { createClient } from 'redis'
+import { createClient, type RedisJSON } from 'redis'
 import { type ArticleData, extract } from '@extractus/article-extractor'
+
 import SimpleAddressBar from '../components/SimpleAddressBar.astro'
 import Post from '../components/Post.astro'
 import App from '../layouts/App.astro'
@@ -31,7 +32,7 @@ if (url && url !== '/' && url !== '') {
       console.log('>>> Using fetched content', article?.url)
       if (article !== null) {
         // cache via redis
-        await client.json.set('cozy:url:' + url, '$', article)
+        await client.json.set('cozy:url:' + url, '$', article as RedisJSON)
         console.log('>>> Added to cache', article.url)
       }
     } catch {
