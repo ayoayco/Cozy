@@ -2,7 +2,7 @@
 import { createClient, type RedisJSON } from 'redis'
 import { type ArticleData, extract } from '@extractus/article-extractor'
 
-import SimpleAddressBar from '../components/SimpleAddressBar.astro'
+import AddressBar from '../components/AddressBar.astro'
 import Post from '../components/Post.astro'
 import App from '../layouts/App.astro'
 import Library from '../components/Library.astro'
@@ -43,7 +43,7 @@ if (url && url !== '/' && url !== '') {
 ---
 
 <App article={article}>
-  <SimpleAddressBar url={url} />
+  <AddressBar url={url} />
   <div slot="post" id="router-outlet">
     <Post article={article} />
   </div>
