@@ -1,0 +1,15 @@
+[Unit]
+Description=Cozy
+
+[Service]
+ExecStart=/home/ayo/cozy/server.mjs
+Restart=always
+User=nobody
+# Note Debian/Ubuntu uses 'nogroup', RHEL/Fedora uses 'nobody'
+Group=nogroup
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
+WorkingDirectory=/home/ayo/cozy
+
+[Install]
+WantedBy=multi-user.target
