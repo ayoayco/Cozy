@@ -8,36 +8,58 @@ import App from '../layouts/App.astro'
 import Library from '../components/Library.astro'
 import Footer from '../components/Footer.astro'
 
+// Initialize Redis client
 const client = createClient()
 client.on('error', (err) => console.error('Redis Client Error', err))
 await client.connect()
+
+// Disable prerendering for dynamic content
 export const prerender = false
 
+// Get URL parameter from query string
 let url = Astro.url.searchParams.get('url')
 let article: ArticleData | null = { url: '/' }
 
+// Handle redirect loops by extracting URL from nested parameters
 while (url?.startsWith(Astro.url.origin)) {
-  url = new URL(url).searchParams.get('url')
+  try {
+    // Parse the URL to extract search parameters
+    const parsedUrl = new URL(url)
+    url = parsedUrl.searchParams.get('url')
+  } catch {
+    // If URL parsing fails, break the loop
+    console.error('Failed to parse URL:', url)
+    break
+  }
 }
 
+// Process article extraction only if a valid URL is provided
 if (url && url !== '/' && url !== '') {
-  const exists = await client.exists('cozy:url:' + url)
-  // try cache
-  if (exists) {
-    article = (await client.json.get('cozy:url:' + url)) as ArticleData
-    console.log('>>> Using cached content', article.url)
-  } else {
-    try {
+  const cacheKey = 'cozy:url:' + url
+
+  try {
+    // Check if article exists in Redis cache
+    const exists = await client.exists(cacheKey)
+
+    if (exists) {
+      // Retrieve cached article data
+      article = (await client.json.get(cacheKey)) as ArticleData
+      console.log('>>> Using cached content', article.url)
+    } else {
+      // Fetch article from the web
       article = await extract(url)
       console.log('>>> Using fetched content', article?.url)
-      if (article !== null) {
-        // cache via redis
-        await client.json.set('cozy:url:' + url, '$', article as RedisJSON)
+
+      if (article !== null && article.url) {
+        // Cache the fetched article in Redis
+        await client.json.set(cacheKey, '$', article as RedisJSON)
         console.log('>>> Added to cache', article.url)
       }
-    } catch {
-      article = null
     }
+  } catch (error) {
+    // Log error and continue with null article
+    console.error('Error processing article:', error)
+    article = null
   }
 }
 ---
