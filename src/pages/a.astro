@@ -2,7 +2,7 @@
 /**
  * NOTE: this page is a fix for old cached articles w/ cozified links going to an `a` route
  */
-import SimpleAddressBar from '../components/SimpleAddressBar.astro'
+import AddressBar from '../components/AddressBar.astro'
 import App from '../layouts/App.astro'
 import Library from '../components/Library.astro'
 import Footer from '../components/Footer.astro'
@@ -13,7 +13,7 @@ return Astro.redirect(`/?url=${url}`)
 ---
 
 <App article={null}>
-  <SimpleAddressBar url={url} />
+  <AddressBar url={url} />
 
   <div>
     Go to the correct <a href={`/?url=${url}`}>Page</a>
