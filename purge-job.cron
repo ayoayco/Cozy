@@ -1,0 +1,107 @@
+```bash
+#!/bin/bash
+
+# Script: purge-cozy.sh
+# Purpose: Clean up temporary files and logs at midnight
+# This script should be scheduled as a cron job to run daily at midnight
+
+# Set working directory
+cd /path/to/your/script/directory || exit 1
+
+# Define log file
+LOG_FILE="/var/log/purge-cozy.log"
+
+# Function to log messages
+log_message() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" | tee -a "$LOG_FILE"
+}
+
+# Start logging
+log_message "Starting purge-cozy.sh script execution"
+
+# Remove temporary files older than 7 days
+log_message "Removing temporary files older than 7 days"
+find /tmp -type f -mtime +7 -delete 2>>"$LOG_FILE" || log_message "Warning: find command failed"
+
+# Clean up log files older than 30 days
+log_message "Cleaning up log files older than 30 days"
+find /var/log -name "*.log" -mtime +30 -delete 2>>"$LOG_FILE" || log_message "Warning: log cleanup failed"
+
+# Remove cache directories (example for user cache)
+log_message "Clearing user cache directories"
+find /home -type d -name ".cache" -mtime +7 -exec rm -rf {} + 2>>"$LOG_FILE" || log_message "Warning: cache cleanup failed"
+
+# Optional: Clean up specific application directories
+# log_message "Cleaning up cozy application data"
+# find /var/lib/cozy -type f -mtime +30 -delete 2>>"$LOG_FILE" || log_message "Warning: cozy data cleanup failed"
+
+# Remove empty directories (excluding important system directories)
+log_message "Removing empty directories"
+find /tmp -type d -empty -delete 2>>"$LOG_FILE" || log_message "Warning: empty directory cleanup failed"
+
+# Display disk usage after cleanup
+log_message "Disk usage after cleanup:"
+df -h | tee -a "$LOG_FILE"
+
+# End logging
+log_message "purge-cozy.sh script execution completed"
+```
+
+To set up the cron job:
+
+1. First, make your script executable:
+```bash
+chmod +x purge-cozy.sh
+```
+
+2. Edit your crontab:
+```bash
+sudo crontab -e
+```
+
+3. Add this line to run the script every midnight:
+```bash
+0 0 * * * /path/to/purge-cozy.sh
+```
+
+4. Save and exit (in nano editor: Ctrl+X, then Y, then Enter)
+
+Alternative method using systemd timer (modern approach):
+```bash
+# Create a service file: /etc/systemd/system/purge-cozy.service
+[Unit]
+Description=Clean up temporary files and logs
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/path/to/purge-cozy.sh
+User=root
+```
+
+```bash
+# Create a timer file: /etc/systemd/system/purge-cozy.timer
+[Unit]
+Description=Run purge-cozy script daily at midnight
+Requires=purge-cozy.service
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+```
+
+```bash
+# Enable and start the timer
+sudo systemctl enable purge-cozy.timer
+sudo systemctl start purge-cozy.timer
+```
+
+Key considerations:
+- Replace `/path/to/your/script/directory` with actual path
+- Adjust cleanup rules based on your specific needs
+- Ensure script has proper permissions to access directories
+- Test script manually before scheduling it
+- Monitor log file for any errors during execution
