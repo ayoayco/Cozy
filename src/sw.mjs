@@ -5,6 +5,13 @@
  */
 const cacheName = `${__prefix ?? 'app'}-v${__version ?? '000'}`
 
+/**
+ * Cleans up old caches by deleting any cache that is not in the allowed list.
+ * This helps prevent the service worker from accumulating unnecessary cached data over time.
+ * @async
+ * @function cleanOldCaches
+ * @returns {Promise<void>} Resolves when all old caches have been deleted
+ */
 const cleanOldCaches = async () => {
   const allowCacheNames = ['cozy-reader', cacheName]
   const allCaches = await caches.keys()
@@ -16,6 +23,13 @@ const cleanOldCaches = async () => {
   })
 }
 
+/**
+ * Adds resources to the cache with the specified cache name.
+ * @async
+ * @function addResourcesToCache
+ * @param {string[]} resources - An array of resource URLs to be cached.
+ * @returns {Promise<void>} Resolves when all resources have been added to the cache.
+ */
 const addResourcesToCache = async (resources) => {
   const cache = await caches.open(cacheName)
   console.info('adding resources to cache...', resources)
@@ -32,6 +46,15 @@ const addResourcesToCache = async (resources) => {
   }
 }
 
+/**
+ * Adds a response to the cache for a given request.
+ * If a response already exists for the request, it will be replaced.
+ * @async
+ * @function putInCache
+ * @param {Request} request - The request to cache.
+ * @param {Response} response - The response to cache.
+ * @returns {Promise<void>} Resolves when the response has been added to the cache.
+ */
 const putInCache = async (request, response) => {
   const cache = await caches.open(cacheName)
 
