@@ -1,3 +1,5 @@
+/// <reference lib="webworker" />
+
 /**
  * Note: @ayco/astro-sw integration injects variables `__prefix`, `__version`, & `__assets`
  * -- find usage in `astro.config.mjs` integrations
@@ -129,20 +131,34 @@ self.addEventListener('activate', (event) => {
   cleanOldCaches()
 })
 
-self.addEventListener('install', (event) => {
-  console.info('installing service worker...')
-  self.skipWaiting() // go straight to activate
+self.addEventListener(
+  'install',
+  /**
+   * @param {ExtendableEvent} event - The install event.
+   * @returns {void}
+   */
+  (event) => {
+    console.info('installing service worker...')
+    self.skipWaiting() // go straight to activate
 
-  event.waitUntil(addResourcesToCache(__assets ?? []))
-})
+    event.waitUntil(addResourcesToCache(__assets ?? []))
+  }
+)
 
-self.addEventListener('fetch', (event) => {
-  console.info('fetch happened', { data: event })
+self.addEventListener(
+  'fetch',
+  /**
+   * @param {FetchEvent} event - The fetch event triggered by the browser.
+   * @returns {Promise<Response>} A promise that resolves to the appropriate response.
+   */
+  (event) => {
+    console.info('fetch happened', { data: event })
 
-  event.respondWith(
-    cacheAndRevalidate({
-      request: event.request,
-      fallbackUrl: './',
-    })
-  )
-})
+    event.respondWith(
+      cacheAndRevalidate({
+        request: event.request,
+        fallbackUrl: './',
+      })
+    )
+  }
+)
