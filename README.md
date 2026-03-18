@@ -36,10 +36,11 @@ Here's what this project is building:
 ## Report bugs or contribute
 
 Get in touch:
+
 1. Chat via Discord: [Ayo's Projects](https://discord.gg/kkvW7GYNAp)
 1. Submit tickets via [SourceHut todo](https://todo.sr.ht/~ayoayco/astro-sw)
 1. Start a [GitHub discussion](https://github.com/ayoayco/astro-sw/discussions)
-1. Email me: [ayo@ayco.io](mailto:ayo@ayco.io)
+1. Email me: [hi@ayo.run](mailto:hi@ayo.run)
 
 ## Roadmap
 

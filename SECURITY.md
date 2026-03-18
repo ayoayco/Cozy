@@ -16,4 +16,4 @@ currently being supported with security updates.
 
 ## Reporting a Vulnerability
 
-Please send an email to the project owner: ayo@ayco.io
+Please send an email to the project owner: hi@ayo.run
